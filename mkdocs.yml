@@ -191,5 +191,6 @@ extra:
     #   link: mailto:2130212584@qq.com
     #   name: Email
   
-
+remote_branch: gh-pages    # GitHub Pages 分支
+remote_name: origin       # 远程仓库名
 
