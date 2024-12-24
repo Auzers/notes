@@ -69,64 +69,71 @@ theme:
 
 
 
-# 导航设置
-nav:
-  - Home: index.md
-  - Blogs:
-    - index: Blogs/index.md
-    - Archives: Blogs/archives.md
-  - tags: tags/index.md
-  - GitHub: https://github.com/your/repo
-  - 社区: 
-    - 论坛: https://forum.example.com
-    - 博客: https://blog.example.com
-
 
 
 # Markdown 扩展
 markdown_extensions:
+  # - abbr
   - meta
+  - def_list
   - attr_list
+  # - admonition
+  # - footnotes
   - md_in_html
-  - tables
-  - footnotes
-  - pymdownx.superfences:
-      custom_fences:
-        - name: mermaid
-          class: mermaid
-          format: !!python/name:pymdownx.superfences.fence_code_format
-
-
+  - sane_lists
+  - admonition
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.tilde
+  # - pymdownx.caret
+  - pymdownx.critic
+  # - pymdownx.betterem
+  - pymdownx.details
+  - pymdownx.snippets
+  - pymdownx.magiclink
+  # - pymdownx.smartsymbols
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  # - markdown.extensions.attr_list
+  - toc:
+      permalink: true
+      toc_depth: 3
+  # - pymdownx.superfences:
+  #     custom_fences:
+  #       - name: mermaid
+  #         class: mermaid
+  #         format:
+  #           pymdownx.superfences.fence_code_format # 代码块高亮插件
+  - pymdownx.highlight: # 代码块高亮
+      anchor_linenums: true
+      linenums: true # 显示行号
+      auto_title: true # 显示编程语言名称
+      linenums_style: pymdownx-inline
+      line_spans: __span
+      pygments_lang_class: true
   - pymdownx.emoji:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
-  - toc:
-      permalink: true        # 添加段落链接
-      toc_depth: 3          # 目录深度
-      separator: "_"        # 标题锚点分隔符
-      title: "目录"         # 目录标题
-      slugify: !!python/object/apply:pymdownx.slugs.slugify
-        kwds: {case: lower} # URL 转换规则
-  - pymdownx.tasklist:
-      custom_checkbox: true    # 自定义复选框样式
   - pymdownx.tabbed:
       alternate_style: true
-  - pymdownx.highlight     # 代码高亮
-  - pymdownx.inlinehilite # 行内代码高亮
-  - pymdownx.snippets     # 代码片段
-  - pymdownx.magiclink    # 自动链接
-  - pymdownx.mark        # ==标记==
-  - pymdownx.critic      # 编辑标记
-  - pymdownx.tilde      # 删除线
-  - pymdownx.caret      # 上标
-  - pymdownx.keys       # 键盘按键
-  - pymdownx.tabbed    # 标签页
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.arithmatex:
+      generic: true
+
   
+validation:
+  nav:
+    omitted_files: info
+    not_found: warn
+    absolute_links: info
+  links:
+    not_found: ignore
+    absolute_links: ignore
+    unrecognized_links: ignore
 
 
 plugins:
-  
-  - blog
   - blogging:
       locale: en
       dirs:
@@ -136,38 +143,76 @@ plugins:
       features:
         tags:
           index_page: tags/
-          insert: top 
+          insert: top
+  - search
+  - glightbox:
+      width: 80%
+  - statistics:
+      words_per_minute: 200
+  - heti
   # - include_dir_to_nav:
   #     sort_file: true
   #     sort_directory: true
-  - search:
-      lang: 
-        - en
-        - zh
-      separator: '[\s\-\.]+'
-      # min_search_length: 2
-      # prebuild_index: true
-      # indexing:
-      #   - full_sections: false
-      #   - headings: true
-      #   - content: true
-  - tags:
-      tags_file: tags/index.md   
-  - statistics:
-      words_per_minute: 200 
-  - glightbox:
-      width: 80%
+  # - obsidian_support
+  # - rss
+  - git-revision-date-localized:
+      type: datetime
+      timezone: Asia/Shanghai
+      enable_creation_date: true
+      exclude:
+        - index.md
+  # - changelog
+  # - mkdocs-jupyter:
+  #     include_source: True
+  #     execute: False
+  #     ignore: ["*.py"]
 
-# extra_javascript:
-#   - javascripts/tabs.js
-#   - javascripts/scroll.js
+not_in_nav: links.md
 
 
-# extra_javascript:
-#   - https://unpkg.com/mermaid@9/dist/mermaid.min.js
+
+
 extra_javascript:
+  - js/katex.js
+  - js/mathjax.js
+  - js/tablesort.js
+  - js/toc.js
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://unpkg.com/tablesort@5.3.0/dist/tablesort.min.js
+  # - https://cdn.tonycrane.cc/utils/katex.min.js
   - https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js
+
+  # katex
+  - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js
+  - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js
+
+  # mathjax
+  - https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js
+  - https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-chtml.js
+  - https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-chtml-full.js
+  - https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-svg-full.js
+  # - js/custom.js
+  # - js/heti.js
+
+extra_css:
+  - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css
+  # - https://cdn.tonycrane.cc/utils/katex.min.css
+  - https://cdn.tonycrane.cc/jbmono/jetbrainsmono.css
+  - https://cdn.tonycrane.cc/lxgw/lxgwscreen.css
+  - css/custom.css
+  - css/tasklist.css
+  - css/card.css
+  - css/flink.css
+  # - css/heti.css
+  # - css/changelog_extra.css
+  # - css/flod_toc.css
+  # - css/grid cards.css # 好用的但还没用
+  # - css/extra.css
+  # - https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.1.0/style.css
+
  
+
+
 extra:
   social:
     # - icon: fontawesome/brands/twitter
@@ -194,3 +239,15 @@ extra:
 remote_branch: gh-pages    # GitHub Pages 分支
 remote_name: origin       # 远程仓库名
 
+nav:
+  - Home: index.md
+  - Blogs:
+    - index: Blogs/index.md
+    - Archives: Blogs/archives.md
+  - computer science:
+    - index: computer/index.md
+  - tags: tags/index.md
+  - GitHub: https://github.com/your/repo
+  - 社区: 
+    - 论坛: https://forum.example.com
+    - 博客: https://blog.example.com
