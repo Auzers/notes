@@ -3,11 +3,6 @@ icon: /material/book
 nostatistics: true
 comments: false
 ---
+# computer science
 
-# Computer Science Basic
 
-!!! note "Abstract"
-
-    
-
-dadad

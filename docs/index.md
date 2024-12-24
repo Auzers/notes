@@ -8,6 +8,21 @@ nostatistics: true
 comments: false
 icon: material/home
 ---
+<!-- 邮箱信息 -->
+<style>
+    .email-info {
+        position: fixed;
+        bottom: 27px; /* 调整高度，距离底部20px */
+        right: 288px; /* 调整距离右侧的位置 */
+        color: #000000; /* 设置字体颜色为黑色 */
+        font-size: 14px; /* 设置字体大小 */
+        z-index: 1000; /* 确保显示在最前方 */
+    }
+</style>
+
+<div class="email-info">
+    <a href="1058564630@qq.com">1058564630@qq.com</a>
+</div>
 
 <br><br><br><br><br><br>
 
