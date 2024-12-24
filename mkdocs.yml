@@ -98,7 +98,7 @@ markdown_extensions:
   # - markdown.extensions.attr_list
   - toc:
       permalink: true
-      toc_depth: 3
+      toc_depth: 4
   # - pymdownx.superfences:
   #     custom_fences:
   #       - name: mermaid
@@ -135,6 +135,7 @@ validation:
 
 
 plugins:
+  - toc
   - blogging:
       locale: en
       dirs:
@@ -146,6 +147,7 @@ plugins:
           index_page: tags/
           insert: top
   - search
+  - callouts
   - glightbox:
       width: 80%
   - statistics:
@@ -245,13 +247,12 @@ nav:
   - Blogs:
     - index: Blogs/index.md
     - Archives: Blogs/archives.md
-  - computer science:
-    - index: computer/index.md
-    - C语言: computer/learning_c.md
-  - tags: tags/index.md
-  - GitHub: https://github.com/Auzers/notes
+  - computer science: computer/index.md
   - dairy&summary: 
     - index: dairy_summary/index.md
     - dairies: dairy_summary/dairy.md
     - summaries: dairy_summary/summary.md
+  - tags: tags/index.md
+  - GitHub: https://github.com/Auzers/notes
+  - links: links/index.md
   
