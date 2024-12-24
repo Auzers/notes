@@ -1,4 +1,0 @@
----
-nostatistics: true
-comments: false
----
