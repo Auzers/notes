@@ -1489,50 +1489,50 @@ p不是数组名，可以改变指向的地址，打印结果为
     <button class="button1" data-md-color-primary="white" style="background-color:white;color:black">white</button>
     </div> -->
 <!-- Giscus -->
-<script async="" crossorigin="anonymous" data-category="General" data-category-id="DIC_kwDONBPLqs4Cja0c" data-emit-metadata="0" data-input-position="bottom" data-lang="zh-CN" data-mapping="pathname" data-reactions-enabled="1" data-repo="Auzers/notes" data-repo-id="R_kgDONBPLqg" data-strict="0" data-theme="preferred_color_scheme" src="https://giscus.app/client.js">
+<script async="" crossorigin="anonymous" data-category="Announcements" data-category-id="DIC_kwDONhXY184ClgKT" data-emit-metadata="0" data-input-position="bottom" data-lang="zh-CN" data-mapping="pathname" data-reactions-enabled="1" data-repo="Auzers/notes" data-repo-id="R_kgDONhXY1w" data-strict="0" data-theme="preferred_color_scheme" src="https://giscus.app/client.js">
 </script>
 <script>
     var buttons = document.querySelectorAll("button[data-md-color-primary]")
-    buttons.forEach(function(button) {
-            button.addEventListener("click", function() {
+    buttons.forEach(function (button) {
+        button.addEventListener("click", function () {
             var attr = this.getAttribute("data-md-color-primary")
             document.body.setAttribute("data-md-color-primary", attr)
-            localStorage.setItem("data-md-color-primary",attr);
-            })
+            localStorage.setItem("data-md-color-primary", attr);
+        })
     })
-    </script>
+</script>
 <!-- Synchronize Giscus theme with palette -->
 <script>
     var giscus = document.querySelector("script[src*=giscus]")
 </script>
 <script>
     var giscus = document.querySelector("script[src*=giscus]")
-    
+
     /* Set palette on initial load */
     var palette = __md_get("__palette")
     if (palette && typeof palette.color === "object") {
         var theme = palette.color.scheme === "slate" ? "dark" : "light"
-        giscus.setAttribute("data-theme", theme) 
+        giscus.setAttribute("data-theme", theme)
     }
-    
+
     /* Register event handlers after documented loaded */
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
         var ref = document.querySelector("[data-md-component=palette]")
-        ref.addEventListener("change", function() {
-        var palette = __md_get("__palette")
-        if (palette && typeof palette.color === "object") {
-            var theme = palette.color.scheme === "slate" ? "dark" : "light"
-    
-            /* Instruct Giscus to change theme */
-            var frame = document.querySelector(".giscus-frame")
-            frame.contentWindow.postMessage(
-            { giscus: { setConfig: { theme } } },
-            "https://giscus.app"
-            )
-        }
+        ref.addEventListener("change", function () {
+            var palette = __md_get("__palette")
+            if (palette && typeof palette.color === "object") {
+                var theme = palette.color.scheme === "slate" ? "dark" : "light"
+
+                /* Instruct Giscus to change theme */
+                var frame = document.querySelector(".giscus-frame")
+                frame.contentWindow.postMessage(
+                    { giscus: { setConfig: { theme } } },
+                    "https://giscus.app"
+                )
+            }
         })
     })
-    </script>
+</script>
 </article>
 </div>
 <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
