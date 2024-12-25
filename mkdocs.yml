@@ -19,7 +19,9 @@ theme:
     logo: material/sail-boat
     repo: fontawesome/brands/git-alt
     edit: material/pencil
-  
+# 网页标签图标
+  favicon: assets/images/avatar.png
+
   palette:
     - media: "(prefers-color-scheme)"
       toggle:
@@ -67,7 +69,6 @@ theme:
     - search.highlight
     - search.share
     - search.suggest
-
 
 
 
