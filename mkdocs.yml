@@ -234,7 +234,7 @@ extra:
     #   link: assets/images/qq.jpg
     #   name: QQ
     - icon: /fontawesome/brands/weixin
-      link: assets/images/WeChat.jpg
+      link: assets/images/wechat.jpg
       name: WeChat
     # - icon: fontawesome/solid/paper-plane
     #   link: mailto:2130212584@qq.com
