@@ -243,12 +243,14 @@ extra:
 remote_branch: gh-pages    # GitHub Pages 分支
 remote_name: origin       # 远程仓库名
 
+
 nav:
   - Home: index.md
   - Blogs:
     - index: Blogs/index.md
     - Archives: Blogs/archives.md
   - computer science: computer/index.md
+  - tools: tools/index.md
   - dairy&summary: 
     - index: dairy_summary/index.md
     - dairies: dairy_summary/dairy.md

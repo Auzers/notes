@@ -1,7 +1,10 @@
 # C 语言
+
 **并非从零开始，并且仍然在更新**<br>
 **如发现有错误欢迎在评论区指正或发送到我的邮箱 1058564630@qq.com**
+
 ## 1 指针进阶
+
 ```c
 int main()
 {
@@ -12,9 +15,13 @@ int main()
     return 0;
 }
 ```
+
 p不是数组名，可以改变指向的地址，打印结果为
+
 >c
+
 ------
+
 ```c
 int main()
 {
@@ -25,9 +32,11 @@ int main()
     return 0;
 }
 ```
+
 会报错，因为arr是**数组名**，不能更改其地址
 
 ------
+
 ```c
 int main()
 {
@@ -37,9 +46,11 @@ int main()
     return 0;
 }
 ```
+
 运行会报错，**常量字符串**不能更改。
 
 由此看这段代码
+
 ```c
 int main()
 {
@@ -59,16 +70,20 @@ int main()
     return 0;
 }
 ```
+
 运行结果如下：
+
 >**p1 == p2**
-**p3 != p4**
+>**p3 != p4**
 
 - 对于p1和p2，两份相同的不能更改的常量字符串在内存中你没必要同时存在两份
-所以p1和p2指向**同一块内存空间**
+  所以p1和p2指向**同一块内存空间**
 - 对于p3和p4,数组名都不同，开辟了两块**不同的内存空间**各自存放了可改变的字符串，只是恰好存储的内容相等。
 
 ------
+
 ### 1.1 指针数组（每个元素都是指针）
+
 ```c
 #include<stdio.h>
 int main()
@@ -96,10 +111,12 @@ int main()
     }
 }
 ```
+
 **运行结果**
+
 >**1 2 3 4 5** 
-**2 3 4 5 6** 
-**3 4 5 6 7** 
+>**2 3 4 5 6** 
+>**3 4 5 6 7** 
 
 ```c
 int main()
@@ -120,6 +137,7 @@ int main()
     }
 } 
 ```
+
 实现了**模拟二维数组**的作用
 
 ### 1.2 数组指针
@@ -150,6 +168,7 @@ int main()
 ```
 
 **数组指针和指针数组有什么区别？**
+
 ```c
 int main()
 {
@@ -164,11 +183,13 @@ int main()
     return 0;
 }
 ```
+
 **运行结果：**
+
 >**000000000061FDE0**
-**000000000061FDE0**
-**000000000061FDE4**
-**000000000061FE08**
+>**000000000061FDE0**
+>**000000000061FDE4**
+>**000000000061FE08**
 
 **p1+1一次跳过一个元素**
 **p2+1一次跳过一个数组**
@@ -180,6 +201,7 @@ int main()
 - &数组名 - 数组名表示整个数组，取出的是整个数组的地址
 
 **数组指针的使用**
+
 ```c
 int main()
 {
@@ -195,9 +217,6 @@ int main()
     } 
     return 0;
 }
-```
-
-```c
 void print1(int a[3][5],int r,int c)
 {
     int i = 0;
@@ -233,11 +252,15 @@ int main()
 ```
 
 理解一下
+
 ```c
 int (*parr3[10])[5];//parr3是一个能存储数组指针的数组1，该数组能够存放十个数组指针，每个数组指针能够指向一个数组，数组五个元素，每个元素是int类型。
 ```
+
 ### 1.3 数组参数和指针参数
+
 #### 1.3.1 *一维数组传参*
+
 ```c
 void test(int arr[10])//ok,10可以省略不写
 {}
@@ -258,7 +281,9 @@ int main()
     return 0;
 }
 ```
+
 #### 1.4.2 *二维数组传参*
+
 ```c
 void test(int arr[3][5])//ok
 {}
@@ -279,7 +304,9 @@ int main()
     return 0;
 }
 ```
+
 ### 1.5 函数指针
+
 ```c
 int Add(int x,int y)
 {
@@ -292,9 +319,11 @@ int main()
     return 0;
 }
 ```
+
 **输出结果：**
+
 >**0000000000401550**
-**0000000000401550**
+>**0000000000401550**
 
 <u>数组名 ！= &数组名</u>
 <u>函数名  = &函数名</u>
@@ -306,12 +335,15 @@ int (*pf)(int,int) = &Add;
 //前面提到函数名 = &函数名，那么下面的写法也可以
 int (*pf)(int,int) = Add;
 ```
+
 **那么如何通过指针调用呢？**
+
 ```c
 int ret = (*pf)(3,5);
-//Add 和 pf等价，所以下面的写法也可以
+//Add 和 &Add等价 则*pf 和 pf同样等价，所以下面的写法也可以
 int ret = pf(3,5);
 ```
+
 **两段代码**
 
 ```c
@@ -319,32 +351,37 @@ int ret = pf(3,5);
 
 void(*signal(int,void(*)(int)))(int);//代码II
 ```
+
 **代码I:**
+
 >**1.** (void(\*)())0
-这部分是一个类型转换，它将 0 转换为一个函数指针：<br>
-0 是一个常数，表示空指针（NULL 或 nullptr）。
-(void(\*)()) 是一种类型转换，表示将 0 转换为**一个函数指针类型，具体是 void (\*)()，即指向返回类型为 void、没有参数的函数的指针。**
-通过这个类型转换，0 变成了一个 "无效的" 函数指针，它指向地址 0，这个地址通常是未定义的，表示没有合法的函数。<br>**2.** (*(void(\*)())0)
-这部分通过解引用操作符 * 来 "调用" 0 地址上的函数。由于 0 是一个空指针，解引用它实际上会引发未定义行为，因为 0 不是有效的函数地址。这会导致程序崩溃或其他不可预测的结果。<br>**3.** ();
-最后的 (); 是一个函数调用语法。它表示尝试调用 (*(void(*)())0) 所指向的函数。<br>
-综合起来：
-这段代码的整体意思是：<br>
-将 0 转换成一个无参数、返回 void 的函数指针。
-尝试解引用这个指针并调用该函数。由于这个指针是空的，指向地址 0
+>这部分是一个类型转换，它将 0 转换为一个函数指针：<br>
+>0 是一个常数，表示空指针（NULL 或 nullptr）。
+>(void(\*)()) 是一种类型转换，表示将 0 转换为**一个函数指针类型，具体是 void (\*)()，即指向返回类型为 void、没有参数的函数的指针。**
+>通过这个类型转换，0 变成了一个 "无效的" 函数指针，它指向地址 0，这个地址通常是未定义的，表示没有合法的函数。<br>**2.** (*(void(\*)())0)
+>这部分通过解引用操作符 * 来 "调用" 0 地址上的函数。由于 0 是一个空指针，解引用它实际上会引发未定义行为，因为 0 不是有效的函数地址。这会导致程序崩溃或其他不可预测的结果。<br>**3.** ();
+>最后的 (); 是一个函数调用语法。它表示尝试调用 (*(void(*)())0) 所指向的函数。<br>
+>综合起来：
+>这段代码的整体意思是：<br>
+>将 0 转换成一个无参数、返回 void 的函数指针。
+>尝试解引用这个指针并调用该函数。由于这个指针是空的，指向地址 0
 
 **代码II：**
+
 >这段代码声明了signal函数，signal函数的两个参数一个为int类型一个为 函数指针，且这个函数指针参数为int 类型，返回类型是void
-而signal的返回类型是函数指针，这个函数指针指向一个返回类型为void，参数为int的函数。
+>而signal的返回类型是函数指针，这个函数指针指向一个返回类型为void，参数为int的函数。
 
 代码II可能写作:
-```void(\*)(int)signal(int,void(\*)(int));```
+```void(*)(int)signal(int,void(*)(int));```
 更容易理解，但遗憾的是语法不支持
 
-**但还有解决办法：** ----使用==typedef==-对函数类型进行重定义
+**但还有解决办法：** ----使用**typedef**对函数类型进行重定义
+
 ```c
 typedef unsigned int uint;
 ```
-相当于用uint替代了unsigned int;
+
+这个语句的作用是用uint替代了unsigned int;
 那么
 ```void(*signal(int,void(*)(int)))(int);```
 ***等价于***
@@ -353,7 +390,9 @@ typedef unsigned int uint;
 typedef void(*pfun_t)(int);
 p_funt signal(int,p_funt);
 ```
+
 ### 1.6 函数指针数组
+
 ```c
 int add(int x,int y);
 {
@@ -373,13 +412,17 @@ int main()
     return 0;
 }
 ```
+
 ### 1.7 指向函数指针数组的指针
+
 ```c
 int(*p)(int,int);//函数指针
 int(*p2[4])(int,int)//函数指针的数组
 int(*(*p3)[4])(int,int) = &p2 //指向函数指针数组的指针，*p3说明是一个指针，[4]这个指针指向一个含有四个元素的数组，这个数组中元素的类型是什么呢？是函数指针，且这些函数指针指向返回值为int,参数为(int,int)的函数。
 ```
+
 ### 1.8 回调函数
+
 **概念：**
 写了个a函数，但是不直接调用a函数，而是通过b函数调用a函数，即a函数地址传到了b函数的形参中
 称a函数为回调函数
@@ -389,41 +432,42 @@ int(*(*p3)[4])(int,int) = &p2 //指向函数指针数组的指针，*p3说明是
 //升序
 void bubble_sort(int arr[],int sz)
 {
-	int i = 0;
-	int j = 0;
-	for(i = 0;i<sz-1-i;i++)
-	{
-	 	for(j = 0;j < sz-1-i;j++)//第一次把最大的放到最后，第二次把第二大的放到倒数第二个，以此类推。
-	 	{
-	 		if(arr[j]>arr[j+1]);
-	 	{
-	 		tmp = arr[j];
-	 		arr[j] = arr[j+1];
-	 		arr[j+1] = tmp;
-	 	}
-	 	}
-	}
+    int i = 0;
+    int j = 0;
+    for(i = 0;i<sz-1-i;i++)
+    {
+        for(j = 0;j < sz-1-i;j++)//第一次把最大的放到最后，第二次把第二大的放到倒数第二个，以此类推。
+        {
+            if(arr[j]>arr[j+1]);
+        {
+            tmp = arr[j];
+            arr[j] = arr[j+1];
+            arr[j+1] = tmp;
+        }
+        }
+    }
 }
 void print_arr(int arr[],int sz)
 {
-	int i;
-	for(i = 0;i<sz;i++)
-	{
-		printf(“%d ”,arr[i]);
-	}
+    int i;
+    for(i = 0;i<sz;i++)
+    {
+        printf(“%d ”,arr[i]);
+    }
 }
 int main()
 {
-	int arr[10] = {9,8,7,6,5,4,3,2,1,0};
-	int sz = sizeof(arr)/sizeof(arr[0]);
-	return 0;
+    int arr[10] = {9,8,7,6,5,4,3,2,1,0};
+    int sz = sizeof(arr)/sizeof(arr[0]);
+    return 0;
 }
 
 
 ```
+
 #### 1.8.1 qsort函数为例
 
-下面用**==qsort==函数**实现功能：
+下面用**qsort函数**实现功能：
 
 ```c
 //qsort 的使用方法
@@ -630,9 +674,6 @@ int main()
     
     return 0;
 }
-```
-
-```c
 int main()
 {
     short s =5;
@@ -642,6 +683,7 @@ int main()
     return 0;
 }
 ```
+
 #### 1.9.2 指针笔试题
 
 ```c
@@ -675,7 +717,7 @@ int main()
     return 0;
 }
 ```
-<img src="C:\Users\俞志炜\AppData\Roaming\Typora\typora-user-images\image-20241210143223959.png" alt="image-20241210143223959" style="zoom:40%;" />
+
 
 ```c
 int main()
@@ -684,15 +726,12 @@ int main()
     int* ptr1 = (int*)(&a + 1);
     int* ptr2 = (int*)((int)a + 1);//跳过一个字节，按照小端考虑，低——01 00 00 00| 02 00 00 00|....
     //从指向01到指向02,按照整形解引用后ptr2的内容是00 00 00 02
-    printf("%x,%x",ptr1[-1],*ptr2);            					 	
+    printf("%x,%x",ptr1[-1],*ptr2);                                 
     //4,20000000
     printf("%#x,%#x",ptr1[-1],*ptr2);
     //0x4,0x20000000;
     return 0;
 }
-```
-
-```c
 int main()
 {
     int a[3][2] = {(0,1),(2,3),(4,5)};//注意里面是括号。
@@ -702,9 +741,6 @@ int main()
     //1
     return 0;
 }
-```
-
-```c
 int main()
 {
     int a[5][5];
@@ -717,9 +753,6 @@ int main()
 }
 12345 12345 12345 12345 12345
 1234 5123 4512 3451 2345 1234 5
-```
-
-```c
 int main()
 {
     int aa[2][5] = {1,2,3,4,5,6,7,8,9,10};
@@ -729,9 +762,6 @@ int main()
     //10 6;
     return 0;
 }
-```
-
-```c
 int main()
 {
     char* a[] = {"work","at","alibaba"};//初始化了三个指针分别存放三个字符串的首元素的地址
@@ -742,9 +772,6 @@ int main()
     
     return 0;
 }
-```
-
-```c
 int main()
 {
     char* c[] = {"enter","new","point","first"};//c[]用四个指针存放了"a","b","c","d"的地址。
@@ -771,13 +798,14 @@ int (*(*p)(int int))(int);
 **杨氏矩阵查找对应字符**
 
 ```c
+
 ```
 
 ## 2 字符串函数和内存函数
 
 ### 2.1 字符串函数
 
-==**strlen**==的返回值是 **size_t（无符号整形）**
+**strlen**的返回值是 **size_t（无符号整形）**
 
 传地址，遇到'\0'停止，返回'\0'之前的字符个数
 
@@ -796,7 +824,7 @@ int main()
 
 > **>**
 
-==**strcpy**==
+**strcpy**
 
 - **原字符串一定要以'\0'结尾**
 - **原字符串长度不够也能拷贝但是会报错**，<u>**所以目标字符串长度要够大**</u>
@@ -835,36 +863,36 @@ int main()
 int my_strstr(char*, char*);
 int main()
 {
-	char* arr1 = "abcdef";
-	char* arr2 = "bcdd";
-	if (my_strstr(arr1, arr2) == 1)
-		printf("found");
-	else
-		printf("not found");
-	return 0;
+    char* arr1 = "abcdef";
+    char* arr2 = "bcdd";
+    if (my_strstr(arr1, arr2) == 1)
+        printf("found");
+    else
+        printf("not found");
+    return 0;
 }
 int my_strstr(char* str1, char* str2)
 {
-	int i, j;
-	while (*str1++ != *str2)
-	{
-		if(*str1 == '\0')
-			return -1;
-	}
-	str1--;
-	while (*++str2 != '\0')
-	{
-		str1++;
-		if (*str1 != *str2)
-			return -1;
+    int i, j;
+    while (*str1++ != *str2)
+    {
+        if(*str1 == '\0')
+            return -1;
+    }
+    str1--;
+    while (*++str2 != '\0')
+    {
+        str1++;
+        if (*str1 != *str2)
+            return -1;
 
-	}
-	return 1;
+    }
+    return 1;
 
 }
 ```
 
-**==strtok==函数**
+**strtok函数**
 
 > **char* strtok(char* str,const char* sep)**
 
@@ -891,7 +919,7 @@ int main()
 }
 ```
 
-**==strerror==函数**
+**strerror函数**
 
 在调用库函数失败的时候都会设置错误码
 
@@ -961,7 +989,7 @@ int main()
 
 ### 2.2 内存函数
 
-- **==memcpy==(void* destination,void* source,size_t num)**
+- **memcpy(void* destination,void* source,size_t num)**
 
   **PS**:不能处理**重叠**的内存
 
@@ -989,7 +1017,7 @@ void my_mempy(void* dest,void* src,size_t num)
 }
 ```
 
-- **==memmove==**()可以处理重叠的内存
+- **memmove**()可以处理重叠的内存
 
   **模拟实现：**
 
@@ -1020,9 +1048,9 @@ void my_memmove(void* destination,void* source,size_t num )//主要是从前向�
 
 **所以直接用memmove()就行了？**
 
-==**memcmp**==(const void* p1,const void* p2,size_t num);
+**memcmp**(const void* p1,const void* p2,size_t num);
 
-返回方式类似==**strcmp**==
+返回方式类似**strcmp**
 
 ```c
 int main()
@@ -1030,12 +1058,12 @@ int main()
     float arr1[] ={1.0,2.0,3.0,4.0};
     float arr2[] = {1.0.3.0};
     int ret = memcmp(arr1,arr2,8);
- 	printf("%d\n",ret);
+    printf("%d\n",ret);
     return 0;
 }
 ```
 
-==**memset()**==
+**memset()**
 
 ```c
 int main()
@@ -1050,5 +1078,395 @@ int main()
 }
 ```
 
-## 3 #自定义类型
+## 3 自定义类型
+
+```c
+struct
+    {
+        char name;
+    }x;
+struct
+    {
+        char name;
+    }*p;
+//*p = x这种语法是错误的，编译器会将其看作是两个不同的结构体尽管里面的数据类型相同
+```
+
+**考虑一下这种代码是否可行**
+
+```c
+struct N
+{
+    char a;
+    struct N n;
+}
+```
+
+**这种语法也是错误的，如果可以，那么struct N类型所占内存的大小不可计算！**
+
+那么如何实现结构体的自引用呢？
+
+### 3.1 结构体的自引用
+
+```c
+struct Node
+{
+	int data;
+	struct Node next;
+};
+//可行否？
+如果可以，那sizeof(struct Node)是多少？
+```
+
+### 3.2 结构体内存对齐
+
+```c
+struct s1
+{
+    char c1;
+    int i;
+    char c2;
+}
+//sizeof(s1) = 12
+struct s2
+{
+    char c1;
+    int i;
+    double d;
+}
+//sizeof(s2) = 16
+struct s3
+{
+    char c1;
+    char c2;
+    int i;
+}
+//sizeof(s3) = 8
+
+```
+
+**如何计算**
+
+结构体的对齐规则：
+
+> 1. 第一个成员在与结构体变量偏移量为0的地址处。
+>
+> 2. 其他成员变量要对齐到某个数字（对齐数）的整数倍的地址处。
+>
+> **对齐数** = 编译器默认的一个对齐数 与 该成员大小的较小值。
+> ==VS中默认的值为8==
+>
+> ==Linux - 没有默认对齐数的概念==
+>
+> 3. 结构体总大小为最大对齐数（每个成员变量都有一个对齐数）的整数倍。
+> 4. 如果嵌套了结构体的情况，嵌套的结构体对齐到自己的最大对齐数的整数倍处，结构体的整
+>
+> 体大小就是所有最大对齐数（含嵌套结构体的对齐数）的整数倍。
+
+**"等我学会画图一定回来把这里讲清楚"**
+
+**为什么存在内存对齐？**
+
+- **平台原因**：不是所有的硬件平台都能访问任意地址上的任意数据的；某些硬件平台只能在某些地址处取某些特定类型的数据，否则抛出硬件异常。
+- **性能原因**：数据结构应该尽可能地在自然边界上对齐，原因在于，为了访问未对齐的内存，处理器需要作两次内存访问；而对齐的内存仅需要一次访问
+
+> 牺牲了空间换取了时间。
+
+当满足占据较小空间的成员放在一起时，占用的空间最少。
+
+**如何修改默认对齐数？**(不合适的时候才修改)
+
+```c
+#pragma pack(2)//把默认对齐数改为了2
+struct S
+{
+    char c1;
+    int i;
+    char c2;
+}
+```
+
+**offsetof(type,member)**:用于计算结构体成员相对首地址的偏移量。[模拟实现]()
+
+示例：
+
+```c
+struct S
+{
+    char c1;
+    int i;
+    char c2;
+}
+int main()
+{
+    printf("%d ",offsetof(struct S,c1));
+    printf("%d ",offsetof(struct S,i));
+    printf("%d",offsetof(struct S,c2));
+    
+    return 0;
+}
+```
+
+运行结果：
+
+> 0 4 8
+
+### 3.3 位段
+
+位段的声明：
+
+>1. 位段的成员必须是*int ,unsigned int, signed int*
+>
+>2. 位段的成员名后面有一个冒号和一个数字。
+
+**PS: 位段不适合跨平台使用**
+
+比如：
+
+```c
+struct A
+{
+    int _a:2;//_a成员占2个bit位置
+    int _b:5;//_b成员占5个bit位置
+    int _c:10;//_c成员占10个bit位置
+    int _d:30;//_d成员占30个bit位置
+      
+}
+// sizeof (struct A) = 8
+
+```
+
+- 开辟空间逻辑：先按照数据类型开辟空间，再逐个分配空间。
+  如果上一次开辟的空间还够用就不开辟。
+
+### 3.4 枚举enum
+
+#### 3.4.1 枚举类型的定义
+
+```c
+//声明枚举类型
+enum color
+{
+	RED,
+    GREEN,
+    BLUE,
+}//存放枚举的可能常量
+int main()
+{
+    printf("%d ",RED);
+    printf("%d ",GREEN);
+    printf("%d ",BLUE);
+}
+```
+
+输出结果：
+
+> 0 1 2
+
+从第一个开始逐步递增1
+
+示例
+
+```c
+enum color
+{
+	RED = 5,
+    GREEN, //6
+    BLUE, //7
+}
+```
+
+### 3.5 联合体
+
+#### 3.5.1 联合体的定义
+
+```c
+union un
+{
+    char c;
+    int i;
+};
+int main()
+{
+    union un u;
+    printf("%d",sizeof(u));
+    //输出4；
+    printf("%p %p %p",&u,&(u.c),&(u.i));
+    //发现三个地址相同
+    return 0;
+}
+```
+
+关键在于联合体的成员**公用同一块空间**
+
+#### 3.5.2 联合体的特点
+
+- 成员共用同一块内存空间
+
+- 大小至少是最大成员的大小。
+- 只能同时调用联合体中**一个成员**
+
+Eg:测试大小端联合体方法
+
+[<u>关于大小端</u>](scatter.md#4-大小端)
+
+1. 传统方法
+
+```c
+int main()
+{
+    int a = 1;
+    if(*(char*)&a == 1)
+    {
+        printf("small");
+    }
+    else
+        printf("big");
+    return 0;
+}
+```
+
+
+
+2. 联合体方法
+
+```c
+int check_sys()
+{
+    union U
+    {
+        char c;
+        int i;
+    }u;
+    u.i = 1;
+    return u.c;
+}
+int main()
+{
+    if(check_sys == 1)
+    {
+        printf("小端");
+    }
+    else
+        printf("大端");
+    return 0;
+}
+```
+
+#### 3.5.3 联合体大小的计算
+
+- 联合体的大小至少是最大成员的大小。
+- 当最大成员的大小不是[最大对齐数]()的整数倍的时候就要对齐到最大对齐数的整数倍。
+
+```c
+union Un1
+{
+    char a[5];//对齐数是min{1,8} = 1
+    int i;//对齐数是min{4,8} = 4;
+    //所以最大对齐数是4
+};
+union Un2
+{
+    short c[7];////对齐数是min{2,8} = 2
+    int i;//对齐数是min{4,8} = 4;
+    //所以最大对齐数是4
+}
+int main()
+{
+    printf("%d %d",sizeof(Un1),sizeof(Un2));
+    //输出8 16
+}
+```
+
+## 4 文件
+
+**用处不大随便写点**
+
+### 4.1 数据文件和程序文件
+
+- 数据文件
+
+>包括源程序文件（后缀为.c）,目标文件（windows环境后缀为.obj），可执行程序（windows环境后缀为.exe）
+
+- 数据文件
+
+>文件的内容不一定是程序，卫视程序读写的数据，比如程序运行需要从中读取数据的文件或者需要输出内容的文件。
+
+本章讨论的是**数据文件**
+
+### 4.2 文件名
+
+  一个文件要有一个唯一的文件标识，以便用户识别和引用。
+  文件名包含三个部分：文件路径+文件名主干+文件后缀
+  EG: `c:\code\test.txt`
+ 为了方便起见，文件表示常被称作**文件名**
+
+### 4.3 文件的打开和关闭
+
+#### 4.3.1 文件指针
+
+  每个被使用的文件都在内存中开辟了一个相应的文件信息区，用来存放文件的相关信息。这些信息被保存在一个**结构体变量**，而该结构体类型是有系统声明的，叫做**FILE**。每当打开一个文件时，系统会根据文件的情况**自动创建一个FILE结构的变量并填充其中的信息**
+
+#### 4.3.2 打开和关闭
+
+```c
+FIle* pf;//文件指针变量
+FILE* fopen(const char* filename,const char* mode);
+int fclose(FILE* stream);
+```
+
+```c
+//Eg
+int main()
+{
+	FILE* pf = fopen("test.dat","w");//只写，如果没如果没有这个文件会自动创建一个同名文件
+	//若用路径打开记得转义
+	if(pf == NULL)
+	{
+		perror ("fopen");
+		return 1;
+	}
+	//写文件
+	//关闭文件
+	fclose(pf);
+	pf = NULL;
+	return 0;
+}
+```
+
+#### 4.2.3 顺序读写
+
+```c
+//Eg
+int main()
+{
+	FILE* pf = fopen("test.dat","w");//只写，如果没如果没有这个文件会自动创建一个同名文件
+	//若用路径打开记得转义
+	if(pf == NULL)
+	{
+		perror ("fopen");
+		return 1;
+	}
+	//写文件
+	*fputc('b',pf);
+	*fputc('i',pf);
+	*fputc('t',pf);
+	//关闭文件
+	fclose(pf);
+	pf = NULL;
+	return 0;
+}
+```
+
+#### 4.2.4 流 
+
+C语言程序只要运行起来就默认打开了三个流：
+
+stdin-标准输入流-键盘
+
+stdout-标准输出流-屏幕
+
+stderr-标准错误流-屏幕
+
+
 
