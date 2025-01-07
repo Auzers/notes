@@ -24,7 +24,7 @@ icon: material/home
 !!! note "" 
     <br><br>
     <div align="center" style="font-size:32px;font-weight:bold">
-        ~『今、道の途中です』~
+        ~『共勉』~
     </div>
     <div align="center" style="font-size:15px">
         我的身体里的火车从来不会错轨。所以允许大雪，风暴，泥石流，和荒谬。
