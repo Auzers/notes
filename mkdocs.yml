@@ -19,6 +19,22 @@ theme:
     logo: material/sail-boat
     repo: fontawesome/brands/git-alt
     edit: material/pencil
+    admonition:
+      info: fontawesome/solid/anchor
+      note: fontawesome/solid/pen-nib
+      abstract: fontawesome/solid/list
+      tip: fontawesome/solid/lightbulb
+      success: fontawesome/solid/check
+      question: fontawesome/solid/circle-question
+      warning: fontawesome/solid/triangle-exclamation
+      failure: material/alien
+      danger: fontawesome/solid/virus
+      bug: fontawesome/solid/robot
+      example: fontawesome/solid/flask
+      quote: fontawesome/solid/link
+  font:
+    text: LXGW WenKai Screen GB Screen # Share Tech
+    code: JetBrains Mono
 # 网页标签图标
   favicon: assets/images/logo.png
 
@@ -199,6 +215,8 @@ extra_javascript:
   # - js/heti.js
 
 extra_css:
+  - https://gcore.jsdelivr.net/npm/lxgw-wenkai-screen-webfont@1.1.0/style.css
+  - https://gcore.jsdelivr.net/npm/lxgw-wenkai-webfont@1.1.0/style.css
   - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css
   # - https://cdn.tonycrane.cc/utils/katex.min.css
   - https://cdn.tonycrane.cc/jbmono/jetbrainsmono.css
@@ -245,7 +263,9 @@ remote_name: origin       # 远程仓库名
 
 
 nav:
-  - Home: index.md
+  - Home:
+    - index: index.md
+    - introduction: introduction.md
   - Blogs:
     - index: Blogs/index.md
     - Archives: Blogs/archives.md

@@ -1,14 +1,11 @@
 ---
-hide:
-    - date
-    - navigation
-    - toc
-home: true
+home: false
 nostatistics: true
 comments: false
 icon: material/home
 ---
 <!-- 邮箱信息 -->
+# Welcome to am's blog!
 <style>
     .email-info {
         position: fixed;
@@ -24,13 +21,27 @@ icon: material/home
     <a href="1058564630@qq.com">1058564630@qq.com</a>
 </div>
 
-<br><br><br><br><br><br>
+!!! note "" 
+    <br><br>
+    <div align="center" style="font-size:32px;font-weight:bold">
+        ~『今、道の途中です』~
+    </div>
+    <div align="center" style="font-size:15px">
+        我的身体里的火车从来不会错轨。所以允许大雪，风暴，泥石流，和荒谬。
+        <br>
+    <span style="font-size:15px; font-weight:normal; display:inline-block; margin-left: 300px;">
+        ——余秀华 《月光落在左手上》
+    </span>
+    </div>
+    <br><br>
+
+<!-- <br><br><br><br><br><br>
 
 <h1 style="text-align: center;">
 <span style="font-size:50px;">
 Welcome to am's blog!
 </span>
-</h1>
+</h1> -->
 
 
 <span style="display: block; text-align: center; font-size: 18px;">
