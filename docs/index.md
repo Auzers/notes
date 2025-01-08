@@ -44,23 +44,23 @@ Welcome to am's blog!
 </h1> -->
 
 
-<span style="display: block; text-align: center; font-size: 18px;">
-[:material-chart-line: Statistics](javascript:toggle_statistics();)
+<!-- <span style="display: block; text-align: center; font-size: 18px;">
+[:material-chart-line: Statistics](javascript:toggle_statistics();) -->
 <!-- [:octicons-link-16: My friends!](./Links/index.md) /  -->
-</span>
+<!-- </span>
 
 <div id="statistics" markdown="1" class="card" style="width: 27em; border-color: transparent; opacity: 0; margin-left: auto; margin-right: 0; font-size: 110%">
-<div style="padding-left: 1em;" markdown="1">
+<div style="padding-left: 1em;" markdown="1"> -->
 <!-- 页面总数：{{ pages }}  
 总字数：{{ words }}  
 代码块行数：{{ codes }}   -->
-网站运行时间：<span id="web-time"></span>  
+<!-- 网站运行时间：<span id="web-time"></span>  
 <span id="busuanzi_container_site_uv">访客总人数：<span id="busuanzi_value_site_uv"></span>人  
 <span id="busuanzi_container_site_pv">总访问次数：<span id="busuanzi_value_site_pv"></span>次
 </div>
-</div>
+</div> -->
 
-<script>
+<!-- <script>
 function updateTime() {
     var date = new Date();
     var now = date.getTime();
@@ -89,4 +89,4 @@ function toggle_statistics() {
         statistics.style.opacity = 0;
     }
 }
-</script>
+</script> -->

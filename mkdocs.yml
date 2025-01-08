@@ -191,7 +191,6 @@ not_in_nav: links.md
 
 
 
-
 extra_javascript:
   - js/katex.js
   - js/mathjax.js
@@ -275,7 +274,6 @@ nav:
     - index: dairy_summary/index.md
     - dairies: dairy_summary/dairy.md
     - summaries: dairy_summary/summary.md
-  - tags: tags/index.md
-  - GitHub: https://github.com/Auzers/notes
+  # - tags: tags/index.md
   - links: links/index.md
   

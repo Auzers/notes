@@ -1,5 +1,5 @@
 ---
-icon: material/book
+icon: /fontawesome/solid/book
 nostatistics: true
 comments: false
 ---
