@@ -6,7 +6,7 @@ icon: /octicons/link-24
 
 # Links 
 
-!!! abstract
+!!! abstract ""
     My friends!
     
 
