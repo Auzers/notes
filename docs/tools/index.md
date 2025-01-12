@@ -9,6 +9,7 @@ comments: false
 
 - "autohotkey":
     - 键位映射: autohotkey/auto
-
+- "AI_prompt":
+    - useful prompt: prompt/prompt
 {{ END_TOC }}
 

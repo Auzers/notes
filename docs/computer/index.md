@@ -15,6 +15,8 @@ comments: false
     - C++: C++/C++
 - "git & github":
     - git & github: git_github/git    
+- "linux":
+    - Linux: Linux/linux
 {{ END_TOC }}
 
 
