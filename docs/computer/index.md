@@ -12,11 +12,9 @@ comments: false
     - C语言: C/learning_c
     - 零散的知识: C/scatter
 - "从C到C++":
-    - C++: C++/C++
-- "git & github":
-    - git & github: git_github/git    
-- "linux":
-    - Linux: Linux/linux
+    - C++: C++/C++    
+- "Linux":
+    - "Linux": Linux/linux
 {{ END_TOC }}
 
 

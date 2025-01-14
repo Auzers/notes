@@ -7,19 +7,13 @@ icon: material/home
 <!-- 邮箱信息 -->
 # Welcome to am's blog!
 <style>
-    /* 设置反引号包裹的内容样式 */
-    code:not(pre code) {
-        color: #0077cc !important; /* 蓝色 */
-    }
-    
-    /* 保持原有的email-info样式 */
     .email-info {
         position: fixed;
-        bottom: 27px;
-        right: 288px;
-        color: #000000;
-        font-size: 14px;
-        z-index: 1000;
+        bottom: 27px; /* 调整高度，距离底部20px */
+        right: 288px; /* 调整距离右侧的位置 */
+        color: #000000; /* 设置字体颜色为黑色 */
+        font-size: 14px; /* 设置字体大小 */
+        z-index: 1000; /* 确保显示在最前方 */
     }
 </style>
 
@@ -27,7 +21,7 @@ icon: material/home
     <a href="1058564630@qq.com">1058564630@qq.com</a>
 </div>
 
-!!! note "" 
+!!! note ""
     <br><br>
     <div align="center" style="font-size:32px;font-weight:bold">
         ~『共勉』~

@@ -11,5 +11,9 @@ comments: false
     - 键位映射: autohotkey/auto
 - "AI_prompt":
     - useful prompt: prompt/prompt
+- "git & github":
+    - git & github: git_github/git    
+- "problems I met":
+    - problem and solution: problem/problem
 {{ END_TOC }}
 

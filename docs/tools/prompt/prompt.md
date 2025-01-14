@@ -1,7 +1,5 @@
 ---
 title: prompt
-tags:
-  - prompt
 ---
 
 # prompt
