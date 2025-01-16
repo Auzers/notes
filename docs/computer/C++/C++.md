@@ -2,6 +2,7 @@
 **以新的语法和示例代码呈现**
 
 ## 1 getline()相关
+<u>[cin的几种读取方法和读取逻辑](https://blog.csdn.net/weixin_43725617/article/details/103079180)</u>
 
 方法一(常用)：
 ```cpp
@@ -49,7 +50,7 @@ int main()
 }
 ```
 
-- `getline(cin, a);`：从标准输入（键盘）读取一行文本，并将其存储到 a 字符串中。getline 是 C++ 标准库中的一个函数，允许读取包含空格的整行文本。cin 表示从键盘输入数据。不存储最后的换行符，且会把换行符从标准输入流中丢弃。
+- `getline(cin, a);`：从标准输入（键盘）读取一行文本，并将其存储到 a 字符串中。getline 是 C++ 标准库中的一个函数，允许读取包含空格的整行文本。cin 表示从键盘输入数据。不存储最后的换行符，且会把换行符从标准输入流中丢弃。且getline()不能直接用于char数组。
 
 ## 2 for(auto c : a)相关
 
@@ -223,3 +224,118 @@ for(int i = 0;i < a.size();i++)
 ```
 - `a.substr(b,c)`: 返回字符串a从第b个字符开始，长度为c的子串。
 实现字符串循环左移
+```cpp
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int n;
+    while(cin >> n, n != 0)
+    {
+        string str[200];
+        int index = 0;
+        int min = 201;
+        for (int i = 0; i < n; ++i) // 修改第 9 行
+        {
+            cin >> str[i]; // 修改第 11 行
+            if(str[i].size() < min)
+            {
+                min = str[i].size();
+                index = i;
+            }
+        }
+        int i;
+        string res;
+        for(i = 1; i <= min; i++)
+        {
+            string tmp = str[index].substr(str[index].size() - i, i);
+            cout << tmp << ' ' << endl;
+            int j;
+            for(j = 0; j < n; j++) // 修改第 20 行
+            {
+                string back = str[j].substr(str[j].size() - i, i);
+                if(back != tmp)
+                {
+                    break;
+                }
+            }
+            if(j == n)
+            {
+                res = tmp;
+            }
+            else
+            {
+                break; // 添加提前退出逻辑
+            }
+        }
+        cout << res << endl;
+    }
+    return 0;
+}
+```
+
+## 9 #include<bits/stdc++.h>
+
+- `#include<bits/stdc++.h>`: 包含C++标准库的所有头文件。常用于竞赛。
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+int n;
+string a[209];
+int main(){
+    while(cin>>n){
+        if(n==0) return 0;
+        for(int i=0;i<n;++i) cin>>a[i],reverse(a[i].begin(),a[i].end());
+        sort(a,a+n);
+        string v="";
+        for(int i=0;i<a[0].length();++i){
+            if(a[0][i]==a[n-1][i]) v=a[0][i]+v;
+            else break;
+        }
+        cout<<v<<"\n";
+    }
+}
+```
+
+## 10 reverse()
+
+- `reverse(a.begin(),a.end())`: 反转字符串a。
+```cpp
+#include <iostream>
+#include <algorithm>
+using namespace std;
+int main()
+{
+    string a = "hello";
+    reverse(a.begin(),a.end());
+    cout << a << endl;
+    return 0;
+}
+```
+输出结果：
+```
+olleh
+```
+
+## 11 sort()
+
+- `sort(a.begin(),a.end())`: 对字符串a进行排序。按照字典序排序即按**ascII码**排序。
+- 在 C++ 中,sort 函数的用法是 sort(first, last)，其中 first 是要排序的范围的起始迭代器，last 是范围的结束迭代器（不包括该位置的元素）。
+
+## 12 unordered_set<int>
+
+- `unordered_set<int> a`: 定义一个无序集合a，其中元素类型为int。
+- `a.insert(b)`: 将b插入到a中。
+- `a.count(b)`: 返回b在a中的个数。
+- `a.find(b)`: 返回b在a中的迭代器。
+- `a.erase(b)`: 删除a中的b。
+
+```cpp
+int get_unique_count(int a[], int n) {
+    unordered_set<int> unique_nums;
+    for (int i = 0; i < n; i++) unique_nums.insert(a[i]);//遍历数组，将每个元素插入集合中。集合会自动去重。
+    return unique_nums.size();
+}
+```

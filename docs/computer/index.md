@@ -12,7 +12,8 @@ comments: false
     - C语言: C/learning_c
     - 零散的知识: C/scatter
 - "从C到C++":
-    - C++: C++/C++    
+    - C++: C++/C++   
+    - 算法基础: C++/algorithm
 - "Linux":
     - "Linux": Linux/linux
 {{ END_TOC }}
