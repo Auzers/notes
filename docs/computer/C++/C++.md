@@ -1,5 +1,6 @@
 # 从C到C++
 **以新的语法和示例代码呈现**
+包括但不限于[acwing](https://www.acwing.com/)的笔记内容
 
 ## 1 getline()相关
 <u>[cin的几种读取方法和读取逻辑](https://blog.csdn.net/weixin_43725617/article/details/103079180)</u>
@@ -333,9 +334,73 @@ olleh
 - `a.erase(b)`: 删除a中的b。
 
 ```cpp
-int get_unique_count(int a[], int n) {
+int get_unique_count(int a[], int n)
+ {
     unordered_set<int> unique_nums;
     for (int i = 0; i < n; i++) unique_nums.insert(a[i]);//遍历数组，将每个元素插入集合中。集合会自动去重。
     return unique_nums.size();
 }
+```
+## 13 结构体内部的构造函数
+
+```cpp
+struct Node
+{
+    int a,b;
+    Node(int _a,int _b):a(_a),b(_b){}//把_a赋值给a,把_b赋值给b
+};
+```
+
+## 14 链表
+```cpp
+#include <iostream>
+using namespace std;
+
+// 定义链表节点结构体
+struct Node
+{
+    int val;        // 节点存储的值
+    Node* next;     // 指向下一个节点的指针
+    
+    // 构造函数，初始化节点
+    Node(int _val) : val(_val), next(NULL) {}
+};
+
+int main()
+{
+    // 创建三个节点
+    auto p = new Node(1);  // 创建值为1的节点
+    auto q = new Node(2);  // 创建值为2的节点
+    auto o = new Node(3);  // 创建值为3的节点
+    
+    // 连接节点，构建链表
+    p->next = q;    // 将节点1指向节点2
+    q->next = o;    // 将节点2指向节点3
+    Node* head = p;//初始化链表的头节点
+
+    //链表的遍历
+    for(Node* i = head;i != NULL; i = -> next)
+    {
+        cout << i->val <<endl;
+    }
+    return 0;
+}
+```
+
+**最终的链表结构**
+```
+p        q        o
+[1] ---> [2] ---> [3] ---> NULL
+```
+
+**在链表中添加节点**(一般添加在最前面)
+```cpp
+Node* u = new Node(4);
+u->next = head;
+head = u;
+```
+
+**节点的删除：**只要遍历不到需要删除的点就可以，至于有没有真正删除并不重要。
+```cpp
+head->next = head->next->next;相当于跳过了某一个节点
 ```

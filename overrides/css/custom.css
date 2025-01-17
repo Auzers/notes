@@ -1,4 +1,5 @@
 
+/*
 .md-typeset details:not([open]) {
   box-shadow: var(--md-shadow-z2);
   padding-bottom: 0;
@@ -8,12 +9,16 @@
 .md-typeset details {
   box-shadow: var(--md-shadow-z2);
 }
+*/
 
 /* .md-typeset img, */
+
+/*
 .md-typeset video {
   box-shadow: var(--md-shadow-z1);
   border-radius: 5px;
 }
+*/
 .md-typeset .admonition,
 .md-typeset details {
   border: none;
@@ -100,9 +105,11 @@
 
   /* --md-default-bg-color: #fffaf5; */
   /* --md-default-bg-color: #E8EEE7; */
-  --md-shadow-z1: 1px 1px 3px #fff5ee, 1px 1px 5px #e1d0c5;
-  --md-shadow-z2: 1px 1px 3px #fff5ee, 2px 2px 7px #cebeb3;
-  --md-shadow-z3: 1px 1px 3px #fff5ee, 2px 2px 9px #cebeb3;
+
+  /* --md-shadow-z1: 1px 1px 3px #fff5ee, 1px 1px 5px #e1d0c5; */
+  /* --md-shadow-z2: 1px 1px 3px #fff5ee, 2px 2px 7px #cebeb3; */
+  /* --md-shadow-z3: 1px 1px 3px #fff5ee, 2px 2px 9px #cebeb3; */
+
   --md-typeset-kbd-border-color: #b8b8b8;
   --md-admonition-fg-color: var(--md-default-fg-color);
   /* --md-admonition-bg-color: #fff9f4; */

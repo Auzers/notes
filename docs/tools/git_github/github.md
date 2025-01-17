@@ -1,8 +1,11 @@
 # 有关GitHub和Git的使用方法与技巧
 
 !!! abstract 
-    [github基本使用](https://www.bilibili.com/video/BV1e541137Tc/?spm_id_from=333.337.search-card.all.click&vd_source=df5a597928fba384c94060640080e142)
-    [git使用](https://www.bilibili.com/video/BV1db4y1d79C/?spm_id_from=333.788.comment.all.click&vd_source=df5a597928fba384c94060640080e142)的相关笔记
+    相关视频：
+
+    - [github基本使用](https://www.bilibili.com/video/BV1e541137Tc/?spm_id_from=333.337.search-card.all.click&vd_source=df5a597928fba384c94060640080e142)
+    - [git使用](https://www.bilibili.com/video/BV1db4y1d79C/?spm_id_from=333.788.comment.all.click&vd_source=df5a597928fba384c94060640080e142)
+    - [git连接远程仓库和本地仓库](https://www.acwing.com/blog/content/2148/)
 
 
 

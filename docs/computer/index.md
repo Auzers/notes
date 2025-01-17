@@ -10,7 +10,7 @@ comments: false
 
 - "C语言":
     - C语言: C/learning_c
-    - 零散的知识: C/scatter
+    - something_scattered: C/scatter
 - "从C到C++":
     - C++: C++/C++   
     - 算法基础: C++/algorithm
