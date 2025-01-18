@@ -4,7 +4,7 @@ title: prompt
 
 # prompt
 
-**支持[原文](https://wncfht.github.io/notes/Tools/AI/prompt/)**
+
 ## 通用思维链 prompt
 
 > [!note]-
@@ -729,3 +729,5 @@ title: prompt
 > 
 > Please follow this template to write your solution, maintaining clear mathematical notation and logical flow throughout the document.
 > ```
+## #附录
+- **支持[原文](https://wncfht.github.io/notes/Tools/AI/prompt/)**

@@ -1,4 +1,9 @@
 
+
+
+
+
+/* 自定义阴影 */
 /*
 .md-typeset details:not([open]) {
   box-shadow: var(--md-shadow-z2);
@@ -101,6 +106,7 @@
   --md-footer-fg-color--lighter: #000000;
   --md-code-bg-color: #fafafa;
   --md-code-fg-color: var(--md-typeset-color);
+
 
 
   /* --md-default-bg-color: #fffaf5; */

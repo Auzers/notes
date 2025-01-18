@@ -4,4 +4,6 @@ nostatistics: true
 comments: false
 ---
 
-# blog
+# Blog
+
+{{ blog_content }}

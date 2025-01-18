@@ -186,7 +186,22 @@ plugins:
   #     include_source: True
   #     execute: False
   #     ignore: ["*.py"]
-
+  - minify:
+      minify_html: true
+      minify_js: true
+      minify_css: true
+      js_files:
+        - js/katex.js
+        - js/mathjax.js
+        - js/toc.js
+      css_files:
+        - css/custom.css
+        - css/tasklist.css
+        - css/card.css
+        - css/flink.css
+        - css/extra.css
+        - css/fold_toc.css
+        - css/grid cards.css
 not_in_nav: links.md
 
 
@@ -267,9 +282,27 @@ nav:
     - introduction: introduction.md
   - Blogs:
     - index: Blogs/index.md
-    - Archives: Blogs/archives.md
-  - computer science: computer/index.md
-  - tools: tools/index.md
+    # - Archives: Blogs/archives.md
+  - computer science:
+    - computer/index.md
+    - C语言:
+      - C语言: computer/C/learning_c.md
+      - something_scattered: computer/C/scatter.md
+    - 从C到C++:
+        - C++: computer/C++/C++.md
+        - 算法基础: computer/C++/algorithm.md
+    - Linux:
+        - "Linux": computer/Linux/linux.md
+  - tools: 
+    - tools/index.md
+    - "autohotkey":
+        - 键位映射: tools/autohotkey/auto.md
+    - "AI_prompt":
+        - useful prompt: tools/prompt/prompt.md
+    - "git & github":
+        - git & github: tools/git_github/github.md    
+    - "problems I met":
+        - problem and solution: tools/problem/problem.md
   - dairy&summary: 
     - index: dairy_summary/index.md
     - dairies: dairy_summary/dairy.md

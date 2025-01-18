@@ -1,6 +1,7 @@
 # 从C到C++
-**以新的语法和示例代码呈现**
-包括但不限于[acwing](https://www.acwing.com/)的笔记内容
+!!! note ""
+    - **以新的语法和示例代码呈现**
+    - 包括但不限于<u>[acwing](https://www.acwing.com/)</u>的笔记内容
 
 ## 1 getline()相关
 <u>[cin的几种读取方法和读取逻辑](https://blog.csdn.net/weixin_43725617/article/details/103079180)</u>
@@ -352,6 +353,19 @@ struct Node
 ```
 
 ## 14 链表
+
+- `new`:new 是 C++ 中用于动态内存分配的关键字。它允许你在堆上分配内存，并返回指向该内存的指针。
+Eg:
+```cpp
+ int* p = new int; // 在堆上分配一个整数
+  *p = 10;          // 给这个整数赋值
+
+
+int* arr = new int[5]; // 在堆上分配一个整数数组，大小为5
+for (int i = 0; i < 5; ++i) {
+    arr[i] = i;        // 初始化数组
+} 
+```
 ```cpp
 #include <iostream>
 using namespace std;
@@ -387,20 +401,76 @@ int main()
 }
 ```
 
-**最终的链表结构**
+- **最终的链表结构**
 ```
 p        q        o
 [1] ---> [2] ---> [3] ---> NULL
 ```
 
-**在链表中添加节点**(一般添加在最前面)
+- **在链表中添加节点**(一般添加在最前面)
 ```cpp
 Node* u = new Node(4);
 u->next = head;
 head = u;
 ```
 
-**节点的删除：**只要遍历不到需要删除的点就可以，至于有没有真正删除并不重要。
+- **节点的删除：**只要遍历不到需要删除的点就可以，至于有没有真正删除并不重要。
 ```cpp
 head->next = head->next->next;相当于跳过了某一个节点
 ```
+
+- **链表归并：**
+!!! note ""
+
+    === "题面"
+
+        - 如下程序的输出为___。
+
+        ```c
+        #include <stdio.h>
+            
+        double myFunction(int x){
+            return x;
+        }
+
+        int main(){
+            printf("%lf",myFunction(3.14));
+        }
+        ```
+    === "答案"
+
+        **二路归并：**
+        ```cpp
+        /**
+        * Definition for singly-linked list.
+        * struct ListNode {
+        *     int val;
+        *     ListNode *next;
+        *     ListNode(int x) : val(x), next(NULL) {}
+        * };
+        */
+        class Solution {
+        public:
+            ListNode* merge(ListNode* l1, ListNode* l2) {
+                auto dummy = new ListNode(-1),tail = dummy;//初始化一个虚拟节点
+                while(l1&&l2)
+                {
+                    if(l1->val < l2->val)
+                    {
+                        tail->next = l1;
+                        l1 = l1->next;
+                    }
+                    else
+                    {
+                    tail->next = l2;
+                    l2 = l2->next;
+                    }
+                    tail = tail->next;
+                }
+                if(l1 == NULL) tail->next = l2;
+                if(l2 == NULL) tail->next = l1;
+                return dummy->next;
+            }
+        };
+        ```   
+        

@@ -1,3 +1,9 @@
 ---
-icon: /fontawesome/solid/tag
+icon: material/tag
+nostatistics: true
+comments: false
 ---
+
+# Tags
+
+{{ tag_content }}

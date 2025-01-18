@@ -57,10 +57,14 @@ int main()
 	return 0;
 }
 ```
-<figure>
-    <img src="https://cdn.jsdelivr.net/gh/Auzers/picture/1.png" alt="打印结果">
-    <figcaption>打印结果</figcaption>
-</figure>
+<div style="text-align: center;">
+    <img src="https://cdn.jsdelivr.net/gh/Auzers/picture/1.png" 
+         alt="替代文本" 
+         width="50%" 
+         style="border-radius: 10px;">
+    <p style="margin-top: 10px;">运行结果</p>
+</div>
+
 --------
 **PS** char 类型的取值范围<br>
 0000000<br>
