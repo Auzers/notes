@@ -422,22 +422,10 @@ head->next = head->next->next;相当于跳过了某一个节点
 - **链表归并：**
 !!! note ""
 
-    === "题面"
+    === "题目-1"
 
-        - 如下程序的输出为___。
-
-        ```c
-        #include <stdio.h>
-            
-        double myFunction(int x){
-            return x;
-        }
-
-        int main(){
-            printf("%lf",myFunction(3.14));
-        }
-        ```
-    === "答案"
+        输入两个递增排序的链表，合并这两个链表并使新链表中的结点仍然是按照递增排序的。
+    === "答案-1"
 
         **二路归并：**
         ```cpp
@@ -473,4 +461,203 @@ head->next = head->next->next;相当于跳过了某一个节点
             }
         };
         ```   
+- **链表反转：**
+
+!!! note ""
+
+    === "题目-2"
+
+        定义一个函数，输入一个链表的头结点，反转该链表并输出反转后链表的头结点。<br>
+        样例:
+        > 输入:1->2->3->4->5->NULL<br>
+          输出:5->4->3->2->1->NULL
+    === "答案-2"
+        **法1：**
+        ```cpp
+        /**
+        * Definition for singly-linked list.
+        * struct ListNode {
+        *     int val;
+        *     ListNode *next;
+        *     ListNode(int x) : val(x), next(NULL) {}
+        * };
+        */
+        class Solution {
+        public:
+            ListNode* reverseList(ListNode* head) {
+                if(!head || !head->next) return head;
+            auto p = head, q = head->next;
+            while (q)
+            {
+                auto o = q -> next;
+                q->next = p;
+                p = q;
+                q = o;
+            }
+            head->next = NULL;
+            return p;
+                
+            }
+        };
+        ```
+        **法2（递归）：**
+        ```cpp
+        /**
+        * Definition for singly-linked list.
+        * struct ListNode {
+        *     int val;
+        *     ListNode *next;
+        *     ListNode(int x) : val(x), next(NULL) {}
+        * };
+        */
+        class Solution {
+        public:
+            ListNode* reverseList(ListNode* head) {
+                if(!head || !head->next) return head;
+                auto tail = reverseList(head->next);
+                head->next->next = head;
+                head->next = NULL;
+                return tail;
+                
+            }
+        };      
+        ```
+
+- **找公共节点：**
+!!! note ""
+    === "题目-3"
+        找两个链表的公共节点
+    === "答案-3"
+        ```cpp
+        /**
+        * Definition for singly-linked list.
+        * struct ListNode {
+        *     int val;
+        *     ListNode *next;
+        *     ListNode(int x) : val(x), next(NULL) {}
+        * };
+        */
+        class Solution {
+        public:
+            ListNode *findFirstCommonNode(ListNode *headA, ListNode *headB) {
+                auto p = headA;
+                auto q = headB;
+                while(p != q)
+                {
+                    if(p) p = p->next;
+                    else p = headB;
+                    if(q) q = q ->next;
+                    else q = headA;
+                }
+                return p;
+                
+            }
+        };
+        ```
+    === "图解"
+        <u>[双指针法图解](https://www.acwing.com/solution/content/26708/)</u>
         
+- **删除链表中重复的节点:**
+!!! note ""
+    === "题目-4"
+        删除链表中的重复节点
+        >样例1<br>
+        输入：1->2->3->3->4->4->5<br>
+        输出：1->2->5
+
+        >样例2<br>
+        输入：1->1->1->2->3<br>
+        输出：2->3
+    === "答案-4"
+        ```cpp
+        /**
+        * Definition for singly-linked list.
+        * struct ListNode {
+        *     int val;
+        *     ListNode *next;
+        *     ListNode(int x) : val(x), next(NULL) {}
+        * };
+        */
+        class Solution {
+        public:
+            ListNode* deleteDuplication(ListNode* head) {
+                auto dummy = new ListNode(-1);
+                dummy->next = head;
+                auto p = dummy;
+                while (p->next) {
+                auto q = p->next;
+                while(q->next && p->next->val == q->next->val) q = q->next;
+                if(q == p->next) p = p->next;
+                else p->next = q->next;
+                }
+
+              return dummy->next;
+            }
+        };
+
+        ```
+
+## 15 类&对象
+
+**示例：**
+
+```cpp
+#include <iostream>
+ 
+using namespace std;
+ 
+class Box
+{
+   public:
+      double length;   // 长度
+      double breadth;  // 宽度
+      double height;   // 高度
+      // 成员函数声明
+      double get(void);
+      void set( double len, double bre, double hei );
+};
+// 成员函数定义
+double Box::get(void)
+{
+    return length * breadth * height;
+}
+ 
+void Box::set( double len, double bre, double hei)
+{
+    length = len;
+    breadth = bre;
+    height = hei;
+}
+int main( )
+{
+   Box Box1;        // 声明 Box1，类型为 Box
+   Box Box2;        // 声明 Box2，类型为 Box
+   Box Box3;        // 声明 Box3，类型为 Box
+   double volume = 0.0;     // 用于存储体积
+ 
+   // box 1 详述
+   Box1.height = 5.0; 
+   Box1.length = 6.0; 
+   Box1.breadth = 7.0;
+ 
+   // box 2 详述
+   Box2.height = 10.0;
+   Box2.length = 12.0;
+   Box2.breadth = 13.0;
+ 
+   // box 1 的体积
+   volume = Box1.height * Box1.length * Box1.breadth;
+   cout << "Box1 的体积：" << volume <<endl;
+ 
+   // box 2 的体积
+   volume = Box2.height * Box2.length * Box2.breadth;
+   cout << "Box2 的体积：" << volume <<endl;
+ 
+ 
+   // box 3 详述
+   Box3.set(16.0, 8.0, 12.0); 
+   volume = Box3.get(); 
+   cout << "Box3 的体积：" << volume <<endl;
+   return 0;
+}
+```
