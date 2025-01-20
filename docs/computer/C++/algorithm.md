@@ -58,6 +58,47 @@ int main()
  排成一排，将会有很多种排列方法。
 现在，请你按照字典序将所有的排列方法输出。
 
+```cpp
+#include <iostream>
+
+using namespace std;
+const int N = 10;
+void dfs(int u,int nums[],bool st[],int sz)
+{
+    if(u > sz)
+    {
+        for(int i = 1;i <= sz;i++)
+        {
+            cout << nums[i] << ' ';
+        }
+        cout << endl;
+    }
+    else
+    {
+        for(int i = 1;i <= sz;i++)
+        {
+            if(!st[i])
+            {
+                nums[u] = i;
+                st[i] = true;
+                dfs(u + 1,nums,st,sz);
+                st[i] = false;//恢复现场
+            }
+        }
+    }
+}
+int main()
+{
+    int n;
+    cin >> n;
+    int nums[N];
+    bool st[N] = {0};
+    dfs(1,nums,st,n);
+    return 0;
+}
+```
+
+
 
 1. **基本语法**：
 

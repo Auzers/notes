@@ -323,8 +323,45 @@ olleh
 
 ## 11 sort()
 
-- `sort(a.begin(),a.end())`: 对字符串a进行排序。按照字典序排序即按**ascII码**排序。
-- 在 C++ 中,sort 函数的用法是 sort(first, last)，其中 first 是要排序的范围的起始迭代器，last 是范围的结束迭代器（不包括该位置的元素）。
+
+- 在 C++ 中,sort 函数的用法是 sort(begin,end,cmp)，其中 begin 是要排序的范围的起始迭代器，end 是范围的结束迭代器（不包括该位置的元素）,cmp是比较方法，如果不自定义则默认按照**字典序从小到大**排序。如果想要降序排列一些基本类型可以在cmp的位置`greater<type>()`,如果需要更复杂的排序方式则需要**自定义**返回类型为`bool`型的cmp函数。
+
+**示例：**
+```cpp
+#include <iostream>
+#include <algorithm>
+using namespace std;
+struct tmp
+{
+    int a;
+    double b;
+    string str;
+}arr[10000];
+int cmp(const tmp x,const tmp y)
+{
+    return x.a < y.a;
+}
+int main()
+{
+    int n;
+    cin >> n;
+   for(int i = 0; i < n;i++)
+   {
+       cin >> arr[i].a >> arr[i].b >> arr[i].str;
+   }
+   sort(arr,arr + n,cmp);
+   for(int i = 0;i < n;i++)
+   {
+       printf("%d %.2f %s\n", arr[i].a, arr[i].b, arr[i].str.c_str());
+   }
+   
+    return 0;
+}
+```
+
+- `c_str()`:  C++ 中 std::string 类的一个成员函数，用于返回一个指向字符串内容的常量字符指针（const char*）。这个指针指向一个以 null 结尾的 C 风格字符串，通常用于与 C 风格的字符串函数进行交互。
+
+
 
 ## 12 unordered_set<int>
 
@@ -661,3 +698,169 @@ int main( )
    return 0;
 }
 ```
+## 16 STL
+
+!!! note ""
+    === "multiset"
+        multiset是<set>库中一个非常有用的类型，它可以看成一个序列，插入一个数，删除一个数都能够在O(logn)的时间内完成，而且他能时刻保证序列中的数是有序的，而且序列中可以存在重复的数。
+    === "multiset_示例1"
+        ```cpp
+        class Solution {
+        public:
+            int getNumberOfK(vector<int>& nums , int k) {
+                multiset<int> s;
+
+                for(int x : nums) s.insert(x);
+
+                return s.count(k);
+            }
+        };
+        ```
+    === "multiset_示例2"
+        ```cpp
+        #include <string>
+        #include <iostream>
+        #include <set>
+        using namespace std;
+        void main(){
+            intx;
+            scanf("%ld",&x);
+            multiset<int>h;          //建立一个multiset类型，变量名是h，h序列里面存的是int类型,初始h为空
+            while(x!=0){
+                h.insert(x);         //将x插入h中
+                scanf("%ld",&x);
+            }    
+            while(!h.empty()){       // 序列非空 h.empty()==true时 表示h已经空了
+                __typeof(h.begin()) c=h.begin();
+                                    //c指向h序列中第一个元素的地址，第一个元素是最小的元素
+                printf("%ld ",*c);   //将地址c存的数据输出
+                h.erase(c);          //从h序列中将c指向的元素删除
+            }
+        }
+        ```
+        <u>[更多multiset相关](https://blog.csdn.net/sodacoco/article/details/84798621)</u>
+
+- <u>[迭代器和反向迭代器](https://blog.csdn.net/weixin_50945234/article/details/137363456)</u>
+
+## 17 重载函数和重载运算符
+
+- **重载函数:**在同一个作用域内，可以声明几个功能类似的同名函数，但是这些同名函数的形式参数（指参数的个数、类型或者顺序）必须不同。您不能仅通过返回类型的不同来重载函数。下面的实例中，同名函数 print() 被用于输出不同的数据类型：
+```cpp
+#include <iostream>
+using namespace std;
+ 
+class printData
+{
+   public:
+      void print(int i) {
+        cout << "整数为: " << i << endl;
+      }
+ 
+      void print(double  f) {
+        cout << "浮点数为: " << f << endl;
+      }
+ 
+      void print(char c[]) {
+        cout << "字符串为: " << c << endl;
+      }
+};
+ 
+int main(void)
+{
+   printData pd;
+ 
+   // 输出整数
+   pd.print(5);
+   // 输出浮点数
+   pd.print(500.263);
+   // 输出字符串
+   char c[] = "Hello C++";
+   pd.print(c);
+ 
+   return 0;
+}
+```
+
+- 关于重载函数的更详细内容可以看<u>[这篇文章](https://blog.csdn.net/weixin_45031801/article/details/135949885)</u>
+
+- **重载运算符**
+**重载运算符的基本语法：**operator 待重载运算符 (参数){函数体}
+
+**示例：**
+```cpp
+#include <iostream>
+using namespace std;
+ 
+class Box
+{
+   public:
+ 
+      double getVolume(void)
+      {
+         return length * breadth * height;
+      }
+      void setLength( double len )
+      {
+          length = len;
+      }
+ 
+      void setBreadth( double bre )
+      {
+          breadth = bre;
+      }
+ 
+      void setHeight( double hei )
+      {
+          height = hei;
+      }
+      // 重载 + 运算符，用于把两个 Box 对象相加
+      Box operator+(const Box& b)
+      {
+         Box box;
+         box.length = this->length + b.length;
+         box.breadth = this->breadth + b.breadth;
+         box.height = this->height + b.height;
+         return box;
+      }
+   private:
+      double length;      // 长度
+      double breadth;     // 宽度
+      double height;      // 高度
+};
+// 程序的主函数
+int main( )
+{
+   Box Box1;                // 声明 Box1，类型为 Box
+   Box Box2;                // 声明 Box2，类型为 Box
+   Box Box3;                // 声明 Box3，类型为 Box
+   double volume = 0.0;     // 把体积存储在该变量中
+ 
+   // Box1 详述
+   Box1.setLength(6.0); 
+   Box1.setBreadth(7.0); 
+   Box1.setHeight(5.0);
+ 
+   // Box2 详述
+   Box2.setLength(12.0); 
+   Box2.setBreadth(13.0); 
+   Box2.setHeight(10.0);
+ 
+   // Box1 的体积
+   volume = Box1.getVolume();
+   cout << "Volume of Box1 : " << volume <<endl;
+ 
+   // Box2 的体积
+   volume = Box2.getVolume();
+   cout << "Volume of Box2 : " << volume <<endl;
+ 
+   // 把两个对象相加，得到 Box3
+   Box3 = Box1 + Box2;
+ 
+   // Box3 的体积
+   volume = Box3.getVolume();
+   cout << "Volume of Box3 : " << volume <<endl;
+ 
+   return 0;
+}
+```
+
