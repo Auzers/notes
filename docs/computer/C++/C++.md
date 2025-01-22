@@ -744,7 +744,8 @@ int main( )
 
 ## 17 重载函数和重载运算符
 
-- **重载函数:**在同一个作用域内，可以声明几个功能类似的同名函数，但是这些同名函数的形式参数（指参数的个数、类型或者顺序）必须不同。您不能仅通过返回类型的不同来重载函数。下面的实例中，同名函数 print() 被用于输出不同的数据类型：
+- **重载函数:**在同一个作用域内，可以声明几个功能类似的同名函数，但是这些同名函数的形式参数（指参数的个数、类型或者顺序）必须不同。您不能仅通过返回类型的不同来重载函数。下面的实例中，同名函数 print () 被用于输出不同的数据类型：
+
 ```cpp
 #include <iostream>
 using namespace std;
@@ -752,41 +753,41 @@ using namespace std;
 class printData
 {
    public:
-      void print(int i) {
+      void print (int i) {
         cout << "整数为: " << i << endl;
       }
  
-      void print(double  f) {
+      void print (double  f) {
         cout << "浮点数为: " << f << endl;
       }
  
-      void print(char c[]) {
+      void print (char c[]) {
         cout << "字符串为: " << c << endl;
       }
 };
  
-int main(void)
+int main (void)
 {
    printData pd;
  
    // 输出整数
-   pd.print(5);
+   pd.print (5);
    // 输出浮点数
-   pd.print(500.263);
+   pd.print (500.263);
    // 输出字符串
    char c[] = "Hello C++";
-   pd.print(c);
+   pd.print (c);
  
    return 0;
 }
 ```
 
 - 关于重载函数的更详细内容可以看<u>[这篇文章](https://blog.csdn.net/weixin_45031801/article/details/135949885)</u>
-
-- **重载运算符**
-**重载运算符的基本语法：**operator 待重载运算符 (参数){函数体}
+- **重载运算符**  
+**重载运算符的基本语法：** `operator 待重载运算符 (参数){函数体}`
 
 **示例：**
+
 ```cpp
 #include <iostream>
 using namespace std;
@@ -795,21 +796,21 @@ class Box
 {
    public:
  
-      double getVolume(void)
+      double getVolume (void)
       {
          return length * breadth * height;
       }
-      void setLength( double len )
+      void setLength ( double len )
       {
           length = len;
       }
  
-      void setBreadth( double bre )
+      void setBreadth ( double bre )
       {
           breadth = bre;
       }
  
-      void setHeight( double hei )
+      void setHeight ( double hei )
       {
           height = hei;
       }
@@ -817,9 +818,9 @@ class Box
       Box operator+(const Box& b)
       {
          Box box;
-         box.length = this->length + b.length;
-         box.breadth = this->breadth + b.breadth;
-         box.height = this->height + b.height;
+         box. length = this->length + b.length;
+         box. breadth = this->breadth + b.breadth;
+         box. height = this->height + b.height;
          return box;
       }
    private:
@@ -828,7 +829,7 @@ class Box
       double height;      // 高度
 };
 // 程序的主函数
-int main( )
+int main ( )
 {
    Box Box1;                // 声明 Box1，类型为 Box
    Box Box2;                // 声明 Box2，类型为 Box
@@ -836,31 +837,307 @@ int main( )
    double volume = 0.0;     // 把体积存储在该变量中
  
    // Box1 详述
-   Box1.setLength(6.0); 
-   Box1.setBreadth(7.0); 
-   Box1.setHeight(5.0);
+   Box1.setLength (6.0); 
+   Box1.setBreadth (7.0); 
+   Box1.setHeight (5.0);
  
    // Box2 详述
-   Box2.setLength(12.0); 
-   Box2.setBreadth(13.0); 
-   Box2.setHeight(10.0);
+   Box2.setLength (12.0); 
+   Box2.setBreadth (13.0); 
+   Box2.setHeight (10.0);
  
    // Box1 的体积
-   volume = Box1.getVolume();
+   volume = Box1.getVolume ();
    cout << "Volume of Box1 : " << volume <<endl;
  
    // Box2 的体积
-   volume = Box2.getVolume();
+   volume = Box2.getVolume ();
    cout << "Volume of Box2 : " << volume <<endl;
  
    // 把两个对象相加，得到 Box3
    Box3 = Box1 + Box2;
  
    // Box3 的体积
-   volume = Box3.getVolume();
+   volume = Box3.getVolume ();
    cout << "Volume of Box3 : " << volume <<endl;
  
    return 0;
 }
 ```
+
+- **友元重载和类内成员重载的两个示例：**
+	- 友元重载是为了让函数能访问类内的 private 和 protected 成员，如果类内全都是 public 成员，友元重载就没有必要
+
+```cpp
+#include <iostream>
+#include <string>
+
+using namespace std;
+class MM
+{
+public:
+	MM() {}
+	MM(string NAME, int AGE) : name(NAME), age(AGE) {}
+	void print()
+	{
+		cout << name << ":" << age << endl;
+	}
+    void printdata()
+    {
+        MM::print(); // 直接通过类名调用静态成员函数
+        this->print(); // 通过对象调用成员函数
+    }
+	string name;
+	int age;
+	friend MM operator+(MM object1, MM object2);// 友元重载
+	MM operator-(MM object1)// 类的成员函数方式重载;
+	{
+		return MM(this->name, this->age - object1.age);
+	}
+	//重载函数的返回值类型：重载函数的返回值，是由重载的运算符表达式的最终结果决定。
+
+};
+MM operator+(MM object1, MM object2)
+{
+	return MM(object1.name + object2.name, object1.age + object2.age);
+}
+int main()
+{
+	MM girl2("小刚", 20);
+	MM girl1("小美", 18);
+	MM object1; //一定要有一个无参的构造函数
+	object1 = girl1 + girl2;//需要重载运算符
+	MM object2 = operator+(girl1, girl2);//运算符重载的实质是函数调用
+	MM object3 = girl2 - girl1;
+	MM object4 = girl2.operator-(girl1);
+	object1.print();
+	object2.print();
+	object3.print();
+	object4.print();
+
+
+}
+```
+
+返回结果：
+
+```
+小美:38
+小美小刚:38
+小刚:2
+小刚:2
+```
+
+```cpp
+#include <iostream>
+
+class Point {
+public:
+    Point(int x = 0, int y = 0) : x(x), y(y) {}
+
+    // 重载 << 运算符，用于输出 Point 对象
+    friend std::ostream& operator<<(std::ostream& out, const Point& point) {
+        out << "(" << point.x << ", " << point.y << ")";
+        return out;
+    }
+
+    // 重载 >> 运算符，用于输入 Point 对象
+    friend std::istream& operator>>(std::istream& in, Point& point) {
+        std::cout << "Enter x: ";
+        in >> point.x;
+        std::cout << "Enter y: ";
+        in >> point.y;
+        return in;
+    }
+
+private:
+    int x, y;
+};
+
+int main() {
+    Point p1;
+    std::cout << "Input a point:" << std::endl;
+    std::cin >> p1;  // 使用重载的 >> 运算符输入点的坐标
+
+    std::cout << "You entered: " << p1 << std::endl;  // 使用重载的 << 运算符输出点的坐标
+
+    return 0;
+}
+```
+输入：
+```
+Enter x: 1
+Enter y: 2
+```
+输出：
+```
+You entered: (1, 2)
+```
+
+**特殊重载**
+
+- 前置++和后置++
+```cpp
+#include <iostream>
+using namespace std;
+class Num
+{
+public:
+	Num(int iNum = 0) : iNum(iNum) {}
+	void print()
+	{
+		cout << iNum << endl;
+	}
+	Num operator++(int)//后置的++和--要用int标识
+	{
+		return(this->iNum++);
+	}
+	Num operator++()
+	{
+		return(++this->iNum);
+	}
+protected:
+	int iNum;//限制在类内访问；
+};
+int main()
+{
+	Num a(1);
+	Num b = a++;
+	Num c = ++a;
+	b.print();
+	a.print();
+	c.print();
+	return 0;
+}
+```
+
+
+- 流运算符重载
+	- 流对象：ostream: 输出流， `cout` 就是 ostream 类的对象，istream: 输入流 `cin` 就是 istream 类的对象
+	- 流重载，必须采用的引用的方式，必须采用友元的方式。
+  
+**示例：**
+```cpp
+#include <iostream>
+#include <string>
+
+using namespace std;
+class MM
+{
+public:
+	MM(string name = "", int age = 0) :name(name), age(age) {}  
+	friend ostream& operator<<(ostream& , MM&);
+	friend istream& operator>>(istream& , MM&);
+protected:
+	string name;
+	int age;
+};
+
+
+class girl // 这种方法避免了使用友元函数，但是实现程序和友元函数差不多
+{
+public:
+	girl(string name = "", int age = 0) :name(name), age(age) {}
+	void output(ostream& out)
+	{
+		out << this->name << ":" << this->age;
+	}
+	void input(istream& in)
+	{
+		in >> this->name >> this->age;
+	}
+protected:
+	string name;
+	int age;
+};
+ostream& operator<<(ostream& out, MM& mm)
+{
+	out << mm.name << '\t' << mm.age;
+	return out;
+}
+istream& operator>>(istream& in, MM& mm)
+{
+	in >> mm.name >> mm.age;
+	return in;
+}
+ostream& operator<<(ostream& out, girl& girl)
+{
+	girl.output(out);
+	return out;
+}
+istream& operator>>(istream& in, girl& girl)
+{
+	girl.input(in);
+	return in;
+}
+int main()
+{
+	MM mm;
+	cin >> mm; //cin:istream
+    cout << mm;//cout:ostream
+	girl girl;
+	cin >> girl;
+	cout << girl;
+	return 0;
+}
+```
+
+- **后缀重载和文本重载**
+- PS：后缀重载和文本重载的返回值类型必须为 `unsigned long long` 和`const char*`
+- PS：后缀重载和文本重载的参数类型必须为 `unsigned long long` 和`const char*`
+
+**示例：**
+```cpp
+#include <iostream>
+
+using namespace std;
+unsigned long long operator""_h(unsigned long long num)
+{
+	return num * 60 * 60;
+}
+int main()
+{
+	int num = 1_h;
+	cout << num;
+	return 0;
+}
+```
+
+- **隐式转换：**
+	- 在C++中，隐式转换是指在表达式中，编译器自动将一种数据类型转换为另一种数据类型，而不需要显式地进行类型转换。
+	- 格式：`operator 目标类型() {return 目标类型数据;}`
+**示例：**
+```cpp
+#include <iostream>
+
+using namespace std;
+class MM
+{
+public:
+	MM(string name = "", int age = 0) : name(name), age(age) {};
+	operator int()
+	{
+		return this->age;
+	}
+private:
+	int age;
+	string name;
+};
+int main()
+{
+	MM girl("小美", 18);
+	int sum = girl;
+	cout << sum;
+	return 0;
+}
+```
+输出结果：
+```
+18
+```
+
+
+
+  
+
 
