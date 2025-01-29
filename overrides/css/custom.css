@@ -327,3 +327,28 @@ input#mkdocs-content-password {
 .toc-tag-reports::before {
   content: "实验报告"
 }
+
+/* 让所有 Markdown 图片自动居中、加圆角、调整大小 */
+img {
+  display: block;
+  /* 让图片居中 */
+  margin: 10px auto;
+  /* 上下留空，左右自动居中 */
+  border-radius: 10px;
+  /* 图片圆角 */
+  width: 80%;
+  /* 图片宽度调整 */
+  max-width: 100%;
+  /* 避免图片超出容器 */
+}
+
+/* 图片下方自动加标题（如果有 alt 文本） */
+img[alt]:after {
+  content: attr(alt);
+  /* 使用图片的 alt 文字作为标题 */
+  display: block;
+  text-align: center;
+  font-size: 14px;
+  margin-top: 5px;
+  color: gray;
+}

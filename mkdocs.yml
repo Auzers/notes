@@ -284,12 +284,15 @@ nav:
     # - Archives: Blogs/archives.md
   - computer science:
     - computer/index.md
+    - CS61A:
+      - CS61A_notes: computer/CS61A/CS61A_notes.md
+      - something related: computer/CS61A/CS61A_resource.md
     - C语言:
       - C语言: computer/C/learning_c.md
-      - something_scattered: computer/C/scatter.md
-    - 从C到C++:
+      - something scattered: computer/C/scatter.md
+    - From C to C++:
         - C++: computer/C++/C++.md
-        - 算法基础: computer/C++/algorithm.md
+        - Basis of algorithm: computer/C++/algorithm.md
     - Linux:
         - "Linux": computer/Linux/linux.md
   - tools: 
@@ -302,7 +305,7 @@ nav:
         - git & github: tools/git_github/github.md    
     - "problems I met":
         - problem and solution: tools/problem/problem.md
-  - dairy&summary: 
+  - summary: 
     - index: dairy_summary/index.md
     - dairies: dairy_summary/dairy.md
     - summaries: dairy_summary/summary.md

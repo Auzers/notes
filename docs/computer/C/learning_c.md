@@ -1,7 +1,7 @@
 # C 语言
 !!! note ""
-    **并非从零开始，并且仍然在更新**<br>
-    **如发现有错误欢迎在评论区指正或发送到我的邮箱 1058564630@qq.com**
+    - **并非从零开始**
+    - B站找的课，点[这里](https://www.bilibili.com/video/BV1cq4y1U7sg/?spm_id_from=333.337.search-card.all.click&vd_source=df5a597928fba384c94060640080e142)
 
 ## 1 指针进阶
 
