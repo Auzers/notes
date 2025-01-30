@@ -3,7 +3,7 @@
 ## 1 二分
 
 - 二分查找：在一个有序数组中查找某个元素。
-- 二分查找的模板：
+- 二分查找模板：
 
 ```cpp
 int binary_search(int a[], int n, int x) {
