@@ -487,6 +487,166 @@ Python 授予函数完全的一等地位，由此带来的表达能力的提升�
 
 ### 2.1 引言
 
+#### 2.1.1 原始数据类型
+
+### 2.2 数据抽象
+
+#### 2.2.1 示例：有理数
+
+#### 2.2.2 对
+
+#### 2.2.3 抽象屏障
+
+抽象屏障（Abstraction Barrier）是编程中一个非常重要的概念，帮助我们管理复杂性，确保代码模块之间的独立性。简单来说，它规定了**如何使用一个模块**，以及**不需要知道模块内部的具体实现细节**。我们只需知道模块提供了哪些功能，而不关心它是如何实现这些功能的。
+
+ **1. 咖啡机的例子**
+
+- **抽象屏障：** 你只需要按下“开始”按钮，等待一会儿，咖啡就会自动出来。
+- **内部实现（被隐藏）：** 你不需要知道水如何被加热、咖啡豆如何被研磨，或者水是如何流过咖啡粉的。
+
+**在编程中的类比：**  
+假设我们有一个 `CoffeeMachine` 类，你只需要调用 `make_coffee()` 方法，而不需要知道这个方法内部是如何工作的。
+
+```python
+class CoffeeMachine:
+    def make_coffee(self):
+        self._heat_water()
+        self._grind_beans()
+        self._brew()
+        print("Your coffee is ready!")
+
+    def _heat_water(self):
+        print("Heating water...")
+
+    def _grind_beans(self):
+        print("Grinding coffee beans...")
+
+    def _brew(self):
+        print("Brewing the coffee...")
+
+# 使用者只需要调用这个接口
+machine = CoffeeMachine()
+machine.make_coffee()
+```
+
+**抽象屏障：** 你只调用 `make_coffee()`，并不需要了解 `_heat_water`、`_grind_beans` 这些细节。
+
+---
+
+当程序中有一部分本可以使用更高级别函数但却使用了低级函数时，就会违反抽象屏障。例如，计算有理数平方的函数最好用 `mul_rational` 实现，它不对有理数的实现做任何假设。
+
+```python
+>>> def square_rational(x):
+        return mul_rational(x, x)
+```
+
+直接引用分子和分母会违反一个抽象屏障。
+
+```python
+>>> def square_rational_violating_once(x):
+        return rational(numer(x) * numer(x), denom(x) * denom(x))
+```
+
+假设有理数会表示为双元素列表将违反两个抽象屏障。
+
+```python
+>>> def square_rational_violating_twice(x):
+        return [x[0] * x[0], x[1] * x[1]]
+```
+
+#### 2.2.4 数据的属性
+
+### 2.3 序列
+
+#### 2.3.1 列表
+
 ![Image](https://www.helloimg.com/i/2025/01/29/6799b9eb7f363.png)
 
-## 参考文献
+#### 2.3.2 序列遍历
+
+#### 2.3.3 序列处理
+
+#### 2.3.4 序列抽象
+
+#### 2.3.5 字符串
+
+#### 2.3.6 树
+
+![image](https://www.helloimg.com/i/2025/02/04/67a18d9f3188e.png)
+
+![image](https://www.helloimg.com/i/2025/02/04/67a1902de4ccb.png)
+
+**图片中的代码：**
+
+```python
+def tree(label,branches=[]):
+    for branch in branches:
+        assert is_tree(branch), 'branches must be tree'
+    return [label] + list(branches)
+
+def label(tree):
+    return tree[0]
+
+def branches(tree):
+    return tree[1:]
+
+def is_leaf(tree):
+    if(not branches(tree)):
+        return True
+    else:
+        return False
+
+def is_tree(tree):
+    if(type(tree) != list or len(tree) < 1):
+        return False
+    else:
+        for branch in branches(tree):
+            if(not is_tree(branch)):
+                return False
+    return True
+```
+
+- **分割树：**
+
+```python
+def partition_tree(n,m):
+    if(n == 0):
+        return tree(True)
+    elif(n < 0 or m == 0):
+        return tree(False)      
+    else:
+        left = partition_tree(n - m, m)
+        right = partition_tree(n, m - 1)
+        return tree(m, [left,right])
+```
+
+- **斐波那契树**：
+
+```python
+>>> def fib_tree(n):
+        if n == 0 or n == 1:
+            return tree(n)
+        else:
+            left, right = fib_tree(n-2), fib_tree(n-1)
+            fib_n = label(left) + label(right)
+            return tree(fib_n, [left, right])
+>>> fib_tree(5)
+[5, [2, [1], [1, [0], [1]]], [3, [1, [0], [1]], [2, [1], [1, [0], [1]]]]]
+```
+
+```python
+>>> def count_leaves(tree):
+      if is_leaf(tree):
+          return 1
+      else:
+          branch_counts = [count_leaves(b) for b in branches(tree)]
+          return sum(branch_counts)
+>>> count_leaves(fib_tree(5))
+8
+```
+
+#### 2.3.7 链表
+
+### 2.4 可变数据
+
+## Reference
