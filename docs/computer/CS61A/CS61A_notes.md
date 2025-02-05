@@ -649,4 +649,200 @@ def partition_tree(n,m):
 
 ### 2.4 可变数据
 
+#### 2.4.1 对象隐喻
+
+#### 2.4.2 序列对象
+
+像数字这样的基本数据类型的实例是不可变（immutable）的。它们所代表的值，在程序运行期间是不可以更改的。另一方面，列表就是可变的（mutable）。
+
+```python
+>>> chinese = ['coin', 'string', 'myriad']  # 一组字符串列表
+>>> suits = chinese                         # 为同一个列表指定了两个不同的变量名
+>>> suits.pop()             # 从列表中移除并返回最后一个元素
+'myriad'
+>>> suits.remove('string')  # 从列表中移除第一个与参数相同的元素
+>>> suits.append('cup')              # 在列表最后插入一个元素
+>>> suits.extend(['sword', 'club'])  # 将另外一个列表中的所有元素添加到当前列表最后
+>>> suits[2] = 'spade'  # 替换某个元素
+>>> suits
+['coin', 'cup', 'spade', 'club']
+>>> suits[0:2] = ['heart', 'diamond']  # 替换一组数据
+>>> suits
+['heart', 'diamond', 'spade', 'club']
+>>> chinese  # 这个变量名与 "suits" 指向的是同一个列表对象
+['heart', 'diamond', 'spade', 'club']
+```
+
+- **数据共享和身份（Sharing and Identity）**。 正是由于我们没有在操作数据时创建新的列表，而是直接操作的源数据，这就导致变量 chinese 也被改变了，因为它和变量 suits 绑定到时同一个列表！
+
+我们可以利用列表的构造器函数 `list` 来对一个列表进行复制。复制完成后，两个列表数据的改动不会再影响彼此，除非二者共享了同一份数据。
+
+```python
+>>> nest = list(suits)  # 复制一个与 suits 相同的列表，并命名为 nest
+>>> nest[0] = suits     # 创建一个嵌套列表，列表第一项是另一个列表
+```
+
+根据当前的运行环境，改动变量 `suits` 所对应的列表数据会影响到 `nest` 列表的第一个元素，也就是我们上面刚刚创建的嵌套列表，而 `nest` 中的其它元素不受影响：
+
+```python
+>>> suits.insert(2, 'Joker')  # 在下标为 2 的位置插入一条新元素，其余元素相应向后移动
+>>> nest
+[['heart', 'diamond', 'Joker', 'spade', 'club'], 'diamond', 'spade', 'club']
+```
+
+- 可以用 `is` 和 `is not` 来区分两个变量是否指向同一个对象
+
+**元组：** Python 内置类型 `tuple` 的实例对象，其是不可变序列。我们可以将不同数据用逗号分隔，用这种字面量的方式即可以创建一个元组。括号并不是必须的，但是一般都会加上。元组中可以放置任意对象。
+
+```python
+>>> 1, 2 + 3
+(1, 5)
+>>> ("the", 1, ("and", "only"))
+('the', 1, ('and', 'only'))
+>>> type( (10, 20) )
+<class 'tuple'>
+>>> ()    # 0 elements
+()
+>>> (10,) # 1 element
+(10,)
+```
+
+- 和列表相同，元组有确定的长度，并支持元素索引。元组还有一些与列表相同的方法，比如 `count` 和 `index`
+
+```python
+>>> code = ("up", "up", "down", "down") + ("left", "right") * 2
+>>> len(code)
+8
+>>> code[3]
+'down'
+>>> code.count("down")
+2
+>>> code.index("left")
+4
+```
+
+- 尽管元组不可变，但是若元组中的元素本身是可变数据，那我们也是可以对该元素进行操作的
+
+![image](https://www.helloimg.com/i/2025/02/05/67a3180cee770.png)
+
+#### 2.4.3 字典
+
+- 字典是**无序**的，多次运行程序，字典输出的顺序可能会有所变化
+
+字典的一些操作
+
+```python
+>>> sum(numerals.values())
+66
+>>> dict([(3, 9), (4, 16), (5, 25)])
+{3: 9, 4: 16, 5: 25}
+```
+
+ - `key` 不能是可变数据也不能包含可变数据，比如元组可以做 `key` 但是列表不行
+ - 一个 `key` 只能对应一个 `value`
+
+#### 2.4.4 局部状态
+
+```python
+>>> def make_withdraw(balance):
+        """返回一个每次调用都会减少 balance 的 withdraw 函数"""
+        def withdraw(amount):
+            nonlocal balance                 # 声明 balance 是非局部的
+            if amount > balance:
+                return '余额不足'
+            balance = balance - amount       # 重新绑定
+            return balance
+        return withdraw
+>>> withdraw(25)
+75
+>>> withdraw(25)
+50
+>>> withdraw(60)
+'余额不足'
+>>> withdraw(15)
+35
+```
+
+- 当 balance 属性为声明为 nonlocal 后，每当它的值发生更改时，相应的变化都会同步更新到 `balance` 属性第一次被声明的位置
+- 第二次调用 withdraw 像往常一样创建了第二个局部帧。并且，这两个 withdraw 帧都具有相同的父级帧。也就是说，它们都集成了 make_withdraw 的运行环境，而变量 balance 就是在该环境中定义和声明的。因此，它们都可以访问到 balance 变量的绑定关系。调用 withdraw 会改变当前运行环境，并且影响到下一次调用 withdraw 的结果。nonlocal 声明语句允许 withdraw 更改 make_withdraw 运行帧中的变量。
+- 另外，如果用 python tutor 实践会发现这个错误发生在第 5 行执行之前，这意味着 Python 在执行第 3 行之前，就以某种方式考虑了第 5 行的代码。
+- `global` 和 `nonlocal` 的区别总结(from ChatGPT4o)
+
+| 特性           | `global`                                | `nonlocal`                                            |
+| -------------- | --------------------------------------- | ----------------------------------------------------- |
+| **作用范围**   | 影响**全局作用域**中的变量              | 影响**外层函数的局部作用域**中的变量                  |
+| **适用场景**   | 在函数内修改全局变量                    | 在嵌套函数内修改外层函数的局部变量                    |
+| **常见错误**   | 忘记声明 `global`，导致修改的是局部变量 | 忘记声明 `nonlocal`，导致修改的是嵌套函数内的局部变量 |
+| **多层嵌套**   | 可以直接访问模块级全局变量              | 只能作用于最近一层的封闭作用域中的变量                |
+| **不能做的事** | 无法修改局部变量，除非显式声明 `global` | 无法作用于全局变量，只能修改封闭作用域中的变          |
+
+#### 2.4.5 非局部 Non-local 赋值的好处
+
+```python
+def make_withdraw(balance):
+    def withdraw(amount):
+        nonlocal balance
+        if amount > balance:
+            return 'Insufficient funds'
+        balance = balance - amount
+        return balance
+    return withdraw
+
+wd = make_withdraw(20)
+wd2 = make_withdraw(7)
+wd2(6)
+wd(8)
+
+```
+
+- 未来对 wd 的调用不受 wd2 的 balance 变化的影响
+
+#### 2.4.6 非局部 Non-local 赋值的代价
+
+```python
+def make_withdraw(balance):
+    def withdraw(amount):
+        nonlocal balance
+        if amount > balance:
+            return 'Insufficient funds'
+        balance = balance - amount
+        return balance
+    return withdraw
+
+wd = make_withdraw(12)
+wd2 = wd
+wd2(1)
+wd(1)
+
+```
+
+- 在这种情况下，调用 wd2 命名的函数确实改变了 wd 命名的函数的值，因为两个名称都引用同一个函数。
+
+#### 2.4.7 列表和字典实现
+
+#### 2.4.8 调度字典（Dispatch Dictionaries）
+
+#### 2.4.9 约束传递 (Propagating Constraints)
+
+## 4 数据处理
+### 4.1 引言
+
+### 4.2 隐式序列
+
+### 4.3 声明式编程
+
+### 4.4 Logic 语言编程
+
+### 4.5 合一
+
+### 4.6 分布式计算
+
+### 4.7 分布式数据处理
+
+### 4.8 并行计算
+
 ## Reference
+
+- https://www.learncs.site/
+- https://composingprograms.netlify.app/
+- https://www.composingprograms.com/

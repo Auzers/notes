@@ -6,4 +6,4 @@ comments: false
 
 # Blog
 
-{{ blog_content }}
+<!-- {{ blog_content }} -->

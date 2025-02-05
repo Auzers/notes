@@ -68,7 +68,6 @@ theme:
 
     # - navigation.tabs.sticky
     # - navigation.sections
-
     - navigation.tracking
     - navigation.tabs
     - navigation.indexes
