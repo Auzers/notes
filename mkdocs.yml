@@ -306,9 +306,7 @@ nav:
     - "problems I met":
         - problem and solution: tools/problem/problem.md
   - summary: 
-    - index: dairy_summary/index.md
-    - dairies: dairy_summary/dairy.md
-    - summaries: dairy_summary/summary.md
+    - index: summary/index.md
   # - tags: tags/index.md
   - links: links/index.md
   
