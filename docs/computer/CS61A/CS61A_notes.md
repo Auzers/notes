@@ -560,6 +560,29 @@ machine.make_coffee()
 
 #### 2.3.1 列表
 
+- `s.pop (i)` : 删除下标为 i 的元素并返回 s[i], 如果无参数则删除并返回末尾元素 
+- `s.remove(x)` : 删除列表中第一个值为 x 的元素，**无返回值**
+- `s.extend(iterable)` :将 `iterable` （可迭代对象）的元素**逐个**添加到列表 s 末尾。直接修改 s，**无返回值**
+- `s.append(i)` :在列表 s **末尾**添加一个元素 i ，并**直接修改 s**
+- `s.insert(index,value)` :在列表 s 的指定位置 index 处插入元素 value ，并**直接修改 s**, 若 index 超过列表长度则添加到最后
+
+```python
+s1 = [1, 2, 3]
+s2 = [4, 5, 6]
+s1.extend(s2)
+print(s1)  # 输出: [1, 2, 3, 4, 5, 6]
+```
+
+一道错题：
+
+```python
+>>> s = [3,4,5]
+>>> s.extend([s.append(9), s.append(10)])
+>>> s
+[3, 4, 5, 9, 10, None, None]
+>>>
+```
+
 ![Image](https://www.helloimg.com/i/2025/01/29/6799b9eb7f363.png)
 
 #### 2.3.2 序列遍历
@@ -825,9 +848,155 @@ wd(1)
 #### 2.4.9 约束传递 (Propagating Constraints)
 
 ## 4 数据处理
+
 ### 4.1 引言
 
 ### 4.2 隐式序列
+
+- **惰性计算**：指任何延迟计算，直到需要该值的程序
+
+#### 4.2.1 迭代器
+
+迭代器抽象的两个组件：
+
+- 检索下一个元素
+- 到达序列末尾并且没有剩余元素，则发出信号
+
+```python
+>>> primes = [2, 3, 5, 7]
+>>> type(primes)
+<class 'list'>
+>>> iterator = iter(primes)
+>>> type(iterator)
+<class 'list-iterator'>
+>>> next(iterator)
+2
+>>> next(iterator)
+3
+>>> next(iterator)
+5
+>>> next(iterator)
+7
+>>> next(iterator)
+Traceback (most recent call las):
+  File "<stdin>", line 1, in <module>
+StopIteration
+
+>>> try:
+        next(iterator)
+    except StopIteration:
+        print('No more values')
+No more values
+```
+
+```python
+>>> r = range(3, 13)
+>>> s = iter(r)  # r 的第一个迭代器
+>>> next(s)
+3
+>>> next(s)
+4
+>>> t = iter(r)  # r 的第二个迭代器
+>>> next(t)
+3
+>>> next(t)
+4
+>>> u = t        # u 绑定到 r 的第二个迭代器
+>>> next(u)
+5
+>>> next(u)
+6
+```
+
+- 在迭代器上调用 `iter` 将返回该迭代器，而不是其副本。 Python 中包含此行为，以便程序员可以对某个值调用 `iter` 来获取迭代器，而不必担心它是迭代器还是容器。
+
+```python
+>>> v = iter(t)  # v 绑定到 r 的第二个迭代器
+>>> next(v)      # u, v, t 都为 r 的第二个迭代器
+8
+>>> next(u)
+9
+>>> next(t)
+10
+```
+
+- 每次调用 iter(s) 都会创建一个新的迭代器 
+
+```python
+s = [1, 2, 3]
+
+next(iter(s))  # 创建一个新迭代器，返回第一个元素 1
+next(iter(s))  # 又创建一个新迭代器，返回第一个元素 1
+next(iter(s))  # 再创建一个新迭代器，返回第一个元素 1
+
+```
+
+#### 4.2.2 可迭代性
+
+- 可以传递给 `iter` 的对象都是**可迭代值（itreble value）**
+- 包括：
+	- 序列值：字符串，元组
+	- 容器：集合，字典
+	- 迭代器本身
+- 字典在生成迭代器时也必须定义其内容的顺序
+- 如果字典由于添加或删除键导致结构发生变化，则迭代器失效
+
+```python
+>>> d = {'one': 1, 'two': 2, 'three': 3}
+>>> d
+{'one': 1, 'three': 3, 'two': 2}
+>>> k = iter(d)
+>>> next(k)
+'one'
+>>> next(k)
+'three'
+>>> v = iter(d.values())
+>>> next(v)
+1
+>>> next(v)
+3
+```
+
+#### 4.2.3 内置迭代器
+
+- `map`
+
+```python
+>>> def double_and_print(x):
+        print('***', x, '=>', 2*x, '***')
+        return 2*x
+>>> s = range(3, 7)
+>>> doubled = map(double_and_print, s)  # double_and_print 未被调用
+>>> next(doubled)                       # double_and_print 调用一次
+*** 3 => 6 ***
+6
+>>> next(doubled)                       # double_and_print 再次调用
+*** 4 => 8 ***
+8
+>>> list(doubled)                       # double_and_print 再次调用兩次
+*** 5 => 10 ***                         # list() 会把剩余的值都计算出来并生成一个列表
+*** 6 => 12 ***
+[10, 12]
+```
+
+- `filter`
+- `zip`
+- `reversed`
+- 以上三个函数也返回迭代器
+
+#### 4.2.4 For 语句
+
+#### 4.2.5 生成器和 Yield 语句
+
+#### 4.2.6 可迭代接口
+
+#### 4.2.7 使用 Yield 创建可迭代对象
+
+#### 4.2.8 迭代器接口
+
+#### 4.2.9 Streams
+
+#### 4.2.10 Python 流
 
 ### 4.3 声明式编程
 
@@ -842,7 +1011,3 @@ wd(1)
 ### 4.8 并行计算
 
 ## Reference
-
-- https://www.learncs.site/
-- https://composingprograms.netlify.app/
-- https://www.composingprograms.com/
