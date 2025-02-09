@@ -278,10 +278,7 @@ nav:
   - Home:
     - index: index.md
     - introduction: introduction.md
-  - Blogs:
-    - index: Blogs/index.md
-    # - Archives: Blogs/archives.md
-  - computer science:
+  - Computer Science:
     - computer/index.md
     - CS61A:
       - CS61A_notes: computer/CS61A/CS61A_notes.md
@@ -294,18 +291,23 @@ nav:
         - Basis of algorithm: computer/C++/algorithm.md
     - Linux:
         - "Linux": computer/Linux/linux.md
-  - tools: 
+  - Tools: 
     - tools/index.md
     - "autohotkey":
         - 键位映射: tools/autohotkey/auto.md
     - "AI_prompt":
+        - Prompt Engineering: tools/prompt/method.md
         - useful prompt: tools/prompt/prompt.md
     - "git & github":
-        - git & github: tools/git_github/github.md    
+        - git: tools/git/git.md
+        - github: tools/git/github.md    
     - "problems I met":
         - problem and solution: tools/problem/problem.md
-  - summary: 
+  - Summary: 
     - index: summary/index.md
   # - tags: tags/index.md
-  - links: links/index.md
+  - Blogs:
+    - index: Blogs/index.md
+    # - Archives: Blogs/archives.md
+  - Links: links/index.md
   
