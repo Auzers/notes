@@ -304,7 +304,11 @@ nav:
     - "problems I met":
         - problem and solution: tools/problem/problem.md
   - Summary: 
-    - index: summary/index.md
+    - summary/index.md
+    - summaries:
+      - 第3~5周: summary/2025/03_05.md
+      - 第 6 周: summary/2025/06.md
+
   # - tags: tags/index.md
   - Blogs:
     - index: Blogs/index.md
