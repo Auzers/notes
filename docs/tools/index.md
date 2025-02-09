@@ -12,11 +12,11 @@ comments: false
 - "git & github":
     - git: git/git    
     - github: git/github
+- "AI_prompt":
+    - 吴恩达 Prompt_Engineering: prompt/method
+    - useful prompt: prompt/prompt
 - "autohotkey":
     - 键位映射: autohotkey/auto
-- "AI_prompt":
-    - 吴恩达Prompt_Engineering: prompt/method
-    - useful prompt: prompt/prompt
 - "problems I met":
     - problem and solution: problem/problem
 {{ END_TOC }}
