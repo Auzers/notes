@@ -18,7 +18,17 @@ icon: /octicons/link-24
             <img src="https://raw.githubusercontent.com/Auzers/picture/main/wechat.jpeg" alt="am">
         </div>
         <div class="flink-item-name heti-skip">am</div>
-        <div class="flink-item-desc"> just me now</div>
+        <div class="flink-item-desc"> myself</div>
+    </a>
+</div>
+
+<div class="flink-list-item">
+    <a href="https://note.isshikih.top/" title="Isshiki修's Notebook" target="_blank">
+        <div class="flink-item-icon">
+            <img src="https://cdn.tonycrane.cc/note/friends/isshiki.png" alt="Isshiki修">
+        </div>
+        <div class="flink-item-name heti-skip">Isshiki修's Notebook</div>
+        <div class="flink-item-desc">厉害的学长</div>
     </a>
 </div>
 
