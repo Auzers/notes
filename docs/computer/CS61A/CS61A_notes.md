@@ -560,11 +560,14 @@ machine.make_coffee()
 
 #### 2.3.1 列表
 
-- `s.pop (i)` : 删除下标为 i 的元素并返回 s[i], 如果无参数则删除并返回末尾元素 
-- `s.remove(x)` : 删除列表中第一个值为 x 的元素，**无返回值**
+- `s.pop (i)` :删除下标为 i 的元素并返回 s[i], 如果无参数则删除并返回末尾元素 
+- `s.remove(x)` :删除列表中第一个值为 x 的元素，**无返回值**
 - `s.extend(iterable)` :将 `iterable` （可迭代对象）的元素**逐个**添加到列表 s 末尾。直接修改 s，**无返回值**
 - `s.append(i)` :在列表 s **末尾**添加一个元素 i ，并**直接修改 s**
 - `s.insert(index,value)` :在列表 s 的指定位置 index 处插入元素 value ，并**直接修改 s**, 若 index 超过列表长度则添加到最后
+- `s.remove(value)` :删除列表中**第一个**匹配 `value` 的元素。
+- `sorted(iterable, key=None, reverse=False)` : 默认升序排列，key 是指定排序规则的函数，不修改原列表而是返回一个新的列表
+- `s.sort(key=None, reverse=False)` : 直接修改原列表而不返回新列表
 
 ```python
 s1 = [1, 2, 3]
@@ -846,6 +849,492 @@ wd(1)
 #### 2.4.8 调度字典（Dispatch Dictionaries）
 
 #### 2.4.9 约束传递 (Propagating Constraints)
+
+### 2.5 面向对象编程
+
+#### 2.5.1 对象和类
+
+- **实例属性:** 对于特定对象，其有特定值的属性，（而不是类的所有对象）称为实例属性
+
+```python
+>>> class Account:
+        def __init__(self, account_holder):
+            self.balance = 0                    #实例属性1
+            self.holder = account_holder        #实例属性2
+```
+
+#### 2.5.2 类的定义
+
+```python
+>>> class Account:
+        def __init__(self, account_holder):
+            self.balance = 0
+            self.holder = account_holder
+```
+
+- `Account` 的 `__init__` 方法有两个形式参数。第一个 `self` 绑定到新创建的 `Account` 对象。第二个参数 `account_holder` 绑定到调用类进行实例化时传递给类的参数。
+
+```python
+>>> a = Account('Kirk')
+>>> a.balance
+0
+>>> a.holder
+'Kirk'
+```
+
+- 每一个 `account` 有自己独立的余额属性
+
+```python
+>>> b = Account('Spock')
+>>> b.balance = 200
+>>> [acc.balance for acc in (a, b)]
+[0, 200]
+```
+
+- 赋值将对象绑定到新名称不会创建新的对象
+
+```python
+>>> c = a
+>>> c is a
+True
+```
+
+```python
+>>> class Account:
+        def __init__(self, account_holder):
+            self.balance = 0
+            self.holder = account_holder
+        def deposit(self, amount):
+            self.balance = self.balance + amount
+            return self.balance
+        def withdraw(self, amount):
+            if amount > self.balance:
+                return 'Insufficient funds'
+            self.balance = self.balance - amount
+            return self.balance
+```
+
+#### 2.5.3 消息传递和点表达式
+
+- 在对象上调用方法时，对象作为第一个参数隐式传递给该方法。即对象绑定到参数 `self`
+
+**方法和函数在交互解释器下的差异：**
+
+```python
+>>> type(Account.deposit)
+<class 'Function'>
+>>> type(spock_account.deposit)
+<class 'method'>
+```
+
+- **命名约定**：
+	- 类名通常使用 CapWords 约定（也称为 CamelCase，因为名称中间的大写字母看起来像驼峰）编写。示例如下
+		- `EmployeeRecord`
+		- `HttpRequestHandler`
+		- `DatabaseConnection`
+	- 方法名称遵循使用下划线分隔的小写单词命名函数的标准约定。
+
+#### 2.5.4 类属性
+
+- 类属性与类本身相关联，不与类的任何单个实例相关联
+- 类属性的赋值会改变所有类的实例的类属性值
+
+```python
+>>> class Account:
+        interest = 0.02            # 类属性
+        def __init__(self, account_holder):
+            self.balance = 0
+            self.holder = account_holder
+        # 在这里定义更多的方法
+>>> spock_account = Account('Spock')
+>>> kirk_account = Account('Kirk')
+>>> spock_account.interest
+0.02
+>>> kirk_account.interest
+0.02
+>>> Account.interest = 0.04 #类属性的赋值会改变类的所有实例的属性值
+>>> spock_account.interest
+0.04
+>>> kirk_account.interest
+0.04
+```
+
+类属性和实例属性很有可能会同名，所以计算点表达式时遵循以下规则：
+
+1. 点表达式左侧的 `<expression>` ，生成点表达式的对象。
+2. `<name>` 与该对象的实例属性匹配；如果存在具有该名称的属性，则返回属性值。
+3. 如果实例属性中没有 `<name>` ，则在类中查找 `<name>`，生成类属性。
+4. 除非它是函数，否则返回属性值。如果是函数，则返回该名称绑定的方法。
+
+```python
+>>> kirk_account.interest = 0.08
+>>> kirk_account.interest
+0.08
+>>> spock_account.interest
+0.04
+>>> Account.interest = 0.05     # 改变类属性
+>>> spock_account.interest      # 实例属性发生变化（该实例中没有和类属性同名称的实例属性）
+0.05
+>>> kirk_account.interest       # 如果实例中存在和类属性同名的实例属性，则改变类属性，不会影响实例属性
+0.08
+```
+
+#### 2.5.5 继承
+
+```python
+>>> class CheckingAccount(Account):
+        """从账号取钱会扣出手续费的账号"""
+        withdraw_charge = 1
+        interest = 0.01
+        def withdraw(self, amount):
+            return Account.withdraw(self, amount + self.withdraw_charge)
+>>> ch = CheckingAccount('Spock')
+>>> ch.interest     # Lower interest rate for checking accounts
+0.01
+>>> ch.deposit(20)  # Deposits are the same
+20
+>>> ch.withdraw(5)  # withdrawals decrease balance by an extra charge
+14
+```
+
+- checkingAccount 是 account 的子类，子类继承其父类的属性，也可以重写某些属性，**在子类中未指定的任何内容都会被自动假定为与父类的行为一样**
+
+#### 2.5.6 使用继承
+
+上述例子的完整实现：
+
+```python
+>>> class Account:
+        """一个余额非零的账户。"""
+        interest = 0.02
+        def __init__(self, account_holder):
+            self.balance = 0
+            self.holder = account_holder
+        def deposit(self, amount):
+            """存入账户 amount，并返回变化后的余额"""
+            self.balance = self.balance + amount
+            return self.balance
+        def withdraw(self, amount):
+            """从账号中取出 amount，并返回变化后的余额"""
+            if amount > self.balance:
+                return 'Insufficient funds'
+            self.balance = self.balance - amount
+            return self.balance
+>>> class CheckingAccount(Account):
+        """从账号取钱会扣出手续费的账号"""
+        withdraw_charge = 1
+        interest = 0.01
+        def withdraw(self, amount):
+            return Account.withdraw(self, amount + self.withdraw_charge)
+```
+
+在类中查找名称：
+
+- 如果它命名在指定类中的属性则返回属性值
+- 否则在该类的父类中查找该名称的属性
+- **接口**定义了一组方法和属性，确保不同的类（ `Account` 和 `CheckingAccount` ）都具有相同的行为。  
+- 这样，无论是哪种账户类型，我们都可以放心地使用 `deposit` 、 `withdraw` 和 `balance` ，而不用关心具体的账户类别。
+
+这个挺绕的  
+![image](https://www.helloimg.com/i/2025/02/11/67aaff3938004.png)
+
+#### 2.5.7 多继承
+
+```python
+>>> class SavingsAccount(Account):
+        deposit_charge = 2
+        def deposit(self, amount):
+            return Account.deposit(self, amount - self.deposit_charge)
+>>> class AsSeenOnTVAccount(CheckingAccount, SavingsAccount):
+        def __init__(self, account_holder):
+            self.holder = account_holder
+            self.balance = 1           # 赠送的 1 $!
+>>> such_a_deal = AsSeenOnTVAccount("John")
+>>> such_a_deal.balance
+1
+>>> such_a_deal.deposit(20)            # 调用 SavingsAccount 的 deposit 方法，会产生 2 $的存储费用
+19
+>>> such_a_deal.withdraw(5)            # 调用 CheckingAccount 的 withdraw 方法，产生 1 $的取款费用。
+13
+```
+
+- 继承结构：
+
+![image](https://www.helloimg.com/i/2025/02/11/67ab013553a0d.png)
+
+遵循**从左到右，从下到上**的检索规则
+
+```
+AsSeenOnTVAccount, CheckingAccount, SavingsAccount, Account, object
+```
+
+#### 2.5.8 对象的作用
+
+### 2.7 对象抽象
+
+#### 2.7.1 字符串转换
+
+> _repr(object) -> string_
+> 
+> _Return the canonical string representation of the object._
+> 
+> _For most object types, eval(repr(object)) == object_
+
+> 返回对象的标准字符串表示。
+> 
+> 对于大多数对象类型， `eval(repr(object)) == object` 。
+
+```python
+>>> 12e12
+12000000000000.0
+>>> print(repr(12e12))
+12000000000000.0
+```
+
+```python
+>>> repr(min)
+'<built-in function min>'
+>>> from datetime import date
+>>> tues = date(2011, 9, 12)
+>>> repr(tues)
+'datetime.date(2011, 9, 12)'
+>>> str(tues)
+'2011-09-12'
+```
+
+- `repr` 函数无法正确地应用到所有的数据类型
+- 解决方案：使用 object 系统-- `repr` 总是再其参数值上调用一个名为 ` __repr__ ` 的方法
+
+```python
+def repr(x):
+    return type(x).__repr__(x)
+```
+
+```python
+class Ratio:
+    def __init__(self, n, d):
+        self.numer = n
+        self.denom = d
+    def __repr__(self):
+        return 'Ratio({0}, {1})'.format(self.numer, self.denom)
+    def __str__(self):
+        return '{0}/{1}'.format(self.numer,self.denom)
+```
+
+```python
+>>> half = Ratio(1,2) 
+>>> half
+Ratio(1, 2)
+>>> print(half)
+1/2
+```
+
+- 当你直接输入对象时，Python 会自动调用该对象的 `__repr__` 方法来返回对象的字符串表示。
+- 在交互式环境中，Python 会自动 **调用对象的 `__repr__()` 方法** 来获得该对象的字符串表示并显示在屏幕上。
+- 输出 `Ratio(1, 2)` 没有引号包围，因为它是对象的 **显示形式**，而不是字符串本身。Python 会将 `__repr__()` 方法的返回值直接打印出来。
+- 当你使用 `print()` 函数时，Python 会调用该对象的 `__str__` 方法来获取对象的字符串表示。
+- `format` : 格式化输出，{}内的数字表示索引
+
+#### 2.7.2 专用方法
+
+```python
+>>> Account.__bool__ = lambda self: self.balance != 0
+```
+
+```python
+>>> bool(Account('Jack'))
+False
+>>> if not Account('Jack'):
+        print('Jack has nothing')
+Jack has nothing
+```
+
+- 如果序列没有提供 `__bool__` 方法，那么 Python 会使用序列的长度来确定其真假值。空的序列是假值，而非空序列是真值。
+
+```python
+>>> bool('')
+False
+>>> bool([])
+False
+>>> bool('Go Bears!')
+True
+```
+
+```python
+>>> 'Go Bears!'[3]
+'B'
+>>> 'Go Bears!'.__getitem__(3)
+'B'
+```
+
+```python
+>>> def make_adder(n):
+        def adder(k):
+            return n + k
+        return adder
+
+>>> add_three = make_adder(3)
+>>> add_three(4)
+7
+```
+
+- 下面是等效的 `Adder` 类
+
+```python
+>>> class Adder(object):
+        def __init__(self, n):
+            self.n = n
+        def __call__(self, k):
+            return self.n + k
+>>> add_three_obj = Adder(3)
+>>> add_three_obj(4)
+7
+```
+
+#### 2.7.3 多重表示
+
+以复数的相乘和相加为例：
+
+```python
+>>> class Number:
+        def __add__(self, other):
+            return self.add(other)
+        def __mul__(self, other):
+            return self.mul(other)
+>>> class Complex(Number): # 继承Number类
+        def add(self, other):
+            return ComplexRI(self.real + other.real, self.imag + other.imag)
+        def mul(self, other):
+            magnitude = self.magnitude * other.magnitude
+            return ComplexMA(magnitude, self.angle + other.angle)
+>>> from math import atan2
+>>> class ComplexRI(Complex):  # 继承Complex类
+        def __init__(self, real, imag):
+            self.real = real
+            self.imag = imag
+        @property
+        def magnitude(self):
+            return (self.real ** 2 + self.imag ** 2) ** 0.5
+        @property
+        def angle(self):
+            return atan2(self.imag, self.real)
+        def __repr__(self):
+            return 'ComplexRI({0:g}, {1:g})'.format(self.real, self.imag)
+>>> ri = ComplexRI(5, 12)
+>>> ri.real
+5
+>>> ri.magnitude
+13.0
+>>> ri.real = 9
+>>> ri.real
+9
+>>> ri.magnitude
+15.0
+>>> from math import sin, cos, pi
+>>> class ComplexMA(Complex):
+        def __init__(self, magnitude, angle):
+            self.magnitude = magnitude
+            self.angle = angle
+        @property
+        def real(self):
+            return self.magnitude * cos(self.angle)
+        @property
+        def imag(self):
+            return self.magnitude * sin(self.angle)
+        def __repr__(self):
+            return 'ComplexMA({0:g}, {1:g} * pi)'.format(self.magnitude, self.angle/pi)
+>>> ma = ComplexMA(2, pi/2)
+>>> ma.imag
+2.0
+>>> ma.angle = pi
+>>> ma.real
+-2.0
+>>> from math import pi
+>>> ComplexRI(1, 2) + ComplexMA(2, pi/2)
+ComplexRI(1, 4)
+>>> ComplexRI(0, 1) * ComplexRI(0, 1)
+ComplexMA(1, 1 * pi)
+```
+
+#### 2.7.4 泛型函数
+
+#### Link List
+
+```python
+class Link:
+    """A linked list.
+
+    >>> s = Link(1)
+    >>> s.first
+    1
+    >>> s.rest is Link.empty
+    True
+    >>> s = Link(2, Link(3, Link(4)))
+    >>> s.first = 5
+    >>> s.rest.first = 6
+    >>> s.rest.rest = Link.empty
+    >>> s                                    # Displays the contents of repr(s)
+    Link(5, Link(6))
+    >>> s.rest = Link(7, Link(Link(8, Link(9))))
+    >>> s
+    Link(5, Link(7, Link(Link(8, Link(9)))))
+    >>> print(s)                             # Prints str(s)
+    <5 7 <8 9>>
+    """
+    empty = ()
+
+    def __init__(self, first, rest=empty):
+        assert rest is Link.empty or isinstance(rest, Link)
+        self.first = first
+        self.rest = rest
+
+    def __repr__(self):
+        if self.rest is not Link.empty:
+            rest_repr = ', ' + repr(self.rest)
+        else:
+            rest_repr = ''
+        return 'Link(' + repr(self.first) + rest_repr + ')'
+
+    def __str__(self):
+        string = '<'
+        while self.rest is not Link.empty:
+            string += str(self.first) + ' '
+            self = self.rest
+        return string + str(self.first) + '>'
+
+def range_Link(start, end):
+    """
+    >>> range_Link(3,6)
+    Link(3, Link(4, Link(5)))
+    """
+    # end -= 1
+    # res = Link.empty
+    # while(end >= start):
+    #     res = Link(end, res)
+    #     end -= 1
+    # return res
+    if(start >= end):
+        return Link.empty
+    else:
+        return Link(start,range_Link(start + 1, end))
+
+def map_Link(f, s):
+    if(s == Link.empty):
+        return s
+    else:
+        return Link(f(s.first), map_Link(s.rest))
+
+def filter_Link(f, s):
+    if(s == Link.empty):
+        return s
+    elif(f(s)):
+        return Link(s.first, filter_Link(f, s.rest))
+    elif(not f(s)):
+        return Link(filter_Link(f,s.rest))
+    
+
+        
+```
 
 ## 4 数据处理
 
