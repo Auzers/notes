@@ -280,6 +280,10 @@ improve_test()
 
 #### 1.6.3 定义函数III: 嵌套定义 
 
+- **闭包**：在 Python 中，当一个函数返回一个嵌套的函数时，嵌套函数会“捕获”外部函数的变量。这个特性叫做 **闭包**。闭包使得嵌套函数可以访问并修改外部函数中的变量，即使外部函数已经执行完毕。
+- **可变对象**（如列表、字典）在嵌套函数中修改时，不需要 `nonlocal`，因为修改的是对象的内部内容，而不是创建一个新的变量。
+- **不可变对象**（如整数、浮点数、字符串）在嵌套函数中修改时，默认会创建一个新的局部变量，因此需要使用 `nonlocal` 来修改外部函数中的变量。
+
 #### 1.6.4 作为返回值的函数
 
 **示例：**
@@ -1258,6 +1262,107 @@ ComplexMA(1, 1 * pi)
 
 #### 2.7.4 泛型函数
 
+### 2.8 效率
+
+#### 2.8.1 测量效率
+
+```python
+>>> def fib(n):
+        if n == 0:
+            return 0
+        elif n == 1:
+            return 1
+        else:
+            return fib(n - 2) + fib(n - 1)
+>>> fib(5)
+5
+```
+
+- 对调用次数计数：
+
+```python
+>>> def count(f):
+        def counted(n):
+            counted.call_count += 1
+            return f(n)
+        counted.call_count = 0
+        return counted
+>>> fib = count(fib)
+>>> fib(19)
+4181
+>>> fib.call_count
+10946
+```
+
+- python 解释器会回收不影响未来计算的内存，**树递归函数所需的空间将与数的最大深度成比例**
+- 计数最大调用帧：
+
+```python
+>>> def count_frames(f):
+        def counted(n):
+            counted.open_count += 1 # 开辟帧
+            counted.max_count = max(counted.max_count, counted.open_count)
+            result = f(n)
+            counted.open_count -= 1 # 计算完了释放帧
+            return result
+        counted.open_count = 0
+        counted.max_count = 0
+        return counted
+>>> fib = count_frames(fib)
+>>> fib(19)
+4181
+>>> fib.open_count
+0
+>>> fib.max_count
+19
+>>> fib(24)
+46368
+>>> fib.max_count
+24
+```
+
+#### 2.8.2 记忆化
+
+```python
+>>> def memo(f):
+        cache = {}
+        def memorized(n):
+            if n not in cache:
+                cache[n] = f(n)
+            return cache[n]
+        return memorized
+>>> counted_fib = count(fib)
+>>> fib =memo(count_fib)
+>>> fib(19)
+4181
+>>> counted_fib.call_count
+20
+>>> fib(34)
+5702887
+>>> counted_fib.call_count
+35
+```
+
+- 应用 memo 后新的计算模式
+
+![image](https://www.helloimg.com/i/2025/02/14/67aed8982936a.png)
+
+- 对于每个唯一的输入, fib 只被调用一次
+
+#### 2.8.3 增长阶数
+
+#### 2.8.4 示例：指数运算
+
+#### 2.8.5 增长类别
+
+#### Data example
+
+![image](https://www.helloimg.com/i/2025/02/14/67af1b1047801.png)
+
+![image](https://tuchuang.org.cn/imgs/2025/02/14/d504068d2f722132.png)
+
+`min(s, key=abs)` ：根据每个元素的 **绝对值** 找出 `s` 中的最小元素。如果有多个元素的绝对值相同，它会返回**第一个最小的元素。**
+
 #### Link List
 
 ```python
@@ -1335,6 +1440,20 @@ def filter_Link(f, s):
 
         
 ```
+
+## 3 计算机程序的解释
+
+### 3.1 引言 
+
+本章将介绍 Scheme 编程语言
+
+### 3.2 函数式编程
+
+### 3.3 异常
+
+### 3.4 组合语言的解释器
+
+### 3.5 抽象语言的解释器
 
 ## 4 数据处理
 
