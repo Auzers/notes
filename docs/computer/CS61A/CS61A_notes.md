@@ -1445,13 +1445,312 @@ def filter_Link(f, s):
 
 ### 3.1 引言 
 
-本章将介绍 Scheme 编程语言
+- 本章将介绍 Scheme 编程语言
+- [语法介绍](https://cs61a.org/articles/scheme-spec/#let)
 
 ### 3.2 函数式编程
 
+#### 3.2.1 表达式
+
+#### 3.2.2 定义
+
+- 运算符前置
+
+```scheme
+scm> (* 3 (+ 4 2))
+18
+scm> (+ 1 2)
+3
+scm> (- 10 (/ 6 2))
+7
+scm> (modulo 35 4)
+3
+scm> (even? (quotient 45 2))
+#t
+```
+
+- **Define:**
+
+```scheme
+scm> (define pi (+ 3 0.14))
+pi
+scm> pi
+3.14
+```
+
+- **define can alse create a procedure!**
+
+```scheme
+(define (<name> <formal parameters>) <body>)
+```
+
+```scheme
+scm> (define (double x) (* x 2))
+double
+scm> (double 3)
+6
+scm> (define (add-then-mul x y z)
+        (* (+ x y) z))
+scm> (add-then-mul 3 4 5)
+35
+```
+
+- **if exp:**
+
+```scheme
+(if <predicate> <if-true> <if-false>)
+```
+
+`
+
+```scheme
+scm> (define x 3)
+x
+scm> (if (> (- x 3) 0) (/ 1 (- x 3)) (+ x 2))
+5
+scm> (if (= x 3) (print x))
+3
+```
+
+- **Cond: scheme 语言不支持 elif**  
+
+```scheme
+(cond  
+(<p1> <e1>)  
+(<p2> <e2>)  
+...  
+(<pn> <en>)  
+(else <else-expression>))
+```
+``
+
+```scheme
+scm> (define x 5)
+x
+scm> (cond ((= (modulo x 3) 0) x)
+            ((= (modulo x 3) 1) (- x 1))
+            ((= (modulo x 3) 2) (+ x 1)))
+6
+```
+
+- **lambda:**
+
+```scheme
+(lambda (<param1> <param2> ...) <body>)
+```
+
+```scheme
+scm> (lambda (x y) (+ x y))        ; Returns a lambda procedure, but doesn't assign it to a name
+(lambda (x y) (+ x y))
+scm> ((lambda (x y) (+ x y)) 3 4)  ; Create and call a lambda procedure in one line
+7
+```
+
+#### 3.2.3 复合类型
+
+- scheme 语言中，pair 通过 cons 创建，而元素可以通过 car 和 cdr 访问
+- scheme 中的列表就像 Python 中的 `Link` 类
+
+```scheme
+(cons 1
+      (cons 2
+            (cons 3
+                  (cons 4 nil))))
+(1 2 3 4)
+(list 1 2 3 4)
+(1 2 3 4)
+(define one-through-four (list 1 2 3 4))
+(car one-through-four)
+1
+(cdr one-through-four)
+(2 3 4)
+(car (cdr one-through-four))
+2
+(cons 10 one-through-four)
+(10 1 2 3 4)
+(cons 5 one-through-four)
+(5 1 2 3 4)
+```
+
+- 使用 `null?` 判断一个列表是否为空
+
+```scheme
+(define (length items)       ;; 测量列表的长度
+  (if (null? items)
+      0
+      (+ 1 (length (cdr items)))))
+(define (getitem items n)    ;; 获取列表索引为 n 的元素 
+  (if (= n 0)
+      (car items)
+      (getitem (cdr items) (- n 1))))
+(define squares (list 1 4 9 16 25))
+(length squares)
+5
+(getitem squares 3)
+16
+```
+
+**Scheme Lists & Quotation**
+
+- `nil` and `()` are the same thing: the empty list.
+- `(cons first rest)` constructs a linked list with `first` as its first element. and `rest` as the rest of the list, which should always be a list.
+- `(car s)` returns the first element of the list `s`.
+- `(cdr s)` returns the rest of the list `s`.
+- `(list ...)` takes n arguments and returns a list of length n with those arguments as elements.
+- `(append ...)` takes n lists as arguments and returns a list of all of the elements of those lists.
+- `(draw s)` draws the linked list structure of a list `s`. It only works on [code.cs61a.org/scheme](https://code.cs61a.org/scheme). **Try it now with something like `(draw (cons 1 nil))`**.
+
+#### 3.2.4 符号数据
+
+- scheme 语言能够处理任意符号作为数据
+
+```scheme
+(define a 1)
+(define b 2)
+(list a b)
+(1 2)
+(list 'a 'b)
+(a b)
+(list 'a b)
+(a 2)
+
+(list 'define 'list)
+(define list)
+(car '(a b c))
+a
+(cdr '(a b c))
+(b c)
+```
+
 ### 3.3 异常
 
+- 异常是一个对象实例，其类直接或间接继承自 `BaseException` 类。
+- assert 语句抛出 `AssertionError` 的异常。
+- 通常可以用 `raise` 语句抛出任何异常实例
+
+```python
+>>> raise Exception(' An error occurred')
+Traceback (most recent call last):
+	File "<stdin>", line 1, in <module>
+Exception: an error occurred
+```
+
+- 抛出异常后，当前代码块中的后续语句将不会执行，除非异常被处理
+- 上述示例中，文件名 `<stdin>` 表示该异常是由用户在**交互会话**中引发的，而不是来自文件中的代码
+- **处理异常**-- try 语句
+
+```python
+try
+	<try suite>
+except <exception class> as <name>:
+	<except suite>
+```
+
+- `<try suite>` 立即执行。只有在 `<try suite>` 过程中发生异常时，except 字句的内容才会执行
+- 如果 `<exception class>` 为 `AssertionError` ，那么 `AssertionError` 绑定到 `name` (不会在 `except suite` 外存在) , `<try suite>` 过程中引发的任何继承自 `AssertionError` 类的实例由随后的 `<except suite>` 处理。
+
+```python
+>>> try:
+		x = 1 / 0:
+	except ZeroDivisionError as e:
+		print('handling a', type(e))
+		x = 0
+handling a <class 'ZeroDivisionError'>
+>>> x
+0
+```
+
+```python
+>>> def invert(x):
+		result = 1/x # 抛出一个异常（ZeroDivisionError) 如果 x 为 0
+		print('Never printed if x is 0')
+		return result
+>>> def invert_safe(x):
+		try:
+			return invert(x)
+		except ZeroDivisionError as e:
+			return str(e)
+
+>>> invert_safe(2)
+Never printed if x is 0
+0.5
+>>> invert_safe(0)
+'division by zero'
+```
+
+#### 3.3.1 异常对象
+
+```python
+>>> class IterImproveError(Exception):
+        def __init__(self, last_guess):
+            self.last_guess = last_guess
+>>> def improve(update, done, guess=1, max_updates=1000):
+        k = 0
+        try:
+            while not done(guess) and k < max_updates:
+                guess = update(guess)
+                k = k + 1
+            return guess
+        except ValueError:
+            raise IterImproveError(guess)  # 抛出异常
+>>> def find_zero(f, guess=1):
+        def done(x):
+            return f(x) == 0
+        try:
+            return improve(newton_update(f), done, guess)
+        except IterImproveError as e:   # raise 抛出的异常被捕获
+            return e.last_guess         # 采用自定义方法处理异常
+>>> from math import sqrt
+>>> find_zero(lambda x: 2*x*x + sqrt(x))
+-0.030211203830201594 
+```
+
 ### 3.4 组合语言的解释器
+
+#### 3.4.1 基于 Scheme 语法的计算器
+
+#### 3.4.2 表达式树
+想要编写一个 Scheme 计算器，我们需要定义一个嵌套对 [Pair](https://www.composingprograms.com/examples/scalc/scheme_reader.py.html)
+
+```python
+>>> s = Pair(1, Pair(2, nil))
+>>> s
+Pair(1, Pair(2, nil))
+>>> print(s)
+(1 2)
+```
+
+```python
+>>> len(s)
+2
+>>> s[1]
+2
+>>> print(s.map(lambda x: x+4))
+(5 6)
+```
+
+嵌套列表：
+
+```python
+>>> expr = Pair('+', Pair(Pair('*', Pair(3, Pair(4, nil))), Pair(5, nil)))
+>>> print(expr)
+(+ (* 3 4) 5)
+>>> print(expr.second.first)
+(* 3 4)
+>>> expr.second.first.second.first
+3
+```
+#### 3.4.3 解析表达式
+解析过程：
+1. 词法分析器将输入字符串划分为几个最小语法单元，比如名称和符号。
+2. 语法分析器根据这个标记序列构建一个表达式树。
+
+我们使用的分词器 `token_line` :
+```python
+>>> tokenize_line('(+ 1 (* 2.3 45))')
+['(', '+', 1, '(', '*', 2.3, 45, ')', ')']
+```
+#### 3.4.4 计算器语言求值
 
 ### 3.5 抽象语言的解释器
 
