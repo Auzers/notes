@@ -1,11 +1,11 @@
 
 # 站点信息
-site_name: am 的纸船
+site_name: am 的 叶栈漫谈
 site_url: https://Auzers.github.io/notes/
 use_directory_urls: true  # 推荐设置
 site_author: am
 site_description: 这里是am的博客
-repo_name: am's boat
+repo_name: am's site
 repo_url: https://github.com/Auzers/notes/
 edit_uri: edit/main/docs/
 copyright: Copyright &copy; 2024 - Present <a href="https://github.com/Auzers/" target="_blank" rel="noopener">Auzers</a>
@@ -16,7 +16,7 @@ theme:
   name: material
   language: zh
   icon:
-    logo: material/sail-boat
+    logo: material/leaf
     repo: fontawesome/brands/git-alt
     edit: material/pencil
     admonition:
@@ -36,7 +36,7 @@ theme:
     text: LXGW WenKai Screen GB Screen # Share Tech
     code: JetBrains Mono
 # 网页标签图标
-  favicon: assets/images/logo.png
+  favicon: assets/images/logo1.png
 
   palette:
     - media: "(prefers-color-scheme)"
