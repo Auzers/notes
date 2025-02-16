@@ -15,7 +15,7 @@ icon: /octicons/link-24
 <div class="flink-list-item">
     <a href="https://Auzers.github.io/notes/" title="am" target="_blank">
         <div class="flink-item-icon">
-            <img src="https://raw.githubusercontent.com/Auzers/picture/main/wechat.jpeg" alt="am">
+            <img src="https://cdn.jsdelivr.net/gh/Auzers/drawingbed/wechat.jpeg" alt="am">
         </div>
         <div class="flink-item-name heti-skip">am</div>
         <div class="flink-item-desc"> myself</div>
@@ -25,7 +25,7 @@ icon: /octicons/link-24
 <div class="flink-list-item">
     <a href="https://note.isshikih.top/" title="Isshiki修's Notebook" target="_blank">
         <div class="flink-item-icon">
-            <img src="https://www.helloimg.com/i/2025/02/10/67aa15784fbb3.png" alt="Isshiki修">
+            <img src="https://cdn.jsdelivr.net/gh/Auzers/drawingbed/isshiki.png" alt="Isshiki修">
         </div>
         <div class="flink-item-name heti-skip">Isshiki修's Notebook</div>
         <div class="flink-item-desc">厉害的学长</div>

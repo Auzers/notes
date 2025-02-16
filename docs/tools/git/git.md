@@ -9,14 +9,14 @@
     - [git连接远程仓库和本地仓库](https://www.acwing.com/blog/content/2148/)
 ## 1 图解
 
-![image](https://www.helloimg.com/i/2025/02/09/67a811a48b762.png)
+![image](https://cdn.jsdelivr.net/gh/Auzers/drawingbed/PixPin_2025-02-16_13-08-59.png)
 
 ## 2 本地仓库和远端仓库关联
 
 - 远程仓库：在 github, gitlab, gitee 等平台上面对应的本地仓库称被称为**远程仓库**
 - github 是一个代码托管平台，通过 github 可以实现代码分享和协同开发
 
-### 3 示例
+### 示例
 
 github 创建一个仓库后关联到本地的一般步骤及解释  
 这里采用 **ssh** 方式 
@@ -33,9 +33,9 @@ github 创建一个仓库后关联到本地的一般步骤及解释
 
 - 如果已经有了本地仓库并且已经进行过提交，直接执行后两个命令即可
 
-## 4 产生冲突与解决办法
+## 3 产生冲突与解决办法
 
-![image](https://www.helloimg.com/i/2025/02/09/67a82bae2463e.png)
+![image](https://cdn.jsdelivr.net/gh/Auzers/drawingbed/PixPin_2025-02-16_13-09-41.png)
 
 - 使用 `git pull`
 - 如果正常合并，证明无需手动解决冲突，接下来正常 `git push` 即可
@@ -83,7 +83,7 @@ git push origin main
 - 克隆远程项目到本地  
   `git clone <url>`
 
-## 5 commit 修正
+## 4 commit 修正
 
  - 使用 `--amend` 命令  
 
@@ -105,16 +105,16 @@ git push origin main
 如果再进行一次 `commit -m 'a的第二次提交（修正第一次）'` 则显得冗余  
 可以使用 `commit --amend -m 'a的第一次提交'` 来修正第一次提交，查看日志时只会显示一条提交记录
 
-## 6 版本建设中的分支管理
+## 5 版本建设中的分支管理
 
 ### 为什么要进行分支管理
 
 - 开发分支上修改，之后合并到产品分支上  
- ![image](https://www.helloimg.com/i/2025/02/09/67a81f5d122ef.png)
+ ![image](https://cdn.jsdelivr.net/gh/Auzers/drawingbed/PixPin_2025-02-16_13-10-52.png)
 
 ### 操作
 
-![image](https://www.helloimg.com/i/2025/02/09/67a81f5917420.png)
+![image](https://cdn.jsdelivr.net/gh/Auzers/drawingbed/PixPin_2025-02-16_13-11-16.png)
 
 | 命令                              | 作用                                                       | 适用场景         |
 | --------------------------------- | ---------------------------------------------------------- | ---------------- |
@@ -132,11 +132,11 @@ git push origin main
 
 - 更改 github 上的默认分支：setting->Branches->Default branch->更改
 
-## 7 从版本库中恢复文件
+## 6 从版本库中恢复文件
 
 - vscode 中的 gitlens 插件已经图形化实现了 bash 命令
 
-## 8 gitignore
+## 7 gitignore
 
  1. 在项目根目录创建 .gitignore 文件
  2. 把想忽略的目录直接添加即可
@@ -206,18 +206,17 @@ data/secret.txt
 
 PS-2：已被.gitignore 忽略的文件无法再添加到版本库中
 
-## 9 git 日志
+## 8 git 日志
 
-![image](https://www.helloimg.com/i/2025/02/09/67a837c7d8048.png)
+![image](https://cdn.jsdelivr.net/gh/Auzers/drawingbed/PixPin_2025-02-16_13-13-11.png)
 
-## 10 github 标签管理
+## 9 github 标签管理
 
 - 为什么打标签：当开发到了一个阶段，为了凸显这次提交比较重要，可以为其打上标签。例如发布节点 (v1.0, v2.0)
 
 ### 打标签
 
-![image](https://www.helloimg.com/i/2025/02/09/67a841f41efac.png)
-
+![image](https://cdn.jsdelivr.net/gh/Auzers/drawingbed/PixPin_2025-02-16_13-13-40.png)
 1. `git log --oneline` 查看 head 指向哪一次提交
 2. `git tag <标签名称> <提交id>` 打上标签 `git tag <标签名称> -a -m '注释' <提交id>` 注释标签
 3. `git log --oneline` 查看是否成功打上标签
