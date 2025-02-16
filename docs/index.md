@@ -5,7 +5,7 @@ comments: false
 icon: material/home
 ---
 <!-- 邮箱信息 -->
-# Welcome to am's notes!
+# Welcome to amaranth's notes!
 <style>
     .email-info {
         position: fixed;

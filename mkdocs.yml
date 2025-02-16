@@ -1,11 +1,11 @@
 
 # 站点信息
-site_name: am 的 叶栈漫谈
+site_name: amaranth 的 叶栈漫谈
 site_url: https://Auzers.github.io/notes/
 use_directory_urls: true  # 推荐设置
-site_author: am
-site_description: 这里是am的博客
-repo_name: am's site
+site_author: amaranth
+site_description: 这里是amaranth的博客
+repo_name: amaranth's site
 repo_url: https://github.com/Auzers/notes/
 edit_uri: edit/main/docs/
 copyright: Copyright &copy; 2024 - Present <a href="https://github.com/Auzers/" target="_blank" rel="noopener">Auzers</a>
