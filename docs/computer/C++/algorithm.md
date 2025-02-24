@@ -1,32 +1,100 @@
-# 算法基础
+---
+tags:
+    - 算法
+---
+# Basis of algorithm
 
-## 1 二分
 
-- 二分查找：在一个有序数组中查找某个元素。
-- 二分查找模板：
-
+## 1 排序
+### 快排
 ```cpp
-int binary_search(int a[], int n, int x) {
-    int l = 0, r = n - 1;
-    while (l <= r) {
-        int mid = l + r >> 1;
-        if (a[mid] == x) return mid;
-        else if (a[mid] < x) l = mid + 1;
-        else r = mid - 1;
+void quick_sort(int q[], int l, int r)
+{
+    if(l >= r) return;
+    int i = l - 1, j = r + 1, x = q[(l + r) >> 1];
+    while(i < j)
+    {
+        do i++ ;while(q[i] < x);
+        do j-- ;while(q[j] > x);
+        if(i < j)
+        {
+            int t = q[i];
+            q[i] = q[j];
+            q[j] = t;
+        }
+        
     }
-    return -1;
+    quick_sort(q, l, j);
+    quick_sort(q, j + 1, r);
+    
 }
 ```
+
+- 除了 `if(l >= r)` 剩下的都是 `>` 或者 `<` 
+- do while
+- [快速排序算法的证明与边界分析](https://www.acwing.com/solution/content/16777/)
+
+### 归并
+```cpp
+void merge_sort(int q[], int l, int r)
+{
+    //递归的终止情况
+    if(l >= r) return;
+
+    //第一步：分成子问题
+    int mid = l + r >> 1;
+
+    //第二步：递归处理子问题
+    merge_sort(q, l, mid ), merge_sort(q, mid + 1, r);
+
+    //第三步：合并子问题
+    int k = 0, i = l, j = mid + 1, tmp[r - l + 1];
+    while(i <= mid && j <= r)
+        if(q[i] <= q[j]) tmp[k++] = q[i++];
+        else tmp[k++] = q[j++];
+    while(i <= mid) tmp[k++] = q[i++];
+    while(j <= r) tmp[k++] = q[j++];
+
+    for(k = 0, i = l; i <= r; k++, i++) q[i] = tmp[k];
+}
+```
+
+- [归并排序的证明与边界分析](https://www.acwing.com/solution/content/16778/)
+
+### 二分
+```cpp
+//查找左边界 SearchLeft 简写SL
+int SL(int l, int r)
+{
+    while (l < r)
+    {
+        int mid = l + r >> 1;
+        if (check(mid)) r = mid; 
+        else l = mid + 1; 
+    }   
+    return l;
+}
+//查找右边界 SearchRight 简写SR 
+int SR(int l, int r) 
+{
+    while (l < r)
+    {                   
+        int mid = l + r + 1 >> 1; //需要+1 防止死循环
+        if (check(mid)) l = mid;
+        else r = mid - 1; 
+    }
+    return r; 
+}
+```
+
+- 发明男左女右的真是个天才，如果包含 x 的条件是左边，就 + 1，否则不加。
+- [二分模板](https://www.acwing.com/solution/content/107848/)
+
+
 ## 2 深度优先搜索(DFS)
 
-- 深度优先搜索（DFS）是一种用于遍历或搜索树或图的算法。
+- 深度优先搜索（DFS）是一种用于遍历或搜索树或图的算法。  
 深度优先搜索示例：
-
-**示例1：**
-> 给定一个 n×m
- 的方格阵，沿着方格的边线走，从左上角 (0,0)
- 开始，每次只能往右或者往下走一个单位距离，问走到右下角 (n,m)
- 一共有多少种不同的走法。
 
 ```cpp
 #include <iostream>
@@ -52,54 +120,3 @@ int main()
     return 0;
 }
 ```
-**示例2：**
-> 给定一个整数 n
-，将数字 1∼n
- 排成一排，将会有很多种排列方法。
-现在，请你按照字典序将所有的排列方法输出。
-
-```cpp
-#include <iostream>
-
-using namespace std;
-const int N = 10;
-void dfs(int u,int nums[],bool st[],int sz)
-{
-    if(u > sz)
-    {
-        for(int i = 1;i <= sz;i++)
-        {
-            cout << nums[i] << ' ';
-        }
-        cout << endl;
-    }
-    else
-    {
-        for(int i = 1;i <= sz;i++)
-        {
-            if(!st[i])
-            {
-                nums[u] = i;
-                st[i] = true;
-                dfs(u + 1,nums,st,sz);
-                st[i] = false;//恢复现场
-            }
-        }
-    }
-}
-int main()
-{
-    int n;
-    cin >> n;
-    int nums[N];
-    bool st[N] = {0};
-    dfs(1,nums,st,n);
-    return 0;
-}
-```
-
-
-
-1. **基本语法**：
-
-
