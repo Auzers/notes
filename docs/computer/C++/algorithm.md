@@ -2,6 +2,7 @@
 tags:
     - 算法
 ---
+
 # Basis of algorithm
 
 ## 时间复杂度
@@ -269,6 +270,162 @@ int main()
 }
 ```
 
+## 前缀 & 差分
+
+首先给定一个原数组a： a[1], a[2], a[3],,,,,, a[n];
+然后我们构造一个数组b ： b[1] ,b[2] , b[3],,,,,, b[i];
+使得 a[i] = b[1] + b[2]+ b[3] +,,,,,, + b[i]
+也就是说，a数组是b数组的**前缀和数组**，反过来我们把b数组叫做a数组的**差分数组**。换句话说，每一个a[i]都是b数组中从头开始的一段区间和。
+### 前缀
+- 一维：
+```cpp
+#include <iostream>
+
+using namespace std;
+const int N = 100010;
+int n, m;
+int a[N], s[N];
+int main()
+{
+    cin >> n >> m;
+    for(int i = 1; i <= n; i++) scanf("%d",&a[i]);
+    for(int i = 1; i <= n; i++) s[i] = s[i - 1] + a[i];
+    while(m --)
+    {
+        int a, b;
+        scanf("%d%d",&a, &b);
+        printf("%d\n", s[b] - s[a - 1]);
+    }
+    
+    return 0;
+}
+```
+
+- 二维：
+```cpp
+#include <iostream>
+using namespace std;
+
+const int N = 1001;
+int n, m, q;
+int a[N][N],s[N][N];
+
+int main()
+{
+    scanf("%d%d%d",&n,&m,&q);
+    for(int i = 1; i <= n; i++)
+    {
+        for(int j = 1; j <= m; j ++)
+        {
+            scanf("%d", &a[i][j]);
+        }
+    }
+    for(int i = 1;i <= n; i++)
+    {
+        for(int j = 1; j <= m; j++)
+        {
+            s[i][j] = s[i - 1][j] + s[i][j - 1] - s[i - 1][j - 1] + a[i][j]; 
+        }
+    }
+    while(q--)
+    {
+        int x1,y1,x2,y2;
+        scanf("%d%d%d%d", &x1, &y1, &x2, &y2);
+        printf("%d\n",s[x2][y2] - s[x2][y1 - 1] - s[x1 - 1][y2] + s[x1 - 1][y1 - 1]);
+    }
+    return 0;
+}
+
+
+```
+
+### 差分
+- 一维：
+```cpp
+#include <iostream>
+using namespace std;
+
+const int N = 100010;
+int n, m;
+int a[N], b[N];
+
+int main()
+{
+    scanf("%d%d",&n, &m);
+    for(int i = 1;i <= n; i++) scanf("%d", &a[i]);
+    for(int i = 1;i <= n; i++) b[i] = a[i] - a[i - 1];
+    while(m --)
+    {
+        int l, r, c;
+        scanf("%d%d%d", &l, &r, &c);
+        b[l] += c;
+        b[r + 1] -= c;
+        
+    }
+     for(int i = 1; i <= n; i++) a[i] = a[i - 1] + b[i];
+     for(int i = 1; i <= n; i++) printf("%d ", a[i]);
+    
+    return 0;
+}
+
+```
+
+- 二维：
+```cpp
+#include<iostream>
+#include<cstdio>
+using namespace std;
+const int N = 1e3 + 10;
+int a[N][N], b[N][N];
+void insert(int x1, int y1, int x2, int y2, int c)
+{
+    b[x1][y1] += c;
+    b[x2 + 1][y1] -= c;
+    b[x1][y2 + 1] -= c;
+    b[x2 + 1][y2 + 1] += c;
+}
+int main()
+{
+    int n, m, q;
+    cin >> n >> m >> q;
+    for (int i = 1; i <= n; i++)
+        for (int j = 1; j <= m; j++)
+            cin >> a[i][j];
+    for (int i = 1; i <= n; i++)
+    {
+        for (int j = 1; j <= m; j++)
+        {
+            insert(i, j, i, j, a[i][j]);      //构建差分数组
+        }
+    }
+    while (q--)
+    {
+        int x1, y1, x2, y2, c;
+        cin >> x1 >> y1 >> x2 >> y2 >> c;
+        insert(x1, y1, x2, y2, c);
+    }
+    for (int i = 1; i <= n; i++)
+    {
+        for (int j = 1; j <= m; j++)
+        {
+            b[i][j] += b[i - 1][j] + b[i][j - 1] - b[i - 1][j - 1];  //二维前缀和
+        }
+    }
+    for (int i = 1; i <= n; i++)
+    {
+        for (int j = 1; j <= m; j++)
+        {
+            printf("%d ", b[i][j]);
+        }
+        printf("\n");
+    }
+    return 0;
+}
+
+```
+
+- [分析](https://www.acwing.com/solution/content/27325/)
+  
 ## 深度优先搜索(DFS)
 
 - 深度优先搜索（DFS）是一种用于遍历或搜索树或图的算法。  
