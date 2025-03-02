@@ -11,6 +11,8 @@ comments: false
 - "CS61A":
     - CS61A notes: CS61A/CS61A_notes
     - something related: CS61A/CS61A_resource
+- "CSAPP":
+    - Resource: CSAPP/resource
 - "From C to C++":
     - C++: C++/C++   
     - Basis of algorithm: C++/algorithm
