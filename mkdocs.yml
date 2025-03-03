@@ -278,19 +278,22 @@ nav:
   - Home:
     - index: index.md
     - introduction: introduction.md
+    - Tags: tags/index.md
   - Computer Science:
     - computer/index.md
     - CS61A:
       - CS61A_notes: computer/CS61A/CS61A_notes.md
       - something related: computer/CS61A/CS61A_resource.md
+    - Data Structure:
+      - Basis of algorithm: computer/Algorithm/algorithm.md
     - CSAPP:
       - Resource: computer/CSAPP/resource.md
     - C语言:
       - C语言: computer/C/learning_c.md
       - something scattered: computer/C/scatter.md
-    - From C to C++:
+    - C++:
+        - 速成 C++: computer/C++/ac_cpp.md
         - C++: computer/C++/C++.md
-        - Basis of algorithm: computer/C++/algorithm.md
     - Linux:
         - "Linux": computer/Linux/linux.md
   - Tools: 

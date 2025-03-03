@@ -1,3 +1,8 @@
+---
+tags:
+  - course note
+  - programming language
+---
 # CS61A_notes
 
 ## 1 使用函数构建抽象

@@ -1,5 +1,7 @@
 ---
 title: prompt
+tags:
+  - AI
 ---
 
 # prompt

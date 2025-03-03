@@ -1,3 +1,7 @@
+---
+tags:
+  - programming language
+---
 # C 语言
 !!! note ""
     - **并非从零开始**

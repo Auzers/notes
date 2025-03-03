@@ -1,3 +1,7 @@
+---
+tags:
+  - tools
+---
 # git使用
 
 !!! abstract "" 
@@ -8,6 +12,7 @@
     - [github基本使用](https://www.bilibili.com/video/BV1e541137Tc/?spm_id_from=333.337.search-card.all.click&vd_source=df5a597928fba384c94060640080e142)
     - [git连接远程仓库和本地仓库](https://www.acwing.com/blog/content/2148/)
 ## 1 图解
+
 
 ![image](https://cdn.jsdelivr.net/gh/Auzers/drawingbed/PixPin_2025-02-16_13-08-59.png)
 
@@ -271,6 +276,8 @@ ssh -T git@github.com
 
 
 ## 💡cheatsheet
+
+![](https://cdn.jsdelivr.net/gh/Auzers/drawingbed/Git_Cheat_Sheet.png)
 
 | **命令**                              | **作用**                                  |
 | ------------------------------------- | ----------------------------------------- |
