@@ -32,6 +32,16 @@ icon: /octicons/link-24
     </a>
 </div>
 
+<div class="flink-list-item">
+        <div class="flink-item-icon">
+            ![](./_assets/avatars/hxwl.jpeg)
+        </div>
+    <a href="https://note.tonycrane.cc/" title="鹤翔万里 的 笔记本" target="_blank">
+        <div class="flink-item-name">鹤翔万里 的 笔记本</div>
+        <div class="flink-item-desc">如果你不知道什么是佬...</div>
+    </a>
+</div>
+
 </div>
 
 <!-- <hr><p>在下方留言申请加入我的友链，按如下格式提供信息：</p><ul><li>名称：Kinnari's Site</li><li>简介：Kinnariya Mama Tanha</li><li>链接：https://kinnariyamamatanha.github.io/</li><li>图片：Link of your avatar</li></ul> -->
