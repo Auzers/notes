@@ -34,7 +34,7 @@ icon: /octicons/link-24
 
 <div class="flink-list-item">
         <div class="flink-item-icon">
-            ![](./_assets/avatars/hxwl.jpeg)
+            <img src="https://cdn.jsdelivr.net/gh/Auzers/drawingbed/hxwl.jpeg" alt="鹤翔万里">
         </div>
     <a href="https://note.tonycrane.cc/" title="鹤翔万里 的 笔记本" target="_blank">
         <div class="flink-item-name">鹤翔万里 的 笔记本</div>
