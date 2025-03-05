@@ -1,8 +1,7 @@
 ---
-tags: 
+tags:
   - programming language
 ---
-# Accelerated C++
 
 ## Chapter 0
 
@@ -234,3 +233,574 @@ int main()
 - 操作数组合方式--运算符的优先级和结合性决定。
 - 操作数怎样被转换为其他类型
 - 操作数的运算次序
+
+## Chapter 3
+
+```cpp
+#include <iostream>
+#include <string>
+#include <ios>
+#include <iomanip>
+using std::cout; using std::string; 
+using std::cin; using std::endl; 
+using std::streamsize;  using std::setprecision;
+
+int main()
+{
+  cout << "Please enter your first name: ";
+  string name;
+  cin >> name;
+  cout << "Hello, " << name << "!" << endl;
+
+  cout << "Please enter your midterm and final exam grades: ";
+  double midterm, final;
+  cin >> midterm >> final;
+
+  cout << "Enter all your homework grades, "
+          "followed by end-of-file: ";
+  int count = 0;
+  double sum = 0;
+  double x;
+  while (cin >> x) {
+    ++count;
+    sum += x;
+  }
+
+  streamsize prec = cout.precision();
+  cout << "Your final grade is " << setprecision(3)
+       << 0.2 * midterm + 0.4 * final + 0.4 * sum / count
+       << setprecision(prec) << endl;
+
+  return 0;
+}
+```
+
+### 3.1 计算学生成绩
+
+- 两个以上字符串直接量仅仅被空白符分隔开，那么这些字符串直接量就会被自动连接到一起。
+
+```cpp
+cout << "Enter all your homework grades, "
+          "followed by end-of-file: ";
+```
+
+和
+
+```cpp
+cout << "Enter all your homework grades, followed by end-of-file: ";
+```
+
+等价。
+
+- **缺省初始化**
+	- 对于自定义类型，例如`string`，当我们在声明该类型变量的同时不进行初始化赋值操作，则该类型会自动的被隐含初始化为空字符串。
+	- 但是定义**内置类型的局部变量**时，系统并不会提供该便利。这意味着我们在定义基本类型的变量时，需要手动为其进行初始化，否则可能会导致程序出现意想不到的错误。
+	- 错误指：系统给这些变量分配适当的内存单元，而变量的值就有这些单元中的随机信息组成。
+- `setprecision`
+	- 位于头文件`<iomanip>`中，用于指明输出所包含的有效位数。
+	- 是一个控制器，为流的后继输出设置了一个特定的**有效位数**
+- `streamsize`
+	- 位于头文件`<ios>`中，输入输出使用该类型表示长度
+- `precision` 
+	- cout 的成员函数，用于返回流在输出浮点数时所使用的精度。
+- `cin >> x` 作为条件：
+	- 类 istream 提供了一个转换来把 cin 转换成一个可以在条件中使用的值。
+	- 用 cin 作为条件等价于检测最近一次从 cin 读数据的尝试是否成功。
+	- 以下情况可能会失败
+		- 到达输入文件的末尾
+		- 输入和试图读取的变量不一致
+		- 系统在输入装置中检测到一个硬件问题
+
+### 3.2 中值代替平均值
+
+```cpp
+#include <algorithm>
+#include <iomanip>
+#include <ios>
+#include <iostream>
+#include <string>
+#include <vector>
+
+using std::cin;             using std::sort;
+using std::cout;            using std::streamsize;
+using std::endl;            using std::string;
+using std::setprecision;    using std::vector;
+
+int main()
+{
+	// ask for and read the student's name
+	cout << "Please enter your first name: ";
+	string name;
+	cin >> name;
+	cout << "Hello, " << name << "!" << endl;
+
+	// ask for and read the midterm and final grades
+	cout << "Please enter your midterm and final exam grades: ";
+	double midterm, final;
+	cin >> midterm >> final;
+
+	// ask for and read the homework grades
+	cout << "Enter all your homework grades, "
+	        "followed by end-of-file: ";
+
+	vector<double> homework;
+	double x;
+	// invariant: `homework' contains all the homework grades read so far
+	while (cin >> x)
+		homework.push_back(x);
+
+	// check that the student entered some homework grades
+	typedef vector<double>::size_type vec_sz;
+	vec_sz size = homework.size();
+	if (size == 0) {
+		cout << endl << "You must enter your grades.  "
+		                "Please try again." << endl;	
+		return 1;
+	}
+
+	// sort the grades
+	sort(homework.begin(), homework.end());
+
+	// compute the median homework grade
+	vec_sz mid = size/2;
+	double median;
+	median = size % 2 == 0 ? (homework[mid] + homework[mid-1]) / 2
+	                       : homework[mid];
+
+	// compute and write the final grade
+	streamsize prec = cout.precision();
+	cout << "Your final grade is " << setprecision(3)
+	     << 0.2 * midterm + 0.4 * final + 0.4 * median
+	     << setprecision(prec) << endl;
+
+	return 0;
+}
+
+```
+
+- 中值避免了一些糟糕的成绩让平均成绩下降太多
+- `vector` 类型表示向量，长度可变
+- `vector<double>::size_type` 是一个 unsigned 类型，保存向量长度。
+- `type_def` 把 vec_sz 设置成了 `vector<double>::size_type` 的替代名
+- sort -- 排序
+- 普通整数和无符号整数结合，普通整数会被转换成无符号整数
+- C++ 强调速度，为注重性能的应用服务
+
+## Chapter 4
+
+### 4.1 组织计算
+
+```cpp
+#include <stdexcept>
+#include <vector>
+#include "grade.h"
+#include "median.h"
+#include "Student_info.h"
+
+using std::domain_error;  using std::vector;
+
+
+// compute a student's overall grade from midterm and final exam grades and homework grade
+double grade(double midterm, double final, double homework)
+{
+	return 0.2 * midterm + 0.4 * final + 0.4 * homework;
+}
+
+// compute a student's overall grade from midterm and final exam grades
+// and vector of homework grades.
+// this function does not copy its argument, because `median' does so for us.
+double grade(double midterm, double final, const vector<double>& hw)
+{
+	if (hw.size() == 0)
+		throw domain_error("student has done no homework");
+	return grade(midterm, final, median(hw));
+}
+
+double grade(const Student_info& s)
+{
+	return grade(s.midterm, s.final, s.homework);
+}
+
+```
+
+- **按值调用**: 参数获得的只是参数值的一个复制，`double grade(double midterm, double final, double homework)`
+- **引用**： `vector<double>& hw` 对 hw 操作相当于对 homework 操作
+- **异常**： 
+
+```cpp
+if (hw.size() == 0)
+		throw domain_error("student has done no homework");
+```
+
+- 如果向量为空就**抛出一个异常**，程序会在抛出异常的地方**中止执行**并转移到程序的另一部分(类似python 中的 try-except 语句)，并向这一部分提供一个**异常对象**
+- `domain_error` 告诉我们取值有问题，我们自定义字符串描述错误信息
+- **左值参数**：指示非临时变量的值
+
+**读取逻辑优化**
+
+```cpp
+// read homework grades from an input stream into a `vector<double>'
+istream& read_hw(istream& in, vector<double>& hw)
+{
+	if (in) {
+		// get rid of previous contents
+		hw.clear();
+
+		// read homework grades
+		double x;
+		while (in >> x)
+			hw.push_back(x);
+
+		// clear the stream so that input will work for the next student
+		in.clear(); // avoid failure by wrong input
+	}
+	return in;
+}
+
+```
+
+- `vector<double>& hw` 是引用，节省了复制的开销
+- 三种参数类型
+	- `vector<double>` 
+	- `const vector<double>`
+	- `vector<double>&`
+- `try-catch` 语句示例
+
+```cpp
+try {
+		double final_grade = grade(midterm, final, homework);
+		streamsize prec = cout.precision();
+		cout << "Your final grade is " << setprecision(3)
+		     << final_grade << setprecision(prec) << endl;
+	} catch (domain_error) {
+		cout << endl << "You must enter your grades.  "
+			"Please try again." << endl;
+		return 1;
+	}
+```
+
+- **保证一条语句的副作用个数不会超过一个**，抛出一个异常是一个副作用，因此在一条可能会引发异常的语句中不应该再出现任何其他的副作用，尤其是哪些包含有输入和输出的语句。上面的语句满足了这个要求，**没有把 final_grade 放入输入输出语句中**。
+
+### 4.2 组织数据
+
+```cpp
+int main()
+{
+    vector<Student_info> students;
+    student_info record;
+    string::size_type maxlen = 0;
+
+    //读并存储所有的记录，然后找出最长的姓名的长度
+    while(read(cin, record))
+    {
+        maxlen = max(maxlen, record.name.size());
+        students.push_back(record);
+    }
+
+    //按字母顺序排列记录
+    sort(Students.begin(), students.end(), compare);
+    for (vector<Student_info>::size_type i = 0; i != students.size(); i++)
+    {
+        //输出姓名，填充姓名以达到maxlen + 1的长度
+        cout << setw(maxlen + 1) << students[i].name;
+    }
+
+    //计算并输出成绩
+    try
+    {
+        double final_grade = grade(students[i]);
+        streamsize prec = cout.precision();
+        cout << setprecision(3) << final_grade << setprecision(prec);
+    }
+    catch(domain_error e){
+        cout << e.what();
+    }
+    cout << endl;
+
+    return 0;
+}
+```
+
+- max 函数在 `algorithm` 中定义
+- e 是异常的名称，这样就可以输出 what() 中的信息。
+
+### 4.3 把各部分代码连接到一起
+
+- 组装 median 函数
+
+```cpp
+// median 函数的源文件 -- median.cpp
+#include <algorithm>    // to get the declaration of `sort'
+#include <stdexcept>    // to get the declaration of `domain_error'
+#include <vector>       // to get the declaration of `vector'
+
+using std::domain_error;   using std::sort;   using std::vector;
+
+#include "median.h"
+
+// compute the median of a `vector<double>'
+// note that calling this function copies the entire argument `vector'
+double median(vector<double> vec)
+{
+	typedef vector<double>::size_type vec_sz;
+
+	vec_sz size = vec.size();
+	if (size == 0)
+		throw domain_error("median of an empty vector");
+
+	sort(vec.begin(), vec.end());
+
+	vec_sz mid = size/2;
+
+	return size % 2 == 0 ? (vec[mid] + vec[mid-1]) / 2 : vec[mid];
+}
+
+```
+
+- 需要包含 median 函数使用的所有名称的声明。
+- 如何在别的文件使用 median 函数
+
+```cpp
+#include "median.h"
+int main {/* */}
+```
+
+- 自己的文件称作**头文件**，系统环境提供的头文件称作**标准头**
+
+```cpp
+//median.h 最终形式
+#ifndef GUARD_median_h
+#define GUARD_median_h
+#include <vector>
+double median(std::vector<double>);
+
+#endif
+
+```
+
+- 头文件应该有什么
+	- median 的声明
+		- 保证 vector 可用，所以要有 vector 头
+		- 头文件应该使用完整的限定名而不是 using 声明
+	- `#ifndef` 检查 median.h 是否被重复包含，必须位于文件的第一行
+
+### 4.4 把计算成绩的程序分块
+
+```cpp
+#ifndef GUARD_Student_info
+#define GUARD_Student_info
+
+// `Student_info.h' 头文件
+#include <iostream>
+#include <string>
+#include <vector>
+
+struct Student_info {
+	std::string name;
+	double midterm, final;
+	std::vector<double> homework;
+};
+
+bool compare(const Student_info&, const Student_info&);
+std::istream& read(std::istream&, Student_info&);
+std::istream& read_hw(std::istream&, std::vector<double>&);
+#endif
+
+```
+
+```cpp
+// median.cpp 源文件
+#include "Student_info.h"
+
+using std::istream;  using std::vector;
+
+bool compare(const Student_info& x, const Student_info& y)
+{
+	return x.name < y.name;
+}
+
+istream& read(istream& is, Student_info& s)
+{
+	// read and store the student's name and midterm and final exam grades
+	is >> s.name >> s.midterm >> s.final;
+
+	read_hw(is, s.homework);  // read and store all the student's homework grades
+	return is;
+}
+
+// read homework grades from an input stream into a `vector<double>'
+istream& read_hw(istream& in, vector<double>& hw)
+{
+	if (in) {
+		// get rid of previous contents
+		hw.clear();
+
+		// read homework grades
+		double x;
+		while (in >> x)
+			hw.push_back(x);
+
+		// clear the stream so that input will work for the next student
+		in.clear();
+	}
+	return in;
+}
+```
+
+- 源文件中包含头文件可以检查声明和定义是否一致
+
+### 4.5 修正后的计算成绩的程序
+
+```cpp
+#include <algorithm>
+#include <iomanip>
+#include <ios>
+#include <iostream>
+#include <stdexcept>
+#include <string>
+#include <vector>
+#include "grade.h"
+#include "Student_info.h"
+
+using std::cin;                     using std::setprecision;
+using std::cout;                    using std::sort;
+using std::domain_error;            using std::streamsize;
+using std::endl;                    using std::string;
+using std::max;                     using std::vector;
+
+int main()
+{
+	vector<Student_info> students;
+	Student_info record;
+	string::size_type maxlen = 0;       // the length of the longest name
+
+	// read and store all the students' data.
+	// Invariant:	`students' contains all the student records read so far
+	//			`maxlen' contains the length of the longest name in `students'
+	while (read(cin, record)) {
+		// find length of longest name
+		maxlen = max(maxlen, record.name.size());
+		students.push_back(record);
+	}
+
+	// alphabetize the student records
+	sort(students.begin(), students.end(), compare);
+
+	// write the names and grades
+	for (vector<Student_info>::size_type i = 0;
+	     i != students.size(); ++i) {
+
+		// write the name, padded on the right to `maxlen' `+' `1' characters
+		cout << students[i].name
+		     << string(maxlen + 1 - students[i].name.size(), ' ');
+
+		// compute and write the grade
+		try {
+			double final_grade = grade(students[i]);
+			streamsize prec = cout.precision();
+			cout << setprecision(3) << final_grade
+			     << setprecision(prec);
+		} catch (domain_error e) {
+			cout << e.what();
+		}
+		cout << endl;
+	}
+	return 0;
+}
+
+```
+
+### 4.6 小结
+
+- `#include <系统头>` ：系统头可能不是以文件的形式实现的
+- `#include "自定义头文件"` ：通常有后缀 `.h`
+- 结构的定义在每一个源文件中只可以出现一次，因此它应该出现在一个有适当防护措施的头文件中。
+
+## Chapter 5
+
+### 5.1 按类别来区分学生
+
+- 在除了向量结尾的其他地方插入或删除元素的开销可能会很大
+
+### 5.2 迭代器
+
+- **迭代器**(iterator)能够
+	- 识别一个容器以及容器中的一个元素
+	- 检查存储在这个元素中的值
+	- 提供操作来移动在容器中的元素
+	- 采用对应于容器所能够有效处理的方式来对可用的操作进行约束
+
+```cpp
+for (vector<Student_info>::size_type i = 0; i!= students.sizes(); ++i) 
+	cout << students[i].name << endl;
+// OR
+for (vector<Student_info>::const_iterator iter = students.begin(); iter != students.end(); ++iter)
+	cout << (*iter).name << endl;
+```
+
+- 每一个标准容器都定义了两种相关的迭代器类型
+	- `container-type::const_iterator` 如果仅仅读选用这个
+	- `container-type::iterator`
+- `(*iter).name` 可以写为 `iter->name`
+
+### 5.3 用迭代器代替索引
+
+- `iter = students.erase(iter)` 只是删除 iter 会使迭代器失效，因为 iter 指向的元素已经消失了，这个语句会让 iter 指向被删除元素后面的的那个元素。
+
+### 5.4 重新思考数据结构以实现更好的性能
+
+### 5.5 list 类型
+
+- list 类型在 `<list>` 头文件中定义
+- list 不支持索引，但是支持迭代器
+- 对 list 来说，erase 和 push_back 操作不会使指向其他元素的迭代器失效，只有指向已被删除的元素的迭代器才会失效。
+- 不能使用标准库的 sort 函数来为存储在 list 中的值排序。
+
+这是 list 类提供的 sort 成员函数
+
+```cpp
+list<Student_info> students
+students.sort(compare);
+```
+
+对比 vector
+
+```cpp
+vector<Student_info> students;
+sort(students.begin(), students.end(), compare);
+```
+
+- 小规模输入 list 效率要比 vector 低
+- 大规模的输入，vector 性能会飞速下降
+
+### 5.6 分割字符串
+
+- substr 是 string 类的一个成员
+	- 从第一个参数给定的索引开始复制字符，复制的字符个数由第二个参数指定。
+
+### 5.7 测试 split 函数
+
+```cpp
+int main()
+{
+	string s;
+
+	// read and split each line of input
+	while (getline(cin, s)) {
+		vector<string> v = split(s);
+
+		// write each word in `v'
+		for (vector<string>::size_type i = 0; i != v.size(); ++i)
+			cout << v[i] << endl;
+	}
+	return 0;
+}
+
+```
+
+- `getline` : 
+	- 第一个参数是一个输入流，第二个参数是一个字符串引用，作用是把从输入流中读取到的数据存在字符串引用中。
+	- 返回值逻辑和 cin 相同
+	- 读取一行输入
+
+### 5.8 连接字符串
