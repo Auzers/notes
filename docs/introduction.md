@@ -17,9 +17,6 @@ icon: /fontawesome/solid/circle-question
 
 从小学到高中熟人几乎都喊我的外号，这个外号的首字母是 `am`，`amaranth` 包含了 `am` ,同时这个词的本意是"**不凋花**"，我觉得寓意不错就用上了
 
-## Data
-
-- 
 ## else
 
 - 如果你发现这个网站上的内容有错误，可以提 issue，可以 PR，或者通过 <u>[VX](https://auzers.github.io/notes/assets/images/wechat.jpg)</u> 联系我。
