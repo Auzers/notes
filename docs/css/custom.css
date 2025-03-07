@@ -104,6 +104,22 @@
   /* 你想要的颜色 */
 }
 
+.md-typeset .grid.cards>ul>li {
+  border-radius: 1rem;
+  /* 圆角 */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  /* 默认较大的阴影 */
+  transition: box-shadow 0.3s ease-in-out, border-radius 0.3s ease-in-out;
+}
+
+.md-typeset .grid.cards>ul>li:hover {
+  box-shadow: none;
+  /* 悬浮时去除阴影 */
+}
+
+
+
+
 
 [data-md-color-scheme="default"] {
   --md-primary-fg-color: #F1F0E8;
