@@ -132,7 +132,7 @@ function toggle_statistics() {
         statistics.style.opacity = 0;
     }
 }
-</script
+</script>
 
 
 
