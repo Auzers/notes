@@ -63,7 +63,7 @@ icon: material/home
 
     ---
     - 本站内容（除特别声明外）采用[**署名-非商业性使用-保持一致 4.0 国际 (CC BY-NC-SA 4.0)**](https://creativecommons.org/licenses/by-nc-sa/4.0/) 许可协议进行许可。
-    - 如加载失败或速度缓慢，请{--使用魔法--}
+    - 如加载速度慢，请{--使用魔法--}
     - 样式参考
         - [Wcowin](https://github.com/Wcowin/Wcowin.github.io)
         - [TonyCrane](https://github.com/TonyCrane/note/)
@@ -85,7 +85,54 @@ icon: material/home
 
 </div>
 
+<span style="display: block; text-align: center; font-size: 18px;">
+[:material-chart-line: Statistics ](javascript:toggle_statistics();) 
+[:octicons-link-16: My friends!](./links/index.md)   
+</span>
 
+<div id="statistics" markdown="1" class="card" style="width: 27em; border-color: transparent; opacity: 0; margin-left: auto; margin-right: 0; font-size: 110%">
+<div style="padding-left: 1em;" markdown="1">
+<!-- 页面总数：<span id="page-count"></span><br>
+总字数：<span id="word-count"></span><br>
+代码块行数：<span id="code-lines"></span><br>  -->
+网站运行时间：<span id="web-time"></span>  
+<!-- <span id="busuanzi_container_site_uv">访客总人数：<span id="busuanzi_value_site_uv"></span>人   -->
+<span id="busuanzi_container_site_pv">总访问次数：<span id="busuanzi_value_site_pv"></span>次
+</div>
+</div>
+
+
+<script>
+function updateTime() {
+    var date = new Date();
+    var now = date.getTime();
+    var startDate = new Date("2024/12/22 09:10:00");
+    var start = startDate.getTime();
+    var diff = now - start;
+    var y, d, h, m;
+    y = Math.floor(diff / (365 * 24 * 3600 * 1000));
+    diff -= y * 365 * 24 * 3600 * 1000;
+    d = Math.floor(diff / (24 * 3600 * 1000));
+    h = Math.floor(diff / (3600 * 1000) % 24);
+    m = Math.floor(diff / (60 * 1000) % 60);
+    if (y == 0) {
+        document.getElementById("web-time").innerHTML = d + "<span class=\"heti-spacing\"> </span>天<span class=\"heti-spacing\"> </span>" + h + "<span class=\"heti-spacing\"> </span>小时<span class=\"heti-spacing\"> </span>" + m + "<span class=\"heti-spacing\"> </span>分钟";
+    } else {
+        document.getElementById("web-time").innerHTML = y + "<span class=\"heti-spacing\"> </span>年<span class=\"heti-spacing\"> </span>" + d + "<span class=\"heti-spacing\"> </span>天<span class=\"heti-spacing\"> </span>" + h + "<span class=\"heti-spacing\"> </span>小时<span class=\"heti-spacing\"> </span>" + m + "<span class=\"heti-spacing\"> </span>分钟";
+    }
+    setTimeout(updateTime, 1000 * 60);
+}
+updateTime();
+
+function toggle_statistics() {
+    var statistics = document.getElementById("statistics");
+    if (statistics.style.opacity == 0) {
+        statistics.style.opacity = 1;
+    } else {
+        statistics.style.opacity = 0;
+    }
+}
+</script
 
 
 
