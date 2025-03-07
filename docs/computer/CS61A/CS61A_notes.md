@@ -1,6 +1,6 @@
 ---
 tags:
-  - course note
+  - course notes
   - programming language
 ---
 # CS61A_notes
@@ -595,7 +595,7 @@ print(s1)  # 输出: [1, 2, 3, 4, 5, 6]
 >>>
 ```
 
-![Image](https://www.helloimg.com/i/2025/01/29/6799b9eb7f363.png)
+![image](https://cdn.jsdelivr.net/gh/Auzers/drawingbed/PixPin_2025-02-16_12-51-26.png)
 
 #### 2.3.2 序列遍历
 
@@ -607,9 +607,9 @@ print(s1)  # 输出: [1, 2, 3, 4, 5, 6]
 
 #### 2.3.6 树
 
-![image](https://www.helloimg.com/i/2025/02/04/67a18d9f3188e.png)
+![image](https://cdn.jsdelivr.net/gh/Auzers/drawingbed/PixPin_2025-02-16_12-58-02.png)
 
-![image](https://www.helloimg.com/i/2025/02/04/67a1902de4ccb.png)
+![image](https://cdn.jsdelivr.net/gh/Auzers/drawingbed/PixPin_2025-02-16_13-03-53.png)
 
 **图片中的代码：**
 
@@ -758,7 +758,7 @@ def partition_tree(n,m):
 
 - 尽管元组不可变，但是若元组中的元素本身是可变数据，那我们也是可以对该元素进行操作的
 
-![image](https://www.helloimg.com/i/2025/02/05/67a3180cee770.png)
+![image](https://cdn.jsdelivr.net/gh/Auzers/drawingbed/PixPin_2025-02-16_13-05-54.png)
 
 #### 2.4.3 字典
 
@@ -1045,7 +1045,7 @@ True
 - 这样，无论是哪种账户类型，我们都可以放心地使用 `deposit` 、 `withdraw` 和 `balance` ，而不用关心具体的账户类别。
 
 这个挺绕的  
-![image](https://www.helloimg.com/i/2025/02/11/67aaff3938004.png)
+![image](https://cdn.jsdelivr.net/gh/Auzers/drawingbed/PixPin_2025-02-16_13-06-32.png)
 
 #### 2.5.7 多继承
 
@@ -1069,7 +1069,7 @@ True
 
 - 继承结构：
 
-![image](https://www.helloimg.com/i/2025/02/11/67ab013553a0d.png)
+![image](https://cdn.jsdelivr.net/gh/Auzers/drawingbed/PixPin_2025-02-16_13-07-14.png)
 
 遵循**从左到右，从下到上**的检索规则
 
@@ -1350,7 +1350,7 @@ ComplexMA(1, 1 * pi)
 
 - 应用 memo 后新的计算模式
 
-![image](https://www.helloimg.com/i/2025/02/14/67aed8982936a.png)
+![image](https://cdn.jsdelivr.net/gh/Auzers/drawingbed/PixPin_2025-02-16_13-07-56.png)
 
 - 对于每个唯一的输入, fib 只被调用一次
 
@@ -1362,9 +1362,9 @@ ComplexMA(1, 1 * pi)
 
 #### Data example
 
-![image](https://www.helloimg.com/i/2025/02/14/67af1b1047801.png)
+![image](https://cdn.jsdelivr.net/gh/Auzers/drawingbed/67af1b1047801.png)
 
-![image](https://tuchuang.org.cn/imgs/2025/02/14/d504068d2f722132.png)
+![image](https://cdn.jsdelivr.net/gh/Auzers/drawingbed/d504068d2f722132.png)
 
 `min(s, key=abs)` ：根据每个元素的 **绝对值** 找出 `s` 中的最小元素。如果有多个元素的绝对值相同，它会返回**第一个最小的元素。**
 
@@ -1527,6 +1527,7 @@ scm> (if (= x 3) (print x))
 (<pn> <en>)  
 (else <else-expression>))
 ```
+
 ``
 
 ```scheme
@@ -1715,6 +1716,7 @@ Never printed if x is 0
 #### 3.4.1 基于 Scheme 语法的计算器
 
 #### 3.4.2 表达式树
+
 想要编写一个 Scheme 计算器，我们需要定义一个嵌套对 [Pair](https://www.composingprograms.com/examples/scalc/scheme_reader.py.html)
 
 ```python
@@ -1745,16 +1747,21 @@ Pair(1, Pair(2, nil))
 >>> expr.second.first.second.first
 3
 ```
+
 #### 3.4.3 解析表达式
+
 解析过程：
+
 1. 词法分析器将输入字符串划分为几个最小语法单元，比如名称和符号。
 2. 语法分析器根据这个标记序列构建一个表达式树。
 
 我们使用的分词器 `token_line` :
+
 ```python
 >>> tokenize_line('(+ 1 (* 2.3 45))')
 ['(', '+', 1, '(', '*', 2.3, 45, ')', ')']
 ```
+
 #### 3.4.4 计算器语言求值
 
 ### 3.5 抽象语言的解释器
@@ -1922,4 +1929,12 @@ next(iter(s))  # 再创建一个新迭代器，返回第一个元素 1
 
 ### 4.8 并行计算
 
+## SQL
+
+- 这里有简单教程 [Lab 12 SQL | CS自学社区](https://www.learncs.site/docs/curriculum-resource/cs61a/lab/lab12#creating-tables)
+
 ## Reference
+
+- https://composingprograms.netlify.app/
+- https://www.composingprograms.com/
+- https://github.com/shuo-liu16/CS61A

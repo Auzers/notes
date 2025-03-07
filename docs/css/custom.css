@@ -41,9 +41,10 @@
 
 
 :root {
-  --md-text-font: "JetBrains Mono", "LXGW WenKai Screen"; 
-  --md-code-font: "JetBrains Mono";
+  --md-text-font: "LXGW WenKai";
 }
+
+/* 字体 */
 
 
 
@@ -92,6 +93,18 @@
   font-size: inherit;
 }
 
+.md-typeset p a {
+  color: rgb(81,143,193);
+  /*正文链接*/
+}
+
+/* 只改变 .grid.cards 里的链接颜色 */
+.grid.cards a {
+  color: rgb(81,143,193);
+  /* 你想要的颜色 */
+}
+
+
 [data-md-color-scheme="default"] {
   --md-primary-fg-color: #F1F0E8;
   /* --md-primary-fg-color: #efefef; */
@@ -109,7 +122,7 @@
 
 
 
-  /* --md-default-bg-color: #fffaf5; */
+  --md-default-bg-color: #FFFFFF;
   /* --md-default-bg-color: #E8EEE7; */
 
   /* --md-shadow-z1: 1px 1px 3px #fff5ee, 1px 1px 5px #e1d0c5; */

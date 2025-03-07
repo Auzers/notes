@@ -209,11 +209,11 @@ extra_javascript:
   - js/mathjax.js
   - js/tablesort.js
   - js/toc.js
+  - https://cdn.jsdelivr.net/gh/Wcowin/Wcowin.github.io@main/docs/javascripts/extra.js
   - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://unpkg.com/tablesort@5.3.0/dist/tablesort.min.js
   # - https://cdn.tonycrane.cc/utils/katex.min.js
   - https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js
-
   # katex
   - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js
   - https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js
@@ -241,6 +241,7 @@ extra_css:
   # - css/changelog_extra.css
   # - css/flod_toc.css
   # - css/grid cards.css # 好用的但还没用
+  # - css/customize.css
   # - css/extra.css
   # - https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.1.0/style.css
 
@@ -276,7 +277,7 @@ remote_name: origin       # 远程仓库名
 
 nav:
   - Home:
-    - index: index.md
+    - Home: index.md
     - introduction: introduction.md
     - Tags: tags/index.md
   - Computer Science:
@@ -296,7 +297,7 @@ nav:
         - C++: computer/C++/C++.md
     - Linux:
         - "Linux": computer/Linux/linux.md
-  - Tools: 
+  - Else: 
     - tools/index.md
     - "autohotkey":
         - 键位映射: tools/autohotkey/auto.md
