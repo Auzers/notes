@@ -32,8 +32,7 @@ icon: material/home
     ---
     ![image](https://cdn.jsdelivr.net/gh/Auzers/drawingbed/school-work-851328_1920-modified.jpg){: style="display: block; margin: 0 auto; width: 600px; height: 350px; border-radius: 25px;" }
 
-    <!-- - [x] 搜索{~~~>关键词~~}查询文章
-    - [x] 如遇页面卡顿，请使用{--科学上网--} -->
+    
     
 
 </div>
@@ -51,7 +50,7 @@ icon: material/home
 
 <div class="grid cards" markdown>
 
--   :octicons-bookmark-16:{ .lg .middle } __推荐的文章__
+-   :octicons-bookmark-16:{ .lg .middle } __Recommend pages__
 
     ---
 
@@ -70,37 +69,33 @@ icon: material/home
         - [TonyCrane](https://github.com/TonyCrane/note/)
 
 
-<!-- -   :material-format-font:{ .lg .middle } __好用/好玩__
+<!-- -   :material-format-font:{ .lg .middle } __待填__
 
     ---
 
     
-    - [好用/好玩网站分享](blog/Webplay.md)
-    - [Mac/windows软件网站汇总](blog/macsoft.md)
-    - [重庆旅游推荐路线](trip/InCQ/CQ.md)
+    - 
     
 -   :simple-aboutdotme:{ .lg .middle } __关于__
 
     ---
 
-    - [留言板](waline.md)[^Knowing-that-loving-you-has-no-ending] 
-    - [Blogger](blog/index.md)  
-    - [:octicons-arrow-right-24: 了解我](about/geren.md)[^see-how-much-I-love-you] -->
+    - 
+    -  -->
 
 </div>
 
 
-<!-- [^Knowing-that-loving-you-has-no-ending]:太阳总是能温暖向日葵  
-[^see-how-much-I-love-you]:All-problems-in-computer-science-can-be-solved-by-another-level-of-indirection -->
 
 
 
 
-发邮件(1) 微信(2)
+邮件(1) 微信(2) 
 { .annotate }
 
 1. :material-email: lingbie2082@gmail.com || 1058564630@qq.com
-2. 右下角微信图标，微信号：w1058564630 (防止图床崩了)
+2. 右下角微信图标 || 微信号: w1058564630
+
 
 
 
