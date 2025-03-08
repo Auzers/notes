@@ -275,11 +275,11 @@ remote_branch: gh-pages    # GitHub Pages 分支
 remote_name: origin       # 远程仓库名
 
 
+
 nav:
-  - Home:
+  - Home: 
     - Home: index.md
-    - introduction: introduction.md
-    - Tags: tags/index.md
+    
   - Computer Science:
     - computer/index.md
     - CS61A:
@@ -322,5 +322,6 @@ nav:
   - Blogs:
     - index: Blogs/index.md
     # - Archives: Blogs/archives.md
-  - Links: links/index.md
+  # - Links: links/index.md
+  - Tags: tags/index.md
   

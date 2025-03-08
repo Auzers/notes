@@ -1,12 +1,11 @@
 ---
 hide:
-#   - navigation # 显示右
-#   - toc #显示左
-  - footer
-  - feedback
-comments: false
-home: false
+    - date
+    - navigation
+    - toc
+home: true
 nostatistics: true
+comments: false
 icon: material/home
 ---
 
@@ -27,7 +26,7 @@ icon: material/home
 
 <div class="grid cards" markdown>
 
--   :material-notebook-edit-outline:{ .lg .middle } 
+-   :material-notebook-edit-outline:{ .lg .middle } __[本站介绍](introduction.md)__
 
     ---
     ![image](https://cdn.jsdelivr.net/gh/Auzers/drawingbed/school-work-851328_1920-modified.jpg){: style="display: block; margin: 0 auto; width: 600px; height: 350px; border-radius: 25px;" }
@@ -85,7 +84,7 @@ icon: material/home
 
 </div>
 
-<span style="display: block; text-align: center; font-size: 18px;">
+<span style="display: block; text-align: center; font-size: 20px;">
 [:material-chart-line: Statistics ](javascript:toggle_statistics();) 
 [:octicons-link-16: My friends!](./links/index.md)   
 </span>
