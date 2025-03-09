@@ -297,6 +297,10 @@ nav:
         - C++: computer/C++/C++.md
     - Linux:
         - "Linux": computer/Linux/linux.md
+  - AI:
+    - ai/index.md
+    - machine learning:
+        - 吴恩达机器学习: ai/ml/wedml.md      
   - Else: 
     - tools/index.md
     - "autohotkey":

@@ -54,6 +54,7 @@ icon: material/home
     ---
 
     - [C++速成](computer/C++/ac_cpp.md)
+    - [吴恩达机器学习](ai/ml/wedml.md)
     - [基于autohotkey实现的极简键位映射](tools/autohotkey/auto.md)
     - [git整理](tools/git/git.md)
     - [CS61A笔记](computer/CS61A/CS61A_notes.md) 
