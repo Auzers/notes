@@ -37,6 +37,7 @@ tags:
 
 ## 线性回归模型
 
+
 ### 成本函数 
 
 - 引入这个函数的目的：用于衡量模型预测的好坏
@@ -94,8 +95,7 @@ $$
 
 ![image.png](https://cdn.jsdelivr.net/gh/Auzers/drawingbed/image/20250309193200829.png)
 
-
-#### 代码实现
+### @@ 梯度下降代码实现
 
 ```python
 import math, copy
@@ -180,6 +180,7 @@ print(f"(w,b) found by gradient descent: ({w_final:8.4f},{b_final:8.4f})")
 ```
 
 - 输出示例
+
 ```output
 Iteration    0: Cost 7.93e+04  dj_dw: -6.500e+02, dj_db: -4.000e+02   w:  6.500e+00, b: 4.00000e+00
 Iteration 1000: Cost 3.41e+00  dj_dw: -3.712e-01, dj_db:  6.007e-01   w:  1.949e+02, b: 1.08228e+02
@@ -202,19 +203,220 @@ print(f"1200 sqft house prediction {w_final*1.2 + b_final:0.1f} Thousand dollars
 print(f"2000 sqft house prediction {w_final*2.0 + b_final:0.1f} Thousand dollars")
 ```
 
-## Notation
+## 多元线性回归
 
-Here is a summary of some of the notation you will encounter.  
 
-| General Notation     | Description                                                                                             | Python (if applicable) |
-| :------------------- | :------------------------------------------------------------------------------------------------------ | :--------------------- |
-| $a$                  | scalar, non bold                                                                                        | -                      |
-| $\mathbf{a}$         | vector, bold                                                                                            | -                      |
-| **Regression**       | -                                                                                                       | -                      |
-| $\mathbf{x}$         | Training Example feature values (in this lab - Size (1000 sqft))                                        | `x_train`              |
-| $\mathbf{y}$         | Training Example targets (in this lab - Price (1000s of dollars))                                       | `y_train`              |
-| $x^{(i)}$, $y^{(i)}$ | $i_{th}$ Training Example                                                                               | `x_i`, `y_i`           |
-| $m$                  | Number of training examples                                                                             | `m`                    |
-| $w$                  | parameter: weight                                                                                       | `w`                    |
-| $b$                  | parameter: bias                                                                                         | `b`                    |
-| $f_{w,b}(x^{(i)})$   | The result of the model evaluation at $x^{(i)}$ parameterized by $w,b$: $f_{w,b}(x^{(i)}) = wx^{(i)}+b$ | `f_wb`                 |
+### 向量化
+
+- 原方法
+
+$$
+f_{\vec{w},b}(\vec{x})=\sum_{j=1}^{n}w_{j}x_{j}+b
+$$
+
+```python
+f = 0
+for j in range(n):
+	f = f + w[j] * x[j]
+f = f + b
+```
+
+- 向量化
+
+$$
+f_{\vec{w},b}(\vec{x})=\vec{w}\dot{\vec{x}}+b
+$$
+
+```python
+f = np.dot(w,x) + b
+```
+
+- 原理
+
+![image.png](https://cdn.jsdelivr.net/gh/Auzers/drawingbed/image/20250310103803265.png)
+
+### 多元梯度下降
+
+
+$$\begin{align*} \text{repeat}&\text{ until convergence:} \; \lbrace \newline\;
+& w_j = w_j -  \alpha \frac{\partial J(\mathbf{w},b)}{\partial w_j} \tag{5}  \; & \text{for j = 0..n-1}\newline
+&b\ \ = b -  \alpha \frac{\partial J(\mathbf{w},b)}{\partial b}  \newline \rbrace
+\end{align*}$$
+
+$$
+\begin{align}
+\frac{\partial J(\mathbf{w},b)}{\partial w_j}  &= \frac{1}{m} \sum\limits_{i = 0}^{m-1} (f_{\mathbf{w},b}(\mathbf{x}^{(i)}) - y^{(i)})x_{j}^{(i)} \tag{6}  \\
+\frac{\partial J(\mathbf{w},b)}{\partial b}  &= \frac{1}{m} \sum\limits_{i = 0}^{m-1} (f_{\mathbf{w},b}(\mathbf{x}^{(i)}) - y^{(i)}) \tag{7}
+\end{align}
+$$
+
+
+### @@ 多元梯度下降代码实现
+
+```python
+def compute_cost(X, y, w, b): 
+    m = X.shape[0]
+    cost = 0.0
+    for i in range(m):                                
+        f_wb_i = np.dot(X[i], w) + b           #(n,)(n,) = scalar (see np.dot)
+        cost = cost + (f_wb_i - y[i])**2       #scalar
+    cost = cost / (2 * m)                      #scalar    
+    return cost
+
+def compute_gradient(X, y, w, b): 
+    m,n = X.shape           #(number of examples, number of features)
+    dj_dw = np.zeros((n,))
+    dj_db = 0.
+
+    for i in range(m):                             
+        err = (np.dot(X[i], w) + b) - y[i]   
+        for j in range(n):                         
+            dj_dw[j] = dj_dw[j] + err * X[i, j]    
+        dj_db = dj_db + err                        
+    dj_dw = dj_dw / m                                
+    dj_db = dj_db / m                                
+        
+    return dj_db, dj_dw
+
+def gradient_descent(X, y, w_in, b_in, cost_function, 
+    # An array to store cost J and w's at each iteration primarily for graphing later
+    J_history = []
+    w = copy.deepcopy(w_in)  #avoid modifying global w within function
+    b = b_in
+    
+    for i in range(num_iters):
+
+        # Calculate the gradient and update the parameters
+        dj_db,dj_dw = gradient_function(X, y, w, b)   ##None
+
+        # Update Parameters using w, b, alpha and gradient
+        w = w - alpha * dj_dw               ##None
+        b = b - alpha * dj_db               ##None
+      
+        # Save cost J at each iteration
+        if i<100000:      # prevent resource exhaustion 
+            J_history.append( cost_function(X, y, w, b))
+
+        # Print cost every at intervals 10 times or as many iterations if < 10
+        if i% math.ceil(num_iters / 10) == 0:
+            print(f"Iteration {i:4d}: Cost {J_history[-1]:8.2f}   ")
+        
+    return w, b, J_history #return final w,b and J history for graphing
+
+# initialize parameters
+X_train = np.array([[2104, 5, 1, 45], [1416, 3, 2, 40], [852, 2, 1, 35]])
+y_train = np.array([460, 232, 178])
+initial_w = np.zeros_like(w_init)
+initial_b = 0.
+# some gradient descent settings
+iterations = 1000
+alpha = 5.0e-7
+# run gradient descent 
+w_final, b_final, J_hist = gradient_descent(X_train, y_train, initial_w, initial_b,
+                                                    compute_cost, compute_gradient, 
+                                                    alpha, iterations)
+print(f"b,w found by gradient descent: {b_final:0.2f},{w_final} ")
+m,_ = X_train.shape
+for i in range(m):
+    print(f"prediction: {np.dot(X_train[i], w_final) + b_final:0.2f}, target value: {y_train[i]}")
+```
+
+### 特征缩放
+
+- 目的是加速梯度下降的收敛
+	- 由于不同特征的数量级可能会有差异，导致对应的 $w_{i}$ 权重更高，后果是梯度下降走 Z 字。
+
+![image.png](https://cdn.jsdelivr.net/gh/Auzers/drawingbed/image/20250310195806439.png)
+
+
+- 均值归一化 
+$$
+x_i := \dfrac{x_i - \mu_i}{max - min}
+$$
+- z-score 归一化
+	- 归一化，所有要素平均值为 0，标准差为 1
+
+$$
+x^{(i)}_j = \dfrac{x^{(i)}_j - \mu_j}{\sigma_j} \tag{4}
+$$ 
+$$
+\begin{align}
+\mu_j &= \frac{1}{m} \sum_{i=0}^{m-1} x^{(i)}_j \tag{5}\\
+\sigma^2_j &= \frac{1}{m} \sum_{i=0}^{m-1} (x^{(i)}_j - \mu_j)^2  \tag{6}
+\end{align}
+$$
+
+### @@ z-score 归一化代码实现
+```python
+def zscore_normalize_features(X):
+    """
+    computes  X, zcore normalized by column
+    
+    Args:
+      X (ndarray (m,n))     : input data, m examples, n features
+      
+    Returns:
+      X_norm (ndarray (m,n)): input normalized by column
+      mu (ndarray (n,))     : mean of each feature
+      sigma (ndarray (n,))  : standard deviation of each feature
+    """
+    # find the mean of each column/feature
+    mu     = np.mean(X, axis=0)                 # mu will have shape (n,)
+    # find the standard deviation of each column/feature
+    sigma  = np.std(X, axis=0)                  # sigma will have shape (n,)
+    # element-wise, subtract mu for that column from each example, divide by std for that column
+    X_norm = (X - mu) / sigma      
+
+    return (X_norm, mu, sigma)
+```
+
+- axis=0 表示逐列求均值，axis=1 表示逐行求均值
+- 下面是三种特征缩放的对比图
+
+![image.png](https://cdn.jsdelivr.net/gh/Auzers/drawingbed/image/20250310191453830.png)
+
+进行预测
+```python
+#predict target using normalized features
+m = X_norm.shape[0]
+yp = np.zeros(m)
+for i in range(m):
+    yp[i] = np.dot(X_norm[i], w_norm) + b_norm
+
+    # plot predictions and targets versus original features    
+fig,ax=plt.subplots(1,4,figsize=(12, 3),sharey=True)
+for i in range(len(ax)):
+    ax[i].scatter(X_train[:,i],y_train, label = 'target')
+    ax[i].set_xlabel(X_features[i])
+    ax[i].scatter(X_train[:,i],yp,color=dlc["dlorange"], label = 'predict')
+ax[0].set_ylabel("Price"); ax[0].legend();
+fig.suptitle("target versus prediction using z-score normalized model")
+plt.show()
+```
+
+![image.png](https://cdn.jsdelivr.net/gh/Auzers/drawingbed/image/20250310195128783.png)
+
+- 用于预测的 input 也必须标准化
+
+#### 怎么选择合适的学习率
+- 尝试并观察参数变化
+
+### 特征工程
+
+
+## 符号声明
+
+|           General Notation           |                                                                          Description                                                                          | Python (if applicable) |
+| :----------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------: |
+|                 $a$                  |                                                                       scalar, non-bold                                                                        |                        |
+|             $\mathbf{a}$             |                                                                         vector, bold                                                                          |                        |
+|             $\mathbf{A}$             |                                                                     matrix, bold capital                                                                      |                        |
+|            **Regression**            |                                                                                                                                                               |                        |
+|             $\mathbf{X}$             |                                                                    training example matrix                                                                    |       `X_train`        |
+|             $\mathbf{y}$             |                                                                   training example targets                                                                    |       `y_train`        |
+|    $\mathbf{x}^{(i)}$, $y^{(i)}$     |                                                                   $i_{th}$ Training Example                                                                   |     `X[i]`, `y[i]`     |
+|                 $m$                  |                                                                  number of training examples                                                                  |          `m`           |
+|                 $n$                  |                                                              number of features in each example                                                               |          `n`           |
+|             $\mathbf{w}$             |                                                                       parameter: weight                                                                       |          `w`           |
+|                 $b$                  |                                                                        parameter: bias                                                                        |          `b`           |
+| $f_{\mathbf{w},b}(\mathbf{x}^{(i)})$ | The result model evaluation at $\mathbf{x}^{(i)}$ parameterized by $\mathbf{w},b$: $f_{\mathbf{w},b}(\mathbf{x}^{(i)}) = \mathbf{w} \cdot \mathbf{x}^{(i)}+b$ |         `f_wb`         |

@@ -299,15 +299,15 @@ nav:
         - "Linux": computer/Linux/linux.md
   - AI:
     - ai/index.md
-    - machine learning:
-        - 吴恩达机器学习: ai/ml/wedml.md      
+    - Ng-machine learning:
+        - 课程笔记: ai/ml/wedml.md
+        - 环境配置: ai/ml/wedes.md 
+    - Tools:
+        - Numpy: ai/aitools/numpy.md
   - Else: 
     - tools/index.md
     - "autohotkey":
         - 键位映射: tools/autohotkey/auto.md
-    - "AI_prompt":
-        - Prompt Engineering: tools/prompt/method.md
-        - useful prompt: tools/prompt/prompt.md
     - "git & github":
         - git: tools/git/git.md
         - github: tools/git/github.md    
