@@ -4,17 +4,21 @@
 
 
 /* 自定义阴影 */
-/*
+
 .md-typeset details:not([open]) {
   box-shadow: var(--md-shadow-z2);
   padding-bottom: 0;
+  border-radius: 8px;
+  /* 你可以调整数值 */
 }
 
 .md-typeset .admonition,
 .md-typeset details {
   box-shadow: var(--md-shadow-z2);
+  border-radius: 8px;
+  /* 让边角变圆 */
 }
-*/
+
 
 /* .md-typeset img, */
 

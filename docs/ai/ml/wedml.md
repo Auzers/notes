@@ -13,6 +13,7 @@ tags:
     	- [课程仓库](https://github.com/greyhatguy007/Machine-Learning-Specialization-Coursera)
     	- [吴恩达《机器学习》课程笔记](https://kyonhuang.top/Andrew-Ng-Machine-Learning-notes/#/)
   	- 本地安装 Jupyter notebook 搭配仓库就够用了(尽量支持 [coursera 正版课](https://www.coursera.org/specializations/machine-learning-introduction) )
+
   
   
 
