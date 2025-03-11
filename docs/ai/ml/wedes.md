@@ -15,21 +15,23 @@ pip --version
 ### 创建虚拟环境
 
 - 目的：隔离项目依赖
+
 ```bash
 python -m venv ml-ng # 创建名为 ml-ng 的虚拟环境，当然你可以自己定
 ```
 
+- 激活虚拟环境
 ```bash
-.\ml-ng\Scripts\Activate.ps1 # Windows PowerShell
-# OR
+.\ml-ng\Scripts\Activate.ps1 # Windows Pow*erShell
 ml-ng\Scripts\activate.bat # cmd
 ```
 
 ### 安装库
 ```bash
 pip install numpy matplotlib scipy h5py jupyter -i https://pypi.tuna.tsinghua.edu.cn/simple # 清华源加速
-# 可以自行添加版本号如 pip install numpy==1.23.0,不添加默认最新版
 ```
+
+- 可以自行添加版本号如 pip install numpy==1.23.0,不添加默认最新版
 
 ### 关联 Jupyter notebook
 ```bash
