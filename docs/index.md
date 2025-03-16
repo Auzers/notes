@@ -53,17 +53,17 @@ icon: material/home
 
     ---
 
-    - [C++速成](computer/C++/ac_cpp.md)
-    - [吴恩达机器学习](ai/ml/wedml.md)
-    - [基于autohotkey实现的极简键位映射](tools/autohotkey/auto.md)
-    - [git整理](tools/git/git.md)
+    - [吴恩达coursera机器学习笔记](ai/ml/wedml.md)
     - [CS61A笔记](computer/CS61A/CS61A_notes.md) 
+    - [git整理](tools/git/git.md)
+    - [C++](computer/C++/ac_cpp.md)
+    - [基于autohotkey实现的极简键位映射](tools/autohotkey/auto.md)
     
 -   :simple-materialformkdocs:{ .lg .middle } __Else__
 
     ---
     - 本站内容（除特别声明外）采用[**署名-非商业性使用-保持一致 4.0 国际 (CC BY-NC-SA 4.0)**](https://creativecommons.org/licenses/by-nc-sa/4.0/) 许可协议进行许可。
-    - 如加载速度慢，请{--使用魔法--}
+    - 如有加载问题，请{--使用魔法--}
     - 样式参考
         - [Wcowin](https://github.com/Wcowin/Wcowin.github.io)
         - [TonyCrane](https://github.com/TonyCrane/note/)
