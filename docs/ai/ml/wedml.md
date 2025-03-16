@@ -6,8 +6,7 @@ tags:
 
 # Ng-Machine learning 课程笔记
 
-!!! note ""  
-    - 还没写完  
+!!! note ""   
 	- @start 2025.3.9  
 	- @end 2025.3.15  
 	- 相关资源  
