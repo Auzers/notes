@@ -2,6 +2,8 @@
 tags:
     - 算法
 ---
+!!! note""
+    - 仍在探索
 
 # Basis of algorithm
 

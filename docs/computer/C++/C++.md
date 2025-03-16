@@ -1,10 +1,10 @@
 # 从C到C++
 !!! note ""
     - **以新的语法和示例代码呈现**
-    - 包括但不限于<u>[acwing](https://www.acwing.com/)</u>的笔记内容
+    - 包括但不限于[acwing](https://www.acwing.com/)的笔记内容
 
 ## 1 getline()相关
-<u>[cin的几种读取方法和读取逻辑](https://blog.csdn.net/weixin_43725617/article/details/103079180)</u>
+[cin的几种读取方法和读取逻辑](https://blog.csdn.net/weixin_43725617/article/details/103079180)
 
 方法一(常用)：
 ```cpp
