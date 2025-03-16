@@ -97,16 +97,18 @@
   font-size: inherit;
 }
 
-.md-typeset p a {
-  color: rgb(81,143,193);
-  /*正文链接*/
+.md-typeset p a,
+.md-typeset li a {
+  color: rgb(81, 143, 193);
+  /* 统一正文和列表中的链接颜色 */
 }
-
 /* 只改变 .grid.cards 里的链接颜色 */
 .grid.cards a {
   color: rgb(81,143,193);
   /* 你想要的颜色 */
 }
+
+
 
 .md-typeset .grid.cards>ul>li {
   border-radius: 1rem;
