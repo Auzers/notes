@@ -301,7 +301,6 @@ nav:
     - ai/index.md
     - Ng-machine learning:
         - 课程笔记: ai/ml/wedml.md
-        - 环境配置: ai/ml/wedes.md 
     - Tools:
         - Numpy: ai/aitools/numpy.md
   - Else: 
