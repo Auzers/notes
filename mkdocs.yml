@@ -237,9 +237,9 @@ extra_css:
   - css/tasklist.css
   - css/card.css
   - css/flink.css
+  - css/fold_toc.css
   # - css/heti.css
   # - css/changelog_extra.css
-  # - css/flod_toc.css
   # - css/grid cards.css # 好用的但还没用
   # - css/customize.css
   # - css/extra.css
