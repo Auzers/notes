@@ -14,8 +14,7 @@ comments: false
 
 - Ng-Machine Learning:
     - 课程笔记: ml/wedml
-    - 环境配置: ml/wedes
-- AI_prompt:
+- prompt:
     - 吴恩达 Prompt_Engineering: prompt/method
 - Tools:
     - Numpy: aitools/numpy

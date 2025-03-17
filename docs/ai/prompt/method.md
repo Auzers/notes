@@ -5,9 +5,8 @@ tags:
 ---
 # 提示词工程
 !!! note ""
-    - 没写完，后面的内容基础不太够..
+    - 仍在探索
     - [吴恩达 Prompt Engineering 英文原版](https://learn.deeplearning.ai/)
-    - 中文版小破站一堆
     - [Prompt Engineering Guide](https://www.promptingguide.ai/zh)
   
 ## Base LLM and Instruction Tuned LLM
