@@ -26,7 +26,7 @@ comments: false
     - C语言: C/learning_c
     - something scattered: C/scatter
 - "Linux":
-    - "Basis of Linux": Linux/linux
+    - "Basis of Linux": Linux/linux2
 {{ END_TOC }}
 
 

@@ -296,7 +296,7 @@ nav:
         - 速成 C++: computer/C++/ac_cpp.md
         - C++: computer/C++/C++.md
     - Linux:
-        - "Linux": computer/Linux/linux.md
+        - "Linux": computer/Linux/linux2.md
   - AI:
     - ai/index.md
     - Ng-machine learning:

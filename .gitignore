@@ -16,3 +16,6 @@ site/
 # OS
 .DS_Store
 Thumbs.db
+
+# Cursor
+.cursorrules
