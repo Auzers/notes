@@ -1,7 +1,7 @@
 ---
 tags:
     - AI
-    - course notes
+    - course_notes
 ---
 
 # Ng-Machine learning 课程笔记
