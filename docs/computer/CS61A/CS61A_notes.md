@@ -1,6 +1,6 @@
 ---
 tags:
-  - course notes
+  - course_notes
   - programming language
 ---
 # CS61A_notes

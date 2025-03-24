@@ -1,7 +1,7 @@
 ---
 tags:
     - 15-213
-    - course notes
+    - course_notes
 ---
 
 - [课程网站](https://csapp.cs.cmu.edu/)

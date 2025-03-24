@@ -253,26 +253,12 @@ extra_css:
 
 extra:
   social:
-    # - icon: fontawesome/brands/twitter
-    #   link: https://twitter.com/
     - icon: /fontawesome/brands/github
       link: https://github.com/Auzers
       name: GitHub
-    # - icon: fontawesome/brands/bilibili
-    #   link: https://space.bilibili.com/496058922?spm_id_from=333.1007.0.0
-    #   name: Bilibili
-    # - icon: /fontawesome/brands/zhihu
-    #   link: https://www.zhihu.com/people/fht-64
-    #   name: Zhihu
-    # - icon: /fontawesome/brands/qq
-    #   link: assets/images/qq.jpg
-    #   name: QQ
     - icon: /fontawesome/brands/weixin
       link: https://cdn.jsdelivr.net/gh/Auzers/drawingbed/wechat_code.jpg
       name: WeChat
-    # - icon: fontawesome/solid/paper-plane
-    #   link: mailto:2130212584@qq.com
-    #   name: Email
   
 remote_branch: gh-pages    # GitHub Pages 分支
 remote_name: origin       # 远程仓库名
@@ -288,6 +274,8 @@ nav:
     - CS61A:
       - CS61A_notes: computer/CS61A/CS61A_notes.md
       - something related: computer/CS61A/CS61A_resource.md
+    - CS61C:
+      - CS61C_notes: computer/CS61C/CS61Cnotes.md
     - Data Structure:
       - Basis of algorithm: computer/Algorithm/algorithm.md
     - CSAPP:

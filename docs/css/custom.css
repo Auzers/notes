@@ -360,11 +360,14 @@ input#mkdocs-content-password {
 
 img {
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, border-radius 0.3s ease-in-out;
-  max-height: 400px;  /* 设置最大高度 */
-  width: auto;        /* 宽度自适应 */
-  height: auto;       /* 高度自适应 */
-  display: block;     /* 块级元素 */
-  margin: 0 auto;     /* 居中显示 */
+  width: 80%;
+  /* 设置宽度为行宽的80% */
+  height: auto;
+  /* 高度自适应 */
+  display: block;
+  /* 块级元素 */
+  margin: 0 auto;
+  /* 居中显示 */
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }

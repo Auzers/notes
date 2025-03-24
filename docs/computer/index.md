@@ -16,6 +16,8 @@ comments: false
 - "CS61A":
     - CS61A notes: CS61A/CS61A_notes
     - something related: CS61A/CS61A_resource
+- "CS61C":
+    - CS61C notes: CS61C/CS61Cnotes
 - "C++":
     - C++速成: C++/ac_cpp 
 - "CSAPP":
