@@ -1,6 +1,14 @@
 ---
 icon: /fontawesome/solid/circle-question
 ---
+## 关于我
+
+- **24 级 ZJUer**
+- **intp**
+- **为什么叫 amaranth？**
+    - 从小学到高中，身边的熟人几乎都叫我的外号，而这个外号的首字母是 am。  
+    - **amaranth** 这个单词不仅包含 **am**，其本意是“**不凋花**”，寓意很好。
+  
 ## 你能在这里看到什么 
 
 - **CS 相关**
@@ -11,12 +19,6 @@ icon: /fontawesome/solid/circle-question
 - **Summary**
     - 由于写日记的时间成本较高，我选择了周结的形式，记录每周的经历和一些反思。我很好奇几年后再回顾这些内容时会是什么感觉。
 
-## 关于我
-
-- **24 级 ZJUer**
-- **为什么叫 amaranth？**
-    - 从小学到高中，身边的熟人几乎都叫我的外号，而这个外号的首字母是 am。  
-    - **amaranth** 这个单词不仅包含 **am**，其本意是“**不凋花**”，寓意很好。
 
 ## 其他
 
@@ -29,6 +31,6 @@ icon: /fontawesome/solid/circle-question
 邮件(1) 微信(2) 如果你想请我喝杯咖啡(3)
 { .annotate }
 
-1. :material-email: lingbie2082@gmail.com || 1058564630@qq.com
+1. :material-email: amaranth2082@gmail.com || 1058564630@qq.com
 2. ![image](https://cdn.jsdelivr.net/gh/Auzers/drawingbed/wechat_code.jpg){: style="display: block; margin: 0 auto; max-width: 300px; height: auto; border-radius: 15px;" }
 3. ![image](https://cdn.jsdelivr.net/gh/Auzers/drawingbed/PixPin_2025-03-07_22-50-54.png){: style="display: block; margin: 0 auto; max-width: 300px; height: auto; border-radius: 15px;" }
