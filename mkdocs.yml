@@ -319,6 +319,5 @@ nav:
   - Blogs:
     - index: Blogs/index.md
     # - Archives: Blogs/archives.md
-  # - Links: links/index.md
   - Tags: tags/index.md
   
