@@ -13,6 +13,8 @@ comments: false
 
 {{ BEGIN_TOC }}
 
+- "prompt":
+    - useful prompt: prompt/usefulpr
 - "git & github":
     - git: git/git    
     - github: git/github

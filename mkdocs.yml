@@ -292,10 +292,14 @@ nav:
     - ai/index.md
     - Ng-machine learning:
         - 课程笔记: ai/ml/wedml.md
+    - Deep Learning:
+        - 机器学习补充: ai/dl/dl.md
     - Tools:
         - Numpy: ai/aitools/numpy.md
   - Else: 
     - tools/index.md
+    - "prompt":
+        - useful prompt: tools/prompt/usefulpr.md
     - "autohotkey":
         - 键位映射: tools/autohotkey/auto.md
     - "git & github":
