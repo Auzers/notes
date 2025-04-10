@@ -8,7 +8,7 @@ comments: false
     color: inherit !important; /* 继承默认颜色，强制覆盖 */
 }
 </style>
-# Computer Science
+# AI
 
 {{ BEGIN_TOC }}
 
