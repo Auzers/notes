@@ -5,16 +5,9 @@ tags:
 
 # NumPy
 
-!!! note ""
-    NumPy (Numerical Python) 是 Python 的核心科学计算库。
 ## 1 Numpy是什么
 
-NumPy 是 Python 语言的一个扩展程序库，主要用于数组计算。它具有以下特点：
-
-- 一个强大的 N 维数组对象 `ndarray`
-- 广播功能函数
-- 整合 `C/C++` / `Fortran` 代码的工具
-- 线性代数、傅里叶变换、随机数生成等功能
+NumPy 是 Python 语言的一个扩展程序库，主要用于数组计算。它具有以下
 
 ## 2 ndarray 对象
 
