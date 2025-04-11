@@ -13,7 +13,7 @@ comments: false
 {{ BEGIN_TOC }}
 
 - Ng-Machine Learning:
-    - 课程笔记: ml/wedml
+    - 机器学习: ml/wedml
 - Deep Learning:
     - 机器学习补充: dl/dl
 - prompt:

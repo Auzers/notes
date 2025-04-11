@@ -1,11 +1,8 @@
----
-tags:
-  - course_notes
----
-# 机器学习进阶
+# 机器学习补充
 
 !!! note ""
-    - 对这篇笔记的补充--[Machine Learning](../ml/wedml.md)
+    - 对这篇笔记的补充-- [Machine Learning](../ml/wedml.md)
+
 ## 滑动窗口目标检测
 
 ![image.png](https://cdn.jsdelivr.net/gh/Auzers/drawingbed/image/20250409074521942.png)
@@ -83,7 +80,7 @@ $$
 $$
 J(G) = \alpha J_{content}(C,G) + \beta J_{style}(S,G)
 $$ 
-流程：随机初始化 G (generate)->梯度下降最小化 J(G)
+流程：随机初始化 G (generate)->梯度下降最小化 J (G)
 
 **内容代价函数：**
 
@@ -92,11 +89,12 @@ J_{content}(C,G) =  \frac{1}{4 \times n_H \times n_W \times n_C}\sum _{ \text{al
 $$
 如果把内容代价函数放在神经网络的浅层计算，会导致颗粒度太小，反之颗粒度太大，所以一般在中等层次进行评估
 
-**风格代价函数(单层)**:
+**风格代价函数 (单层)**:
 
 $$
 J_{style}^{[l]}(S,G) = \frac{1}{4 \times {n_C}^2 \times (n_H \times n_W)^2} \sum _{i=1}^{n_C}\sum_{j=1}^{n_C}(G^{(S)}_{ij} - G^{(G)}_{ij})^2
 $$
+
 每个 channel 都对应着一种特征的提取，只要把 S 和 G 分别计算风格矩阵并进行比较
 
 **多层整合：**
@@ -111,7 +109,7 @@ $$
 建立直觉：。RNN 的本质是 **记忆与预测的循环**。它通过不断地将历史信息传递到下一时间步，从而增强了模型的记忆能力，能够做出基于历史的更精准的预测。
 下面来看细节
 
-simple(standard) RNN
+simple (standard) RNN
 ![image.png](https://cdn.jsdelivr.net/gh/Auzers/drawingbed/image/20250409164710433.png)
 
 每一个 cell 的细节部分
@@ -124,7 +122,7 @@ RNN 的反向传播
 不是所有应用都是输入输出序列相同的，翻译-多对多，打分-一对多
 ![image.png](https://cdn.jsdelivr.net/gh/Auzers/drawingbed/image/20250409165024525.png)
 ### LSTM
-长短时记忆(long short-term memory)
+长短时记忆 (long short-term memory)
 为什么要有这个机制：举个例子，当你需要模型生成一段英语，可能前面已有的主语是 cats, 若干单词之后需要生成 was 或者 were，此时模型有遗忘的可能 (因为相差太远了)，此时引入 LSTM 的门机制，来帮助模型记忆一些重要内容。
 
 ![image.png](https://cdn.jsdelivr.net/gh/Auzers/drawingbed/image/20250409165158759.png)
@@ -137,3 +135,79 @@ LSTM 的前向传播
 缺点是要全部输入完成才能得到结果
 ### 深层循环神经网络
 ![image.png](https://cdn.jsdelivr.net/gh/Auzers/drawingbed/image/20250409165655449.png)
+
+## 上篇笔记的概念补充
+
+### Dropout
+下面是 ChatGPT 的回答：
+Dropout 是一种在训练神经网络时用来 **减少过拟合** 的技术。简单来说，过拟合是指模型在训练数据上表现得很好，但在新的、未见过的数据上表现得很差。Dropout 通过在训练过程中随机丢弃（"drop"）神经网络中某些神经元，来防止模型过度依赖某些特定的神经元，从而增强模型的泛化能力。
+
+**Dropout 在训练和推理时的不同**
+
+- **训练时**：Dropout 会丢弃部分神经元，使模型不依赖某个特定神经元。
+    
+- **推理时**：在推理（预测）阶段，Dropout 不再丢弃神经元，所有神经元都参与计算。但为了保持训练时的输出一致，推理时的输出通常会乘以一个缩放因子，通常是 1−dropout rate1 - \text{dropout rate}1−dropout rate。
+**5. 使用代码示例**
+
+```python
+import torch
+import torch.nn as nn
+import torch.optim as optim
+
+class SimpleNN(nn.Module):
+    def __init__(self):
+        super(SimpleNN, self).__init__()
+        self.fc1 = nn.Linear(784, 256)  
+        self.fc2 = nn.Linear(256, 128)  
+        self.fc3 = nn.Linear(128, 10)   
+        self.dropout = nn.Dropout(0.5)  # 添加 Dropout，丢弃 50% 的神经元
+    
+    def forward(self, x):
+        x = torch.relu(self.fc1(x))
+        x = self.dropout(x)  # 在第一个隐藏层后应用 Dropout
+        x = torch.relu(self.fc2(x))
+        x = self.dropout(x)  # 在第二个隐藏层后应用 Dropout
+        x = self.fc3(x)
+        return x
+
+
+model = SimpleNN()
+optimizer = optim.SGD(model.parameters(), lr=0.01)
+
+input_data = torch.randn(32, 784)  
+output_data = torch.randint(0, 10, (32,)) 
+
+optimizer.zero_grad()
+output = model(input_data)
+
+criterion = nn.CrossEntropyLoss()
+loss = criterion(output, output_data)
+
+loss.backward()
+optimizer.step()
+```
+
+### Momentum
+Momentum 用于帮助梯度下降算法加速收敛。传统的梯度下降算法在更新模型参数时，每次只考虑当前梯度方向，容易陷入局部最优或者在鞍点附近波动。而Momentum通过引入“动量”概念，考虑了历史梯度信息，帮助加速收敛并抑制震荡。
+
+优化后的梯度计算：
+$$
+v_{t+1} = \beta \cdot v_t + (1 - \beta) \cdot \nabla_{\theta} J(\theta_t)
+$$
+$\beta$ 一般为 0.9，这种方式很大程度保留了原始的梯度
+
+###  RMSprop
+
+RMSprop 通过调整每个参数的学习率，来提高梯度下降算法的效率。它的核心思想是根据每个参数的梯度的平方的均值来调整学习率，以减少学习率过大或过小导致的问题，特别是在非凸优化问题中（比如深度学习中的复杂损失面）。
+
+与传统的梯度下降不同，RMSprop 通过计算梯度的平方的均值，来动态调整学习率，使得较大的梯度得到较小的更新，而较小的梯度则得到较大的更新，从而加速了优化过程。
+
+$$
+v_t = \beta \cdot v_{t-1} + (1 - \beta) \cdot (\nabla_{\theta} J(\theta_t))^2
+$$
+
+$$
+\theta_{t+1} = \theta_{t} - \frac{\eta}{\sqrt{v_t + \epsilon}} \cdot \nabla_{\theta} J(\theta_t)
+$$
+
+$\epsilon$ 通常是 $10^{-8}$ ，防止除数为 0
