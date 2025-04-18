@@ -137,11 +137,11 @@ function toggle_statistics() {
 
 
 
-邮件(1) 微信(2) 
+<!-- 邮件(1) 微信(2) 
 { .annotate }
 
 1. :material-email: amaranth2082@gmail.com || 1058564630@qq.com
-2. 右下角微信图标 || 微信号: w1058564630
+2. 右下角微信图标 || 微信号: w1058564630 -->
 
 
 

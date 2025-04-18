@@ -257,8 +257,13 @@ extra:
       link: https://github.com/Auzers
       name: GitHub
     - icon: /fontawesome/brands/weixin
-      link: https://cdn.jsdelivr.net/gh/Auzers/drawingbed/wechat_code.jpg
+      link: https://cdn.jsdelivr.net/gh/Auzers/drawingbed/image/wechat_avatar.png
       name: WeChat
+    - icon: /fontawesome/brands/QQ
+      link: https://cdn.jsdelivr.net/gh/Auzers/drawingbed/image/PixPin_2025-04-18_21-49-43.png
+    - icon: /fontawesome/brands/zhihu
+      link: https://www.zhihu.com/people/_yzw
+
   
 remote_branch: gh-pages    # GitHub Pages 分支
 remote_name: origin       # 远程仓库名
