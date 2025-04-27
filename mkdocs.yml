@@ -299,6 +299,7 @@ nav:
         - 课程笔记: ai/ml/wedml.md
     - Deep Learning:
         - 机器学习补充: ai/dl/dl.md
+        - Hugging Face LLM: ai/dl/huggingface_llm.md
     - Tools:
         - Numpy: ai/aitools/numpy.md
   - Else: 
@@ -325,6 +326,7 @@ nav:
       - 第 12 周: summary/2025/12.md
       - 第 13 周: summary/2025/13.md
       - 第 14 周: summary/2025/14.md
+      - 第 17 周: summary/2025/17.md
   # - tags: tags/index.md
   - Blogs:
     - index: Blogs/index.md

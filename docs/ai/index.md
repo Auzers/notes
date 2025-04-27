@@ -16,6 +16,7 @@ comments: false
     - 机器学习: ml/wedml
 - Deep Learning:
     - 机器学习补充: dl/dl
+    - Hugging Face LLM Course 的一点记录: dl/huggingface_llm
 - prompt:
     - 吴恩达 Prompt_Engineering: prompt/method
 - Tools:
