@@ -156,6 +156,11 @@ plugins:
       locale: en
       dirs:
         - Blogs/posts
+      #   - scatter/posts
+      # categories:
+      #   - name: scatter
+      #     dirs:
+      #       - scatter/posts
       theme:
         name: card
       features:
@@ -257,7 +262,7 @@ extra:
       link: https://github.com/Auzers
       name: GitHub
     - icon: /fontawesome/brands/weixin
-      link: https://cdn.jsdelivr.net/gh/Auzers/drawingbed/image/wechat_avatar.png
+      link: https://cdn.jsdelivr.net/gh/Auzers/drawingbed/image/wechat_bcode.png
       name: WeChat
     - icon: /fontawesome/brands/QQ
       link: https://cdn.jsdelivr.net/gh/Auzers/drawingbed/image/PixPin_2025-04-18_21-49-43.png
@@ -302,6 +307,8 @@ nav:
         - Hugging Face LLM: ai/dl/huggingface_llm.md
     - Tools:
         - Numpy: ai/aitools/numpy.md
+        - Langchain: ai/aitools/langchain.md
+        - jupyter: ai/aitools/jupyter_hotkey.md
   - Else: 
     - tools/index.md
     - "prompt":
@@ -331,5 +338,7 @@ nav:
   - Blogs:
     - index: Blogs/index.md
     # - Archives: Blogs/archives.md
+  # - scatter:
+  #   - index: scatter/index.md
   - Tags: tags/index.md
   
