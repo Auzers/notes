@@ -1,6 +1,7 @@
 ---
 tags:
     - tools
+    - AI
 ---
 
 # NumPy

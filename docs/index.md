@@ -53,10 +53,11 @@ icon: material/home
 
     ---
 
-    - [吴恩达coursera机器学习笔记](ai/ml/wedml.md)
+    - [吴恩达coursera机器学习](ai/ml/wedml.md)
+    - [深度学习](ai/dl/dl.md)
+    - [langchain basis](ai/aitools/langchain.md)
     - [CS61A笔记](computer/CS61A/CS61A_notes.md) 
     - [git整理](tools/git/git.md)
-    - [C++](computer/C++/ac_cpp.md)
     - [基于autohotkey实现的极简键位映射](tools/autohotkey/auto.md)
     
 -   :simple-materialformkdocs:{ .lg .middle } __Else__

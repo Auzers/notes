@@ -17,11 +17,12 @@ comments: false
 - Deep Learning:
     - 机器学习补充: dl/dl
     - Hugging Face LLM Course 的一点记录: dl/huggingface_llm
-- prompt:
-    - 吴恩达 Prompt_Engineering: prompt/method
 - Tools:
+    - langchain basis: aitools/langchain
     - Numpy: aitools/numpy
     - Jupyter notebook 快捷键: aitools/jupyter_hotkey
+- prompt:
+    - 吴恩达 Prompt_Engineering: prompt/method
 {{ END_TOC }}
 
 
