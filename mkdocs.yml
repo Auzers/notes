@@ -156,11 +156,6 @@ plugins:
       locale: en
       dirs:
         - Blogs/posts
-      #   - scatter/posts
-      # categories:
-      #   - name: scatter
-      #     dirs:
-      #       - scatter/posts
       theme:
         name: card
       features:
@@ -338,7 +333,5 @@ nav:
   - Blogs:
     - index: Blogs/index.md
     # - Archives: Blogs/archives.md
-  # - scatter:
-  #   - index: scatter/index.md
   - Tags: tags/index.md
   
