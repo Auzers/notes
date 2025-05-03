@@ -6,7 +6,7 @@ tags:
 
 # RAG
 !!! note ""
-    - 代码 --> [RAG_from_scratch](https://github.com/langchain-ai/rag-from-scratch?tab=readme-ov-file) 这个仓库的代码使用 [langchain](aitools/langchain) 作为框架
+    - 代码 --> [RAG_from_scratch](https://github.com/langchain-ai/rag-from-scratch?tab=readme-ov-file) 这个仓库的代码使用 [langchain](../aitools/langchain) 作为框架
 
 R-Retrieve 检索
 

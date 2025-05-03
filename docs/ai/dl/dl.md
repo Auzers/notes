@@ -5,7 +5,7 @@ tags:
 # 机器学习补充
 
 !!! note ""
-    - 对这篇笔记的补充--[Machine Learning](ml/wedml.md)
+    - 对这篇笔记的补充--[Machine Learning](../ml/wedml.md)
 ## 滑动窗口目标检测
 
 ![image.png](https://cdn.jsdelivr.net/gh/Auzers/drawingbed/image/20250409074521942.png)
