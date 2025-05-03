@@ -6,8 +6,10 @@ tags:
 
 # langchain 
 
-## 1. Prompt 系统
+调用的是[智谱的api](https://bigmodel.cn/dev/api/normal-model/glm-4),相比ds快很多
+如果想要调 openai 的api,可以用[这个]((https://bewildcard.com/))搞定 payment detail
 
+## 1. Prompt 系统
 
 ### 1.1 基础 PromptTemplate
 

@@ -300,6 +300,8 @@ nav:
     - Deep Learning:
         - 机器学习补充: ai/dl/dl.md
         - Hugging Face LLM: ai/dl/huggingface_llm.md
+    - RAG:
+        - RAG_from_scratch: ai/RAG/rag_from_scratch.md
     - Tools:
         - Numpy: ai/aitools/numpy.md
         - Langchain: ai/aitools/langchain.md

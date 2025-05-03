@@ -17,6 +17,8 @@ comments: false
 - Deep Learning:
     - 机器学习补充: dl/dl
     - Hugging Face LLM Course 的一点记录: dl/huggingface_llm
+- RAG:
+    - RAG_from_scratch: RAG/rag_from_scratch
 - Tools:
     - langchain basis: aitools/langchain
     - Numpy: aitools/numpy
