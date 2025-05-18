@@ -279,6 +279,8 @@ nav:
     - CS61A:
       - CS61A_notes: computer/CS61A/CS61A_notes.md
       - something related: computer/CS61A/CS61A_resource.md
+    - Python:
+      - Python异步编程: computer/python/yibu.md
     - CS61C:
       - CS61C_notes: computer/CS61C/CS61Cnotes.md
     - Data Structure:

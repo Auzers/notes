@@ -16,6 +16,8 @@ comments: false
 - "CS61A":
     - CS61A notes: CS61A/CS61A_notes
     - something related: CS61A/CS61A_resource
+- "Python":
+    - Python异步编程: Python/yibu
 - "CS61C":
     - CS61C notes: CS61C/CS61Cnotes
 - "C++":
