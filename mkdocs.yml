@@ -212,7 +212,6 @@ extra_javascript:
   - js/toc.js
   # - js/convert_hr.js
   - https://cdn.jsdelivr.net/gh/Wcowin/Wcowin.github.io@main/docs/javascripts/extra.js
-  - https://polyfill.io/v3/polyfill.min.js?features=es6
   - https://unpkg.com/tablesort@5.3.0/dist/tablesort.min.js
   # - https://cdn.tonycrane.cc/utils/katex.min.js
   - https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js
