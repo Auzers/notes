@@ -29,6 +29,7 @@ jobs:
             mkdocs-glightbox \
             mkdocs-statistics-plugin \
             mkdocs-heti-plugin \
+            mkdocs-hr-plugin \
             mkdocs-git-revision-date-localized-plugin \
             mkdocs-minify-plugin
 
