@@ -150,7 +150,6 @@ validation:
 
 
 plugins:
-  - toc
   - hr
   - blogging:
       locale: en
