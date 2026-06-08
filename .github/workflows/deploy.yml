@@ -27,7 +27,7 @@ jobs:
           pip install mkdocs-blogging-plugin
           pip install mkdocs-callouts
           pip install mkdocs-glightbox
-          pip install mkdocs-statistics
+          pip install mkdocs-statistics-plugin
           pip install mkdocs-heti
           pip install mkdocs-git-revision-date-localized-plugin
           pip install mkdocs-minify-plugin
