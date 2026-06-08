@@ -251,15 +251,15 @@ extra_css:
 
 extra:
   social:
-    - icon: /fontawesome/brands/github
+    - icon: fontawesome/brands/github
       link: https://github.com/Auzers
       name: GitHub
-    - icon: /fontawesome/brands/weixin
+    - icon: fontawesome/brands/weixin
       link: https://cdn.jsdelivr.net/gh/Auzers/drawingbed/image/wechat_bcode.png
       name: WeChat
-    - icon: /fontawesome/brands/QQ
+    - icon: material/chat
       link: https://cdn.jsdelivr.net/gh/Auzers/drawingbed/image/PixPin_2025-04-18_21-49-43.png
-    - icon: /fontawesome/brands/zhihu
+    - icon: fontawesome/brands/zhihu
       link: https://www.zhihu.com/people/_yzw
 
   
