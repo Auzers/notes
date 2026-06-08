@@ -28,7 +28,7 @@ jobs:
           pip install mkdocs-callouts
           pip install mkdocs-glightbox
           pip install mkdocs-statistics-plugin
-          pip install mkdocs-heti
+          pip install mkdocs-heti-plugin
           pip install mkdocs-git-revision-date-localized-plugin
           pip install mkdocs-minify-plugin
 
