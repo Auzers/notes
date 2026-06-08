@@ -23,14 +23,14 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install mkdocs-material
-          pip install mkdocs-blogging-plugin
-          pip install mkdocs-callouts
-          pip install mkdocs-glightbox
-          pip install mkdocs-statistics-plugin
-          pip install mkdocs-heti-plugin
-          pip install mkdocs-git-revision-date-localized-plugin
-          pip install mkdocs-minify-plugin
+          pip install mkdocs-material \
+            mkdocs-blogging-plugin \
+            mkdocs-callouts \
+            mkdocs-glightbox \
+            mkdocs-statistics-plugin \
+            mkdocs-heti-plugin \
+            mkdocs-git-revision-date-localized-plugin \
+            mkdocs-minify-plugin
 
       - name: Deploy
         run: mkdocs gh-deploy --force
